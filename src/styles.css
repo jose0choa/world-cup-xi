@@ -70,6 +70,11 @@ button {
   min-width: 230px;
 }
 
+.info-brand {
+  color: inherit;
+  text-decoration: none;
+}
+
 .brand-mark {
   display: grid;
   place-items: center;
@@ -130,6 +135,20 @@ h1 {
 .stat-pill span {
   color: #69746b;
   font-size: 0.8rem;
+}
+
+.home-link,
+.site-footer a,
+.source-list a {
+  color: #205a3c;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.home-link:hover,
+.site-footer a:hover,
+.source-list a:hover {
+  text-decoration: underline;
 }
 
 .workspace-grid {
@@ -575,6 +594,21 @@ h1 {
   gap: 5px;
 }
 
+.player-role {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 17px;
+  padding: 0 4px;
+  color: #4d3710;
+  border: 1px solid rgba(255, 255, 255, 0.64);
+  background: #f6e3a3;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
 .club-mark {
   position: relative;
   display: inline-grid;
@@ -615,15 +649,22 @@ h1 {
 }
 
 .player-number {
-  display: grid;
-  place-items: center;
-  width: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 50px;
   height: 28px;
+  padding: 0 6px;
   color: white;
   background: var(--team-color);
-  border-radius: 50%;
+  border-radius: 999px;
   font-size: 0.86rem;
   font-weight: 900;
+}
+
+.player-number-value {
+  line-height: 1;
 }
 
 .player-name {
@@ -999,6 +1040,93 @@ dd {
   font-weight: 900;
 }
 
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 13px 16px;
+  color: #69746b;
+  border: 1px solid rgba(23, 32, 25, 0.12);
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.site-footer nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.info-shell {
+  width: min(920px, calc(100% - 32px));
+}
+
+.info-topbar {
+  border-radius: 8px;
+}
+
+.info-page {
+  margin-top: 18px;
+  padding: 22px;
+  border: 1px solid rgba(23, 32, 25, 0.12);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 18px 45px rgba(23, 32, 25, 0.08);
+  border-radius: 8px;
+}
+
+.info-hero {
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(23, 32, 25, 0.1);
+}
+
+.info-hero h2 {
+  margin-top: 4px;
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.info-content {
+  display: grid;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.info-block {
+  display: grid;
+  gap: 8px;
+}
+
+.info-block h3 {
+  font-size: 1rem;
+}
+
+.info-block p,
+.source-list span {
+  color: #4f5b52;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.source-list {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.source-list li {
+  display: grid;
+  gap: 2px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(23, 32, 25, 0.08);
+}
+
 @media (max-width: 1180px) {
   .workspace-grid {
     grid-template-columns: 260px minmax(0, 1fr);
@@ -1082,6 +1210,11 @@ dd {
   .roster-row {
     min-width: 780px;
   }
+
+  .site-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 560px) {
@@ -1127,6 +1260,23 @@ dd {
     text-align: left;
   }
 
+  .info-shell {
+    width: min(100% - 20px, 760px);
+  }
+
+  .info-topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .info-page {
+    padding: 16px;
+  }
+
+  .info-hero h2 {
+    font-size: 1.35rem;
+  }
+
   .lineup-toolbar {
     align-items: stretch;
     flex-direction: column;
@@ -1159,7 +1309,18 @@ dd {
   }
 
   .player-number {
+    width: auto;
+    min-width: 38px;
+    gap: 2px;
+    padding: 0 3px;
     font-size: 0.74rem;
+  }
+
+  .player-role {
+    min-width: 21px;
+    height: 15px;
+    padding: 0 3px;
+    font-size: 0.48rem;
   }
 
   .player-name {

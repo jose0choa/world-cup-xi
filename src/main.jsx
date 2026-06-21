@@ -291,6 +291,11 @@ function summaryUrl(page) {
   return `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(page.replaceAll(' ', '_'))}`;
 }
 
+function normalizedPathname() {
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
+  return ['/about', '/sources', '/privacy'].includes(path) ? path : '/';
+}
+
 function spreadByIndex(index, total, center = 50, width = 42) {
   if (total <= 1) return center;
   const start = center - width / 2;
@@ -405,7 +410,7 @@ function comparePlayers(a, b) {
   return rank[a.position] - rank[b.position] || a.number - b.number;
 }
 
-function App() {
+function LineupsPage() {
   const [query, setQuery] = useState('');
   const [groupFilter, setGroupFilter] = useState('All');
   const [selectedId, setSelectedId] = useState(worldCupData.teams[0]?.id);
@@ -658,11 +663,15 @@ function App() {
                 className="player-card"
                 style={{ left: `${player.x}%`, top: `${player.y}%` }}
                 onClick={() => setSelectedPlayerId(player.playerId)}
-                title={`${player.name}, ${player.club}`}
+                aria-label={`${player.name}, number ${player.number}, ${player.role}, ${player.club}`}
+                title={`${player.name}, ${player.role}, ${player.club}`}
               >
                 <span className="player-card-top">
                   <ClubMark logo={player.clubLogo} name={player.club} className="pitch-club-mark" />
-                  <span className="player-number">{player.number}</span>
+                  <span className="player-number">
+                    <span className="player-number-value">{player.number}</span>
+                    <span className="player-role">{player.role}</span>
+                  </span>
                 </span>
                 <span className="player-name">
                   {player.name}
@@ -800,6 +809,8 @@ function App() {
           ))}
         </div>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }
@@ -812,6 +823,198 @@ function Stat({ icon, value, label }) {
       <span>{label}</span>
     </div>
   );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <span>World Cup Lineups</span>
+      <nav aria-label="Site links">
+        <a href="/">Lineups</a>
+        <a href="/about">About</a>
+        <a href="/sources">Sources</a>
+        <a href="/privacy">Privacy</a>
+        <a href="https://github.com/jose0choa/world-cup-xi" target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+      </nav>
+    </footer>
+  );
+}
+
+function InfoHeader() {
+  return (
+    <section className="app-topbar info-topbar">
+      <a className="brand-lockup info-brand" href="/">
+        <div className="brand-mark">
+          <Trophy size={22} strokeWidth={2.4} />
+        </div>
+        <div>
+          <h1>World Cup Lineups</h1>
+          <p>{worldCupData.tournament}</p>
+        </div>
+      </a>
+
+      <a className="home-link" href="/">
+        Back to lineups
+      </a>
+    </section>
+  );
+}
+
+function InfoPageLayout({ eyebrow, title, children }) {
+  return (
+    <main className="app-shell info-shell">
+      <InfoHeader />
+      <section className="info-page">
+        <div className="info-hero">
+          <span className="eyebrow">{eyebrow}</span>
+          <h2>{title}</h2>
+        </div>
+        {children}
+      </section>
+      <SiteFooter />
+    </main>
+  );
+}
+
+function AboutPage() {
+  return (
+    <InfoPageLayout eyebrow="About" title="A neutral squad and lineup viewer">
+      <div className="info-content">
+        <section className="info-block">
+          <h3>What This Is</h3>
+          <p>
+            World Cup Lineups helps compare international football squads, formations,
+            player clubs, ratings, and computed team strength in one focused interface.
+          </p>
+        </section>
+
+        <section className="info-block">
+          <h3>How Ratings Work</h3>
+          <p>
+            Player ratings are matched from public ratings sources. Team OVR and ranks are
+            computed from each team's top 16 rated players, with low-coverage teams marked
+            as partial or unavailable instead of filling in guesses.
+          </p>
+        </section>
+
+        <section className="info-block">
+          <h3>Independence</h3>
+          <p>
+            This is an independent fan project. It is not affiliated with, endorsed by, or
+            sponsored by any governing body, league, club, game publisher, or data provider.
+          </p>
+        </section>
+      </div>
+    </InfoPageLayout>
+  );
+}
+
+function SourcesPage() {
+  return (
+    <InfoPageLayout eyebrow="Sources" title="Data and asset sources">
+      <div className="info-content">
+        <section className="info-block">
+          <h3>Primary Data</h3>
+          <ul className="source-list">
+            <li>
+              <a href={worldCupData.source.squads} target="_blank" rel="noreferrer">
+                Wikipedia squad data
+              </a>
+              <span>Players, clubs, coaches, caps, goals, and squad numbers.</span>
+            </li>
+            <li>
+              <a href={worldCupData.source.groups} target="_blank" rel="noreferrer">
+                Wikipedia match/group data
+              </a>
+              <span>Latest lineup and match details where available.</span>
+            </li>
+            <li>
+              <a href={worldCupData.source.eaFcRatings} target="_blank" rel="noreferrer">
+                Official EA Sports FC ratings
+              </a>
+              <span>Primary player rating source.</span>
+            </li>
+            <li>
+              <a href={worldCupData.source.eaFcFallbackRatings} target="_blank" rel="noreferrer">
+                FUT.GG player ratings
+              </a>
+              <span>Fallback FC 26 common-card ratings for players missing from the official table.</span>
+            </li>
+          </ul>
+        </section>
+
+        <section className="info-block">
+          <h3>Images and Metadata</h3>
+          <p>
+            Team flags are loaded from FlagCDN. Club logos and player images come from
+            public page metadata and summaries when available. All marks, photos, names,
+            and statistics belong to their respective owners.
+          </p>
+        </section>
+
+        <section className="info-block">
+          <h3>Computed Values</h3>
+          <p>
+            Team OVR, ATT, MID, DEF, and ranks are calculated by this app from available
+            player ratings. They are comparison aids, not official rankings.
+          </p>
+        </section>
+      </div>
+    </InfoPageLayout>
+  );
+}
+
+function PrivacyPage() {
+  return (
+    <InfoPageLayout eyebrow="Privacy" title="Privacy notice">
+      <div className="info-content">
+        <section className="info-block">
+          <h3>Current Data Collection</h3>
+          <p>
+            This site does not require accounts, does not include a contact form, and does
+            not intentionally collect personal information from visitors.
+          </p>
+        </section>
+
+        <section className="info-block">
+          <h3>Hosting and Logs</h3>
+          <p>
+            The site is hosted on Vercel, which may process standard technical information
+            such as IP address, device information, request logs, and performance data to
+            operate and protect the service.
+          </p>
+        </section>
+
+        <section className="info-block">
+          <h3>Analytics and Ads</h3>
+          <p>
+            Analytics and advertising are not part of this notice unless they are added to
+            the site. If ads or analytics are added later, this page should be updated with
+            the providers used, cookie details, and any consent options required for visitors.
+          </p>
+        </section>
+
+        <section className="info-block">
+          <h3>Third-Party Sources</h3>
+          <p>
+            Some images and data are requested from third-party sources listed on the
+            Sources page. Visiting those providers directly is subject to their own privacy
+            policies.
+          </p>
+        </section>
+      </div>
+    </InfoPageLayout>
+  );
+}
+
+function App() {
+  const path = normalizedPathname();
+  if (path === '/about') return <AboutPage />;
+  if (path === '/sources') return <SourcesPage />;
+  if (path === '/privacy') return <PrivacyPage />;
+  return <LineupsPage />;
 }
 
 createRoot(document.getElementById('root')).render(<App />);
