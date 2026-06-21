@@ -451,6 +451,8 @@ function LineupsPage() {
     selectedTeam.players.find((player) => player.id === selectedPlayerId) ??
     selectedTeam.players.find((player) => player.captain) ??
     selectedTeam.players[0];
+  const selectedLineupPlayer = activeStarters.find((player) => player.playerId === selectedPlayer.id);
+  const selectedPosition = selectedLineupPlayer?.role ?? selectedPlayer.position;
   const selectedPhoto = selectedPlayer.photo || photoCache[selectedPlayer.page]?.url || '';
 
   useEffect(() => {
@@ -708,7 +710,15 @@ function LineupsPage() {
                 <b>{selectedPlayer.eaFcRating ?? 'n/a'}</b>
               </span>
               <strong>#{selectedPlayer.number}</strong>
-              <span>{selectedPlayer.position}</span>
+              <span
+                title={
+                  selectedLineupPlayer
+                    ? `Lineup role: ${selectedPosition}`
+                    : `Squad position: ${selectedPlayer.position}`
+                }
+              >
+                {selectedPosition}
+              </span>
               <span>{selectedPlayer.age ? `${selectedPlayer.age} yrs` : 'Age n/a'}</span>
             </div>
             <dl>
