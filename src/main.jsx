@@ -447,11 +447,12 @@ function LineupsPage() {
   const activeStarters = coordinatesFor(
     useLatest ? latestStarters : squadForAutoXi(selectedTeam.players, formation),
   );
+  const lineupPlayersById = new Map(activeStarters.map((player) => [player.playerId, player]));
   const selectedPlayer =
     selectedTeam.players.find((player) => player.id === selectedPlayerId) ??
     selectedTeam.players.find((player) => player.captain) ??
     selectedTeam.players[0];
-  const selectedLineupPlayer = activeStarters.find((player) => player.playerId === selectedPlayer.id);
+  const selectedLineupPlayer = lineupPlayersById.get(selectedPlayer.id);
   const selectedPosition = selectedLineupPlayer?.role ?? selectedPlayer.position;
   const selectedPhoto = selectedPlayer.photo || photoCache[selectedPlayer.page]?.url || '';
 
@@ -665,8 +666,8 @@ function LineupsPage() {
                 className="player-card"
                 style={{ left: `${player.x}%`, top: `${player.y}%` }}
                 onClick={() => setSelectedPlayerId(player.playerId)}
-                aria-label={`${player.name}, number ${player.number}, ${player.role}, ${player.club}`}
-                title={`${player.name}, ${player.role}, ${player.club}`}
+                aria-label={`${player.name}${player.captain ? ', captain' : ''}, number ${player.number}, ${player.role}, ${player.club}`}
+                title={`${player.name}${player.captain ? ' (C)' : ''}, ${player.role}, ${player.club}`}
               >
                 <span className="player-card-top">
                   <ClubMark logo={player.clubLogo} name={player.club} className="pitch-club-mark" />
@@ -676,8 +677,12 @@ function LineupsPage() {
                   </span>
                 </span>
                 <span className="player-name">
-                  {player.name}
-                  {player.captain ? <b> C</b> : null}
+                  <span className="player-name-text">{player.name}</span>
+                  {player.captain ? (
+                    <span className="captain-badge" title="Captain" aria-label="Captain">
+                      C
+                    </span>
+                  ) : null}
                 </span>
                 <small>{player.club}</small>
               </button>
@@ -785,38 +790,55 @@ function LineupsPage() {
             <span>Caps</span>
             <span>Goals</span>
           </div>
-          {[...selectedTeam.players].sort(comparePlayers).map((player) => (
-            <button
-              type="button"
-              role="row"
-              key={player.id}
-              className={`roster-row ${player.id === selectedPlayer.id ? 'active' : ''}`}
-              onClick={() => setSelectedPlayerId(player.id)}
-            >
-              <span>{player.number}</span>
-              <span>
-                {player.name}
-                {player.captain ? <b> C</b> : null}
-              </span>
-              <span>{player.position}</span>
-              <span
-                className={`roster-rating ${player.eaFcRating ? 'rated' : ''}`}
-                title={
-                  player.eaFcRating
-                    ? `${player.eaFcRatingSource || 'EA Sports FC 26'}: ${player.eaFcRating} OVR${player.eaFcTeam ? `, ${player.eaFcTeam}` : ''}`
-                    : 'EA Sports FC 26 rating unavailable'
-                }
+          {[...selectedTeam.players].sort(comparePlayers).map((player) => {
+            const lineupPlayer = lineupPlayersById.get(player.id);
+            const displayPosition = lineupPlayer?.role ?? player.position;
+
+            return (
+              <button
+                type="button"
+                role="row"
+                key={player.id}
+                className={`roster-row ${player.id === selectedPlayer.id ? 'active' : ''}`}
+                onClick={() => setSelectedPlayerId(player.id)}
               >
-                {player.eaFcRating ?? 'n/a'}
-              </span>
-              <span className="roster-club">
-                <ClubMark logo={player.clubLogo} name={player.club} />
-                {player.club}
-              </span>
-              <span>{player.caps}</span>
-              <span>{player.goals}</span>
-            </button>
-          ))}
+                <span>{player.number}</span>
+                <span className="roster-player-name">
+                  <span className="roster-player-text">{player.name}</span>
+                  {player.captain ? (
+                    <span className="captain-badge" title="Captain" aria-label="Captain">
+                      C
+                    </span>
+                  ) : null}
+                </span>
+                <span
+                  title={
+                    lineupPlayer
+                      ? `Lineup role: ${displayPosition}`
+                      : `Squad position: ${player.position}`
+                  }
+                >
+                  {displayPosition}
+                </span>
+                <span
+                  className={`roster-rating ${player.eaFcRating ? 'rated' : ''}`}
+                  title={
+                    player.eaFcRating
+                      ? `${player.eaFcRatingSource || 'EA Sports FC 26'}: ${player.eaFcRating} OVR${player.eaFcTeam ? `, ${player.eaFcTeam}` : ''}`
+                      : 'EA Sports FC 26 rating unavailable'
+                  }
+                >
+                  {player.eaFcRating ?? 'n/a'}
+                </span>
+                <span className="roster-club">
+                  <ClubMark logo={player.clubLogo} name={player.club} />
+                  {player.club}
+                </span>
+                <span>{player.caps}</span>
+                <span>{player.goals}</span>
+              </button>
+            );
+          })}
         </div>
       </section>
 

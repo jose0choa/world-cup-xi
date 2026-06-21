@@ -668,21 +668,39 @@ h1 {
 }
 
 .player-name {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
   max-width: 100%;
   margin-top: 5px;
-  overflow: hidden;
   color: #172019;
   font-size: 0.78rem;
   font-weight: 900;
   line-height: 1.1;
+}
+
+.player-name-text {
+  min-width: 0;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.player-name b,
-.roster-row b {
+.captain-badge {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 16px;
+  height: 16px;
   color: #b01825;
-  font-size: 0.7em;
+  border: 1px solid rgba(176, 24, 37, 0.22);
+  background: rgba(176, 24, 37, 0.08);
+  border-radius: 50%;
+  font-size: 0.55rem;
+  font-weight: 950;
+  line-height: 1;
 }
 
 .player-card small {
@@ -996,7 +1014,20 @@ dd {
   background: #f1f7f0;
 }
 
-.roster-row span {
+.roster-row > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.roster-player-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.roster-player-text {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1032,11 +1063,11 @@ dd {
   background: #f6e3a3;
 }
 
-.roster-row span:nth-child(1),
-.roster-row span:nth-child(3),
-.roster-row span:nth-child(4),
-.roster-row span:nth-child(6),
-.roster-row span:nth-child(7) {
+.roster-row > span:nth-child(1),
+.roster-row > span:nth-child(3),
+.roster-row > span:nth-child(4),
+.roster-row > span:nth-child(6),
+.roster-row > span:nth-child(7) {
   font-weight: 900;
 }
 
@@ -1325,6 +1356,12 @@ dd {
 
   .player-name {
     font-size: 0.6rem;
+  }
+
+  .captain-badge {
+    width: 13px;
+    height: 13px;
+    font-size: 0.46rem;
   }
 
   .player-card small {
