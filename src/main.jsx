@@ -99,6 +99,29 @@ const RATING_SPLITS = [
   { label: 'DEF', positions: ['GK', 'DF'], target: 7, minimum: 4 },
 ];
 
+const SEO_BY_PATH = {
+  '/': {
+    title: 'World Cup Lineups | 2026 Squads, Starting XIs and Ratings',
+    description:
+      'Explore 2026 World Cup squads, starting lineups, player clubs, club leagues, EA Sports FC ratings, and computed team rankings.',
+  },
+  '/about': {
+    title: 'About | World Cup Lineups',
+    description:
+      'Learn how World Cup Lineups compares international squads, tactical XIs, player clubs, ratings, and computed team strength.',
+  },
+  '/sources': {
+    title: 'Sources | World Cup Lineups',
+    description:
+      'Review the squad, lineup, player rating, image, and computed ranking sources used by World Cup Lineups.',
+  },
+  '/privacy': {
+    title: 'Privacy | World Cup Lineups',
+    description:
+      'Read the privacy notice for World Cup Lineups, including hosting logs, third-party data sources, and future analytics or ads.',
+  },
+};
+
 function lineForRole(role) {
   if (role === 'GK') return 'keeper';
   if (['LB', 'RB', 'CB', 'DF', 'SW'].includes(role)) return 'defense';
@@ -296,6 +319,39 @@ function normalizedPathname() {
   return ['/about', '/sources', '/privacy'].includes(path) ? path : '/';
 }
 
+function updateMetaAttribute(attribute, key, content) {
+  let meta = document.head.querySelector(`meta[${attribute}="${key}"]`);
+  if (!meta) {
+    meta = document.createElement('meta');
+    meta.setAttribute(attribute, key);
+    document.head.appendChild(meta);
+  }
+  meta.setAttribute('content', content);
+}
+
+function usePageSeo(path) {
+  useEffect(() => {
+    const seo = SEO_BY_PATH[path] ?? SEO_BY_PATH['/'];
+    const canonicalUrl = `${window.location.origin}${path === '/' ? '/' : path}`;
+
+    document.title = seo.title;
+    updateMetaAttribute('name', 'description', seo.description);
+    updateMetaAttribute('property', 'og:title', seo.title);
+    updateMetaAttribute('property', 'og:description', seo.description);
+    updateMetaAttribute('property', 'og:url', canonicalUrl);
+    updateMetaAttribute('name', 'twitter:title', seo.title);
+    updateMetaAttribute('name', 'twitter:description', seo.description);
+
+    let canonical = document.head.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', canonicalUrl);
+  }, [path]);
+}
+
 function spreadByIndex(index, total, center = 50, width = 42) {
   if (total <= 1) return center;
   const start = center - width / 2;
@@ -333,6 +389,18 @@ function coordinatesFor(starters) {
   return starters.map((starter) =>
     positioned.get(starter.playerId || `${starter.role}-${starter.number}-${starter.name}`),
   );
+}
+
+function normalizeLineupRoles(starters) {
+  const centerBacks = starters.filter((player) => player.role === 'CB').length;
+  if (centerBacks < 3) return starters;
+
+  return starters.map((player) => {
+    if (player.squadPosition !== 'DF') return player;
+    if (player.role === 'RM') return { ...player, role: 'RWB' };
+    if (player.role === 'LM') return { ...player, role: 'LWB' };
+    return player;
+  });
 }
 
 function squadForAutoXi(players, formation) {
@@ -444,9 +512,10 @@ function LineupsPage() {
   const groupedTeams = useMemo(() => groupTeams(visibleTeams), [visibleTeams]);
   const latestStarters = selectedTeam.latestLineup?.starters ?? [];
   const useLatest = lineupMode === 'latest' && latestStarters.length === 11;
-  const activeStarters = coordinatesFor(
-    useLatest ? latestStarters : squadForAutoXi(selectedTeam.players, formation),
-  );
+  const lineupStarters = useLatest
+    ? normalizeLineupRoles(latestStarters)
+    : squadForAutoXi(selectedTeam.players, formation);
+  const activeStarters = coordinatesFor(lineupStarters);
   const lineupPlayersById = new Map(activeStarters.map((player) => [player.playerId, player]));
   const selectedPlayer =
     selectedTeam.players.find((player) => player.id === selectedPlayerId) ??
@@ -645,7 +714,7 @@ function LineupsPage() {
             <strong>{useLatest ? selectedTeam.latestLineup.match : `${selectedTeam.name} auto XI`}</strong>
             <span>
               {useLatest
-                ? `${selectedTeam.latestLineup.date} · ${inferFormation(latestStarters)} · ${selectedTeam.latestLineup.score}`
+                ? `${selectedTeam.latestLineup.date} · ${inferFormation(lineupStarters)} · ${selectedTeam.latestLineup.score}`
                 : formation}
             </span>
           </div>
@@ -792,7 +861,7 @@ function LineupsPage() {
           </div>
           {[...selectedTeam.players].sort(comparePlayers).map((player) => {
             const lineupPlayer = lineupPlayersById.get(player.id);
-            const displayPosition = lineupPlayer?.role ?? player.position;
+            const lineupRole = lineupPlayer?.role;
 
             return (
               <button
@@ -812,13 +881,15 @@ function LineupsPage() {
                   ) : null}
                 </span>
                 <span
+                  className="roster-position"
                   title={
                     lineupPlayer
-                      ? `Lineup role: ${displayPosition}`
+                      ? `Squad position: ${player.position} · Lineup role: ${lineupRole}`
                       : `Squad position: ${player.position}`
                   }
                 >
-                  {displayPosition}
+                  <span className="roster-position-main">{player.position}</span>
+                  {lineupRole && lineupRole !== player.position ? <small>XI {lineupRole}</small> : null}
                 </span>
                 <span
                   className={`roster-rating ${player.eaFcRating ? 'rated' : ''}`}
@@ -1043,6 +1114,8 @@ function PrivacyPage() {
 
 function App() {
   const path = normalizedPathname();
+  usePageSeo(path);
+
   if (path === '/about') return <AboutPage />;
   if (path === '/sources') return <SourcesPage />;
   if (path === '/privacy') return <PrivacyPage />;

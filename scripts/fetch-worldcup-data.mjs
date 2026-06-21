@@ -1299,6 +1299,18 @@ function parseStarters(tableText) {
   return starters;
 }
 
+function normalizeLineupRoles(starters) {
+  const centerBacks = starters.filter((player) => player.role === 'CB').length;
+  if (centerBacks < 3) return starters;
+
+  return starters.map((player) => {
+    if (player.squadPosition !== 'DF') return player;
+    if (player.role === 'RM') return { ...player, role: 'RWB' };
+    if (player.role === 'LM') return { ...player, role: 'LWB' };
+    return player;
+  });
+}
+
 function parseLineupsFromGroup(raw, letter) {
   const headings = [...raw.matchAll(/^===([^=]+)===$/gm)].map((match) => ({
     title: cleanWikiText(match[1]),
@@ -1357,7 +1369,7 @@ function attachLineups(teams, lineups) {
     const team = teamsByName.get(teamName);
     if (!team) continue;
 
-    const enrichedStarters = lineup.starters.map((starter) => {
+    const enrichedStarters = normalizeLineupRoles(lineup.starters.map((starter) => {
       const normalizedStarter = normalizeName(starter.name);
       const player =
         team.players.find((candidate) => candidate.number === starter.number) ??
@@ -1373,7 +1385,7 @@ function attachLineups(teams, lineups) {
         photo: player?.photo ?? '',
         squadPosition: player?.position ?? '',
       };
-    });
+    }));
 
     const nextLineup = { ...lineup, starters: enrichedStarters };
     if (!team.latestLineup || nextLineup.date >= team.latestLineup.date) {

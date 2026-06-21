@@ -983,7 +983,7 @@ dd {
 .roster-head,
 .roster-row {
   display: grid;
-  grid-template-columns: 54px minmax(150px, 1.35fr) 58px 76px minmax(170px, 1.5fr) 68px 68px;
+  grid-template-columns: 54px minmax(150px, 1.35fr) 96px 76px minmax(170px, 1.5fr) 68px 68px;
   align-items: center;
   gap: 10px;
 }
@@ -1030,6 +1030,31 @@ dd {
 .roster-player-text {
   min-width: 0;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.roster-position {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.roster-position-main {
+  flex: 0 0 auto;
+}
+
+.roster-position small {
+  min-width: 0;
+  overflow: hidden;
+  color: #4d3710;
+  border: 1px solid rgba(163, 117, 22, 0.24);
+  background: #f6e3a3;
+  border-radius: 999px;
+  padding: 3px 5px;
+  font-size: 0.62rem;
+  font-weight: 950;
+  line-height: 1;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1239,7 +1264,7 @@ dd {
 
   .roster-head,
   .roster-row {
-    min-width: 780px;
+    min-width: 820px;
   }
 
   .site-footer {
