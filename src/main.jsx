@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Analytics } from '@vercel/analytics/react';
 import {
   Goal,
   Search,
@@ -120,7 +121,7 @@ const SEO_BY_PATH = {
   '/privacy': {
     title: 'Privacy | World Cup Lineups',
     description:
-      'Read the privacy notice for World Cup Lineups, including hosting logs, third-party data sources, and future analytics or ads.',
+      'Read the privacy notice for World Cup Lineups, including Vercel Analytics, hosting logs, and third-party data sources.',
   },
 };
 
@@ -1079,7 +1080,7 @@ function PrivacyPage() {
           <h3>Current Data Collection</h3>
           <p>
             This site does not require accounts, does not include a contact form, and does
-            not intentionally collect personal information from visitors.
+            not ask visitors to submit personal information.
           </p>
         </section>
 
@@ -1095,9 +1096,11 @@ function PrivacyPage() {
         <section className="info-block">
           <h3>Analytics and Ads</h3>
           <p>
-            Analytics and advertising are not part of this notice unless they are added to
-            the site. If ads or analytics are added later, this page should be updated with
-            the providers used, cookie details, and any consent options required for visitors.
+            This site uses Vercel Web Analytics to understand page views and basic traffic
+            patterns. Vercel Web Analytics is designed without third-party cookies and
+            reports aggregated usage data. Advertising is not currently enabled; if ads are
+            added later, this notice should be updated with the provider and any consent
+            options required for visitors.
           </p>
         </section>
 
@@ -1118,10 +1121,17 @@ function App() {
   const path = normalizedPathname();
   usePageSeo(path);
 
-  if (path === '/about') return <AboutPage />;
-  if (path === '/sources') return <SourcesPage />;
-  if (path === '/privacy') return <PrivacyPage />;
-  return <LineupsPage />;
+  let page = <LineupsPage />;
+  if (path === '/about') page = <AboutPage />;
+  if (path === '/sources') page = <SourcesPage />;
+  if (path === '/privacy') page = <PrivacyPage />;
+
+  return (
+    <>
+      {page}
+      <Analytics />
+    </>
+  );
 }
 
 createRoot(document.getElementById('root')).render(<App />);
