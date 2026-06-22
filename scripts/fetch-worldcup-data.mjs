@@ -1304,7 +1304,7 @@ function normalizeLineupRoles(starters) {
   if (centerBacks < 3) return starters;
 
   return starters.map((player) => {
-    if (player.squadPosition !== 'DF') return player;
+    if (!['DF', 'MF'].includes(player.squadPosition)) return player;
     if (player.role === 'RM') return { ...player, role: 'RWB' };
     if (player.role === 'LM') return { ...player, role: 'LWB' };
     return player;

@@ -59,6 +59,8 @@ const roleX = {
   ST: 50,
 };
 
+const wideRoleX = new Set(['LB', 'RB', 'LWB', 'RWB', 'LM', 'RM', 'LW', 'RW', 'LF', 'RF']);
+
 const lineY = {
   keeper: 90,
   defense: 76,
@@ -377,7 +379,7 @@ function coordinatesFor(starters) {
     const width = total >= 5 ? 78 : total === 4 ? 68 : total === 3 ? 52 : 34;
 
     sorted.forEach((player, index) => {
-      const fixedX = total === 1 ? roleX[player.role] : null;
+      const fixedX = wideRoleX.has(player.role) || total === 1 ? roleX[player.role] : null;
       positioned.set(player.playerId || `${player.role}-${player.number}-${player.name}`, {
         ...player,
         x: fixedX ?? spreadByIndex(index, total, 50, width),
@@ -396,7 +398,7 @@ function normalizeLineupRoles(starters) {
   if (centerBacks < 3) return starters;
 
   return starters.map((player) => {
-    if (player.squadPosition !== 'DF') return player;
+    if (!['DF', 'MF'].includes(player.squadPosition)) return player;
     if (player.role === 'RM') return { ...player, role: 'RWB' };
     if (player.role === 'LM') return { ...player, role: 'LWB' };
     return player;
