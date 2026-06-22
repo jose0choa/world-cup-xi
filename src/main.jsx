@@ -102,6 +102,18 @@ const RATING_SPLITS = [
   { label: 'DEF', positions: ['GK', 'DF'], target: 7, minimum: 4 },
 ];
 
+const FIFA_MENS_RANKING_URL = 'https://inside.fifa.com/fifa-world-ranking/men';
+// Used only to order teams that cannot get a computed rating rank.
+const FIFA_FALLBACK_RANKS = {
+  IRN: 20,
+  EGY: 29,
+  UZB: 50,
+  QAT: 56,
+  RSA: 60,
+  JOR: 63,
+  CUW: 82,
+};
+
 const SEO_BY_PATH = {
   '/': {
     title: 'World Cup Lineups | 2026 Squads, Starting XIs and Ratings',
@@ -209,20 +221,43 @@ function rankedTeamRatings(teams) {
         b.summary.overall.score - a.summary.overall.score ||
         a.team.name.localeCompare(b.team.name),
     );
-  const rankedCount = rankable.length;
-  const ranksByTeam = new Map(
-    rankable.map(({ team }, index) => [team.id, index + 1]),
+  const fifaFallbackRankable = summaries
+    .filter(
+      ({ team, summary }) =>
+        summary.overall.score === null && Number.isFinite(FIFA_FALLBACK_RANKS[team.code]),
+    )
+    .sort(
+      (a, b) =>
+        FIFA_FALLBACK_RANKS[a.team.code] - FIFA_FALLBACK_RANKS[b.team.code] ||
+        a.team.name.localeCompare(b.team.name),
+    );
+  const computedRankedCount = rankable.length;
+  const rankedCount = computedRankedCount + fifaFallbackRankable.length;
+  const ranksByTeam = new Map();
+  rankable.forEach(({ team }, index) =>
+    ranksByTeam.set(team.id, { rank: index + 1, source: 'computed' }),
+  );
+  fifaFallbackRankable.forEach(({ team }, index) =>
+    ranksByTeam.set(team.id, {
+      rank: computedRankedCount + index + 1,
+      source: 'fifa-fallback',
+    }),
   );
 
   return new Map(
-    summaries.map(({ team, summary }) => [
-      team.id,
-      {
-        ...summary,
-        rank: ranksByTeam.get(team.id) ?? null,
-        rankedCount,
-      },
-    ]),
+    summaries.map(({ team, summary }) => {
+      const rankMeta = ranksByTeam.get(team.id);
+
+      return [
+        team.id,
+        {
+          ...summary,
+          rank: rankMeta?.rank ?? null,
+          rankSource: rankMeta?.source ?? null,
+          rankedCount,
+        },
+      ];
+    }),
   );
 }
 
@@ -252,19 +287,23 @@ function TeamRatingSummary({ rating }) {
       : rating.overall.status === 'insufficient'
         ? 'insufficient'
         : '';
+  const usesFifaFallback = rating.rankSource === 'fifa-fallback';
+  const rankStateClass = rating.rank ? (usesFifaFallback ? 'fallback' : 'rated') : 'empty';
+  const rankTitle = rating.rank
+    ? usesFifaFallback
+      ? `Team rank #${rating.rank} of ${rating.rankedCount}, ordered after computed teams by FIFA men's ranking because fewer than ${TEAM_RATING_MINIMUM} players have ratings`
+      : `Team rank #${rating.rank} of ${rating.rankedCount}, computed from the unrounded top-${rating.overall.target} average`
+    : `Unranked because fewer than ${TEAM_RATING_MINIMUM} players have ratings and no FIFA fallback rank is available`;
 
   return (
     <div className="team-rating-panel" aria-label="Computed team ratings">
       <div
-        className={`team-rank-card ${rating.rank ? 'rated' : 'empty'}`}
-        title={
-          rating.rank
-            ? `Team rank #${rating.rank} of ${rating.rankedCount}, sorted by unrounded top-${rating.overall.target} average`
-            : `Unranked because fewer than ${TEAM_RATING_MINIMUM} players have ratings`
-        }
+        className={`team-rank-card ${rankStateClass}`}
+        title={rankTitle}
       >
         <span>Rank</span>
         <strong>{rating.rank ? `#${rating.rank}` : 'n/a'}</strong>
+        {usesFifaFallback ? <small>FIFA</small> : null}
       </div>
 
       <div
@@ -625,6 +664,16 @@ function LineupsPage() {
                 <div className="group-heading">Group {group}</div>
                 {teams.map((team) => {
                   const rating = teamRatings.get(team.id);
+                  const rankSourceClass = rating?.rank
+                    ? rating.rankSource === 'fifa-fallback'
+                      ? 'fallback'
+                      : 'rated'
+                    : 'empty';
+                  const rankTitle = rating?.rank
+                    ? rating.rankSource === 'fifa-fallback'
+                      ? `Rank #${rating.rank} · FIFA ranking fallback`
+                      : `Rank #${rating.rank} · ${rating.overall.value} OVR`
+                    : 'Unranked';
 
                   return (
                     <button
@@ -639,12 +688,8 @@ function LineupsPage() {
                       <img src={flagUrl(team)} alt="" />
                       <span>{team.name}</span>
                       <span
-                        className={`team-row-rank ${rating?.rank ? 'rated' : 'empty'}`}
-                        title={
-                          rating?.rank
-                            ? `Rank #${rating.rank} · ${rating.overall.value} OVR`
-                            : 'Unranked'
-                        }
+                        className={`team-row-rank ${rankSourceClass}`}
+                        title={rankTitle}
                       >
                         {rating?.rank ? `#${rating.rank}` : 'n/a'}
                       </span>
@@ -999,9 +1044,14 @@ function AboutPage() {
         <section className="info-block">
           <h3>How Ratings Work</h3>
           <p>
-            Player ratings are matched from public ratings sources. Team OVR and ranks are
-            computed from each team's top 16 rated players, with low-coverage teams marked
-            as partial or unavailable instead of filling in guesses.
+            Player ratings are matched from public ratings sources. Team OVR and primary
+            ranks are computed from each team's top 16 rated players.
+          </p>
+          <p>
+            If a team does not have enough rated players for a fair computed rank, it is
+            placed after the computed teams using FIFA men's ranking order. FIFA rankings
+            are only used for those missing-rank teams, so they do not move or override
+            teams that already have a computed app rank.
           </p>
         </section>
 
@@ -1048,6 +1098,12 @@ function SourcesPage() {
               </a>
               <span>Fallback FC 26 common-card ratings for players missing from the official table.</span>
             </li>
+            <li>
+              <a href={FIFA_MENS_RANKING_URL} target="_blank" rel="noreferrer">
+                FIFA/Coca-Cola men's ranking
+              </a>
+              <span>Fallback order for teams without enough player ratings.</span>
+            </li>
           </ul>
         </section>
 
@@ -1064,7 +1120,15 @@ function SourcesPage() {
           <h3>Computed Values</h3>
           <p>
             Team OVR, ATT, MID, DEF, and ranks are calculated by this app from available
-            player ratings. They are comparison aids, not official rankings.
+            player ratings. A team needs at least {TEAM_RATING_MINIMUM} rated players to
+            receive a computed rank.
+          </p>
+          <p>
+            Teams with too few ratings are ranked after all computed teams by FIFA men's
+            ranking order. This means a team can have a strong official FIFA ranking but
+            still appear below the computed teams here, because the FIFA order is only a
+            fallback for otherwise unavailable ranks. These values are comparison aids,
+            not official tournament rankings.
           </p>
         </section>
       </div>
