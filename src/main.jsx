@@ -137,6 +137,9 @@ const SEO_BY_PATH = {
   },
 };
 
+const STATIC_PATHS = new Set(['/about', '/sources', '/privacy']);
+const TEAM_BY_SLUG = new Map(worldCupData.teams.map((team) => [teamSlug(team), team]));
+
 function lineForRole(role) {
   if (role === 'GK') return 'keeper';
   if (['LB', 'RB', 'CB', 'DF', 'SW'].includes(role)) return 'defense';
@@ -165,6 +168,57 @@ function normalizeSearchText(value = '') {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
+}
+
+function teamSlug(team) {
+  return normalizeSearchText(team.name)
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function teamPath(team) {
+  return `/teams/${teamSlug(team)}`;
+}
+
+function routeFromPathname(pathname = window.location.pathname) {
+  const path = pathname.replace(/\/+$/, '') || '/';
+  if (STATIC_PATHS.has(path)) return { type: 'static', path };
+
+  const teamMatch = path.match(/^\/teams\/([^/]+)$/);
+  if (teamMatch) {
+    let slug = teamMatch[1];
+    try {
+      slug = decodeURIComponent(slug);
+    } catch {
+      slug = '';
+    }
+    const team = TEAM_BY_SLUG.get(slug);
+    if (team) return { type: 'team', path: teamPath(team), team };
+  }
+
+  return { type: 'home', path: '/' };
+}
+
+function seoForRoute(route) {
+  if (route.type === 'team') {
+    return {
+      title: `${route.team.name} World Cup 2026 Squad, Lineup and Ratings | World Cup Lineups`,
+      description: `View the ${route.team.name} 2026 World Cup squad, latest lineup, player clubs, club leagues, EA Sports FC ratings, caps, goals, and computed team rank.`,
+    };
+  }
+
+  return SEO_BY_PATH[route.path] ?? SEO_BY_PATH['/'];
+}
+
+function isPlainLeftClick(event) {
+  return (
+    event.button === 0 &&
+    !event.metaKey &&
+    !event.altKey &&
+    !event.ctrlKey &&
+    !event.shiftKey
+  );
 }
 
 function ratedPlayers(players, positions) {
@@ -356,11 +410,6 @@ function summaryUrl(page) {
   return `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(page.replaceAll(' ', '_'))}`;
 }
 
-function normalizedPathname() {
-  const path = window.location.pathname.replace(/\/+$/, '') || '/';
-  return ['/about', '/sources', '/privacy'].includes(path) ? path : '/';
-}
-
 function updateMetaAttribute(attribute, key, content) {
   let meta = document.head.querySelector(`meta[${attribute}="${key}"]`);
   if (!meta) {
@@ -371,10 +420,10 @@ function updateMetaAttribute(attribute, key, content) {
   meta.setAttribute('content', content);
 }
 
-function usePageSeo(path) {
+function usePageSeo(route) {
   useEffect(() => {
-    const seo = SEO_BY_PATH[path] ?? SEO_BY_PATH['/'];
-    const canonicalUrl = `${window.location.origin}${path === '/' ? '/' : path}`;
+    const seo = seoForRoute(route);
+    const canonicalUrl = `${window.location.origin}${route.path === '/' ? '/' : route.path}`;
 
     document.title = seo.title;
     updateMetaAttribute('name', 'description', seo.description);
@@ -391,7 +440,7 @@ function usePageSeo(path) {
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', canonicalUrl);
-  }, [path]);
+  }, [route]);
 }
 
 function spreadByIndex(index, total, center = 50, width = 42) {
@@ -520,17 +569,16 @@ function comparePlayers(a, b) {
   return rank[a.position] - rank[b.position] || a.number - b.number;
 }
 
-function LineupsPage() {
+function LineupsPage({ routeTeam = null, onTeamSelect }) {
   const [query, setQuery] = useState('');
   const [groupFilter, setGroupFilter] = useState('All');
-  const [selectedId, setSelectedId] = useState(worldCupData.teams[0]?.id);
   const [lineupMode, setLineupMode] = useState('latest');
   const [formation, setFormation] = useState('4-3-3');
   const [selectedPlayerId, setSelectedPlayerId] = useState('');
   const [photoCache, setPhotoCache] = useState({});
 
   const teamRatings = useMemo(() => rankedTeamRatings(worldCupData.teams), []);
-  const selectedTeam = worldCupData.teams.find((team) => team.id === selectedId) ?? worldCupData.teams[0];
+  const selectedTeam = routeTeam ?? worldCupData.teams[0];
   const selectedTeamRating = teamRatings.get(selectedTeam.id) ?? teamRatingSummary(selectedTeam);
   const visibleTeams = useMemo(() => {
     const normalized = normalizeSearchText(query.trim());
@@ -566,6 +614,10 @@ function LineupsPage() {
   const selectedLineupPlayer = lineupPlayersById.get(selectedPlayer.id);
   const selectedPosition = selectedLineupPlayer?.role ?? selectedPlayer.position;
   const selectedPhoto = selectedPlayer.photo || photoCache[selectedPlayer.page]?.url || '';
+
+  useEffect(() => {
+    setSelectedPlayerId('');
+  }, [selectedTeam.id]);
 
   useEffect(() => {
     if (!selectedPlayer.page || photoCache[selectedPlayer.page]) return;
@@ -676,13 +728,14 @@ function LineupsPage() {
                     : 'Unranked';
 
                   return (
-                    <button
+                    <a
                       key={team.id}
-                      type="button"
+                      href={teamPath(team)}
                       className={`team-row ${team.id === selectedTeam.id ? 'active' : ''}`}
-                      onClick={() => {
-                        setSelectedId(team.id);
-                        setSelectedPlayerId('');
+                      onClick={(event) => {
+                        if (!isPlainLeftClick(event)) return;
+                        event.preventDefault();
+                        onTeamSelect(team);
                       }}
                     >
                       <img src={flagUrl(team)} alt="" />
@@ -694,7 +747,7 @@ function LineupsPage() {
                         {rating?.rank ? `#${rating.rank}` : 'n/a'}
                       </span>
                       <strong>{team.code}</strong>
-                    </button>
+                    </a>
                   );
                 })}
               </div>
@@ -1182,13 +1235,33 @@ function PrivacyPage() {
 }
 
 function App() {
-  const path = normalizedPathname();
-  usePageSeo(path);
+  const [route, setRoute] = useState(() => routeFromPathname());
+  usePageSeo(route);
 
-  let page = <LineupsPage />;
-  if (path === '/about') page = <AboutPage />;
-  if (path === '/sources') page = <SourcesPage />;
-  if (path === '/privacy') page = <PrivacyPage />;
+  useEffect(() => {
+    const syncRoute = () => {
+      setRoute(routeFromPathname());
+    };
+
+    window.addEventListener('popstate', syncRoute);
+    return () => {
+      window.removeEventListener('popstate', syncRoute);
+    };
+  }, []);
+
+  const navigateToTeam = (team) => {
+    const nextPath = teamPath(team);
+    const nextRoute = routeFromPathname(nextPath);
+    if (window.location.pathname !== nextPath) {
+      window.history.pushState({}, '', nextPath);
+    }
+    setRoute(nextRoute);
+  };
+
+  let page = <LineupsPage routeTeam={route.type === 'team' ? route.team : null} onTeamSelect={navigateToTeam} />;
+  if (route.path === '/about') page = <AboutPage />;
+  if (route.path === '/sources') page = <SourcesPage />;
+  if (route.path === '/privacy') page = <PrivacyPage />;
 
   return (
     <>

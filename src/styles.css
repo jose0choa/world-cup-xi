@@ -260,6 +260,7 @@ h1 {
   gap: 8px;
   padding: 7px 8px;
   color: #1d2a20;
+  text-decoration: none;
   text-align: left;
   border: 1px solid transparent;
   background: transparent;
