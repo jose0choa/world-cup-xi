@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Analytics } from '@vercel/analytics/react';
 import {
+  GitBranch,
   Goal,
   Search,
   Shield,
@@ -11,6 +12,7 @@ import {
   Users,
 } from 'lucide-react';
 import worldCupData from './data/worldcup-2026.json';
+import { knockoutData } from './data/knockout-2026';
 import './styles.css';
 
 const FORMATIONS = {
@@ -125,6 +127,11 @@ const SEO_BY_PATH = {
     description:
       'Learn how World Cup Lineups compares international squads, tactical XIs, player clubs, ratings, and computed team strength.',
   },
+  '/bracket': {
+    title: 'World Cup 2026 Knockout Bracket | World Cup Lineups',
+    description:
+      'Track the 2026 World Cup knockout bracket, remaining teams, round-of-32 results, round-of-16 fixtures, and route to the final.',
+  },
   '/sources': {
     title: 'Sources | World Cup Lineups',
     description:
@@ -137,8 +144,9 @@ const SEO_BY_PATH = {
   },
 };
 
-const STATIC_PATHS = new Set(['/about', '/sources', '/privacy']);
+const STATIC_PATHS = new Set(['/about', '/bracket', '/sources', '/privacy']);
 const TEAM_BY_SLUG = new Map(worldCupData.teams.map((team) => [teamSlug(team), team]));
+const TEAM_BY_CODE = new Map(worldCupData.teams.map((team) => [team.code, team]));
 
 function lineForRole(role) {
   if (role === 'GK') return 'keeper';
@@ -219,6 +227,12 @@ function isPlainLeftClick(event) {
     !event.ctrlKey &&
     !event.shiftKey
   );
+}
+
+function handleInternalNav(event, path, onNavigate) {
+  if (!isPlainLeftClick(event)) return;
+  event.preventDefault();
+  onNavigate(path);
 }
 
 function ratedPlayers(players, positions) {
@@ -569,7 +583,53 @@ function comparePlayers(a, b) {
   return rank[a.position] - rank[b.position] || a.number - b.number;
 }
 
-function LineupsPage({ routeTeam = null, onTeamSelect }) {
+function AppTopbar({ activeView, onNavigate }) {
+  return (
+    <section className="app-topbar">
+      <a
+        className="brand-lockup app-brand"
+        href="/"
+        onClick={(event) => handleInternalNav(event, '/', onNavigate)}
+      >
+        <div className="brand-mark">
+          <Trophy size={22} strokeWidth={2.4} />
+        </div>
+        <div>
+          <h1>World Cup Lineups</h1>
+          <p>{worldCupData.tournament}</p>
+        </div>
+      </a>
+
+      <nav className="view-switch" aria-label="Primary views">
+        <a
+          className={activeView === 'lineups' ? 'active' : ''}
+          href="/"
+          onClick={(event) => handleInternalNav(event, '/', onNavigate)}
+        >
+          <SquareStack size={16} />
+          Lineups
+        </a>
+        <a
+          className={activeView === 'bracket' ? 'active' : ''}
+          href="/bracket"
+          onClick={(event) => handleInternalNav(event, '/bracket', onNavigate)}
+        >
+          <GitBranch size={16} />
+          Bracket
+        </a>
+      </nav>
+
+      <div className="stat-strip" aria-label="Tournament totals">
+        <Stat icon={<Shield size={17} />} value={worldCupData.totals.teams} label="Teams" />
+        <Stat icon={<Users size={17} />} value={worldCupData.totals.players} label="Players" />
+        <Stat icon={<SquareStack size={17} />} value={worldCupData.totals.clubs} label="Clubs" />
+        <Stat icon={<Goal size={17} />} value={worldCupData.totals.lineups} label="XIs" />
+      </div>
+    </section>
+  );
+}
+
+function LineupsPage({ routeTeam = null, onNavigate, onTeamSelect }) {
   const [query, setQuery] = useState('');
   const [groupFilter, setGroupFilter] = useState('All');
   const [lineupMode, setLineupMode] = useState('latest');
@@ -665,24 +725,7 @@ function LineupsPage({ routeTeam = null, onTeamSelect }) {
 
   return (
     <main className="app-shell">
-      <section className="app-topbar">
-        <div className="brand-lockup">
-          <div className="brand-mark">
-            <Trophy size={22} strokeWidth={2.4} />
-          </div>
-          <div>
-            <h1>World Cup Lineups</h1>
-            <p>{worldCupData.tournament}</p>
-          </div>
-        </div>
-
-        <div className="stat-strip" aria-label="Tournament totals">
-          <Stat icon={<Shield size={17} />} value={worldCupData.totals.teams} label="Teams" />
-          <Stat icon={<Users size={17} />} value={worldCupData.totals.players} label="Players" />
-          <Stat icon={<SquareStack size={17} />} value={worldCupData.totals.clubs} label="Clubs" />
-          <Stat icon={<Goal size={17} />} value={worldCupData.totals.lineups} label="XIs" />
-        </div>
-      </section>
+      <AppTopbar activeView="lineups" onNavigate={onNavigate} />
 
       <section className="workspace-grid">
         <aside className="team-sidebar" aria-label="Teams">
@@ -1019,6 +1062,153 @@ function LineupsPage({ routeTeam = null, onTeamSelect }) {
   );
 }
 
+function remainingKnockoutTeams() {
+  const roundOf32 = knockoutData.rounds.find((round) => round.id === 'round-of-32');
+  const codes = new Set();
+
+  roundOf32?.matches.forEach((match) => {
+    if (match.winnerCode) {
+      codes.add(match.winnerCode);
+      return;
+    }
+
+    match.teams.forEach((entry) => {
+      if (entry.code) codes.add(entry.code);
+    });
+  });
+
+  return [...codes].map((code) => TEAM_BY_CODE.get(code)).filter(Boolean);
+}
+
+function BracketPage({ onNavigate, onTeamSelect }) {
+  const remainingTeams = remainingKnockoutTeams();
+
+  return (
+    <main className="app-shell">
+      <AppTopbar activeView="bracket" onNavigate={onNavigate} />
+
+      <section className="bracket-shell">
+        <header className="bracket-header">
+          <div>
+            <span className="eyebrow">Knockout Stage</span>
+            <h2>World Cup bracket</h2>
+            <p>
+              A live-style bracket snapshot for the remaining route to the final, while
+              the full group and squad browser stays available in Lineups.
+            </p>
+          </div>
+          <a href={knockoutData.sourceUrl} target="_blank" rel="noreferrer">
+            {knockoutData.sourceLabel}
+          </a>
+        </header>
+
+        <section className="remaining-panel" aria-label="Remaining teams">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">Still Alive</span>
+              <h2>{remainingTeams.length} teams remaining</h2>
+            </div>
+            <span className="bracket-updated">Updated {knockoutData.updatedAt}</span>
+          </div>
+
+          <div className="remaining-team-strip">
+            {remainingTeams.map((team) => (
+              <a
+                key={team.id}
+                href={teamPath(team)}
+                className="remaining-team-pill"
+                onClick={(event) => {
+                  if (!isPlainLeftClick(event)) return;
+                  event.preventDefault();
+                  onTeamSelect(team);
+                }}
+              >
+                <img src={flagUrl(team)} alt="" />
+                {team.name}
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="bracket-board" aria-label="Knockout bracket">
+          {knockoutData.rounds.map((round) => (
+            <div key={round.id} className="bracket-round">
+              <h3>{round.label}</h3>
+              <div className="bracket-match-list">
+                {round.matches.map((match) => (
+                  <BracketMatch key={match.id} match={match} onTeamSelect={onTeamSelect} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      </section>
+
+      <SiteFooter />
+    </main>
+  );
+}
+
+function BracketMatch({ match, onTeamSelect }) {
+  const complete = Boolean(match.winnerCode);
+
+  return (
+    <article className={`bracket-match ${complete ? 'complete' : 'pending'}`}>
+      <div className="bracket-match-meta">
+        <span>{match.id}</span>
+        <span>{match.date}</span>
+        <strong>{match.status}</strong>
+      </div>
+
+      <div className="bracket-slots">
+        {match.teams.map((entry, index) => (
+          <BracketTeamSlot
+            key={`${match.id}-${entry.code ?? entry.label}-${index}`}
+            entry={entry}
+            match={match}
+            onTeamSelect={onTeamSelect}
+          />
+        ))}
+      </div>
+    </article>
+  );
+}
+
+function BracketTeamSlot({ entry, match, onTeamSelect }) {
+  const team = entry.code ? TEAM_BY_CODE.get(entry.code) : null;
+  const isWinner = entry.code && match.winnerCode === entry.code;
+  const isEliminated = entry.code && match.winnerCode && match.winnerCode !== entry.code;
+  const score = entry.score ? `${entry.score}${entry.pens ? ` (${entry.pens})` : ''}` : '';
+  const className = `bracket-team ${isWinner ? 'winner' : ''} ${isEliminated ? 'eliminated' : ''}`;
+
+  if (!team) {
+    return (
+      <div className={`${className} placeholder`}>
+        <span className="bracket-team-flag" />
+        <span>{entry.label}</span>
+        <strong>{score}</strong>
+      </div>
+    );
+  }
+
+  return (
+    <a
+      href={teamPath(team)}
+      className={className}
+      title={`Open ${team.name} squad`}
+      onClick={(event) => {
+        if (!isPlainLeftClick(event)) return;
+        event.preventDefault();
+        onTeamSelect(team);
+      }}
+    >
+      <img src={flagUrl(team)} alt="" />
+      <span>{team.name}</span>
+      <strong>{score}</strong>
+    </a>
+  );
+}
+
 function Stat({ icon, value, label }) {
   return (
     <div className="stat-pill">
@@ -1035,6 +1225,7 @@ function SiteFooter() {
       <span>World Cup Lineups</span>
       <nav aria-label="Site links">
         <a href="/">Lineups</a>
+        <a href="/bracket">Bracket</a>
         <a href="/about">About</a>
         <a href="/sources">Sources</a>
         <a href="/privacy">Privacy</a>
@@ -1157,6 +1348,12 @@ function SourcesPage() {
               </a>
               <span>Fallback order for teams without enough player ratings.</span>
             </li>
+            <li>
+              <a href={knockoutData.sourceUrl} target="_blank" rel="noreferrer">
+                {knockoutData.sourceLabel}
+              </a>
+              <span>Knockout bracket snapshot and remaining tournament path.</span>
+            </li>
           </ul>
         </section>
 
@@ -1249,8 +1446,7 @@ function App() {
     };
   }, []);
 
-  const navigateToTeam = (team) => {
-    const nextPath = teamPath(team);
+  const navigateToPath = (nextPath) => {
     const nextRoute = routeFromPathname(nextPath);
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, '', nextPath);
@@ -1258,7 +1454,18 @@ function App() {
     setRoute(nextRoute);
   };
 
-  let page = <LineupsPage routeTeam={route.type === 'team' ? route.team : null} onTeamSelect={navigateToTeam} />;
+  const navigateToTeam = (team) => navigateToPath(teamPath(team));
+
+  let page = (
+    <LineupsPage
+      routeTeam={route.type === 'team' ? route.team : null}
+      onNavigate={navigateToPath}
+      onTeamSelect={navigateToTeam}
+    />
+  );
+  if (route.path === '/bracket') {
+    page = <BracketPage onNavigate={navigateToPath} onTeamSelect={navigateToTeam} />;
+  }
   if (route.path === '/about') page = <AboutPage />;
   if (route.path === '/sources') page = <SourcesPage />;
   if (route.path === '/privacy') page = <PrivacyPage />;

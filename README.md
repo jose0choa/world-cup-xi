@@ -1,6 +1,6 @@
 # World Cup Lineups
 
-Interactive 2026 World Cup squad and lineup browser. It shows all registered teams and players, club affiliations, club leagues, EA Sports FC card ratings, computed team rankings, club crests, player portraits, and a FIFA-style pitch view built from the latest parsed starting XI when available.
+Interactive 2026 World Cup squad, lineup, and knockout bracket browser. It shows all registered teams and players, club affiliations, club leagues, EA Sports FC card ratings, computed team rankings, club crests, player portraits, a FIFA-style pitch view built from the latest parsed starting XI when available, and a bracket view for the knockout rounds.
 
 ## Commands
 

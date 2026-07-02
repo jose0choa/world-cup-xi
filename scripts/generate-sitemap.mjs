@@ -15,6 +15,7 @@ const siteUrl = normalizeSiteUrl(
 
 const paths = [
   '/',
+  '/bracket',
   '/about',
   '/sources',
   '/privacy',
