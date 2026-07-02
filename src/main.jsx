@@ -147,6 +147,35 @@ const SEO_BY_PATH = {
 const STATIC_PATHS = new Set(['/about', '/bracket', '/sources', '/privacy']);
 const TEAM_BY_SLUG = new Map(worldCupData.teams.map((team) => [teamSlug(team), team]));
 const TEAM_BY_CODE = new Map(worldCupData.teams.map((team) => [team.code, team]));
+const KNOCKOUT_MATCH_BY_ID = new Map(
+  knockoutData.rounds.flatMap((round) => round.matches.map((match) => [match.id, match])),
+);
+const BRACKET_SIDES = [
+  {
+    id: 'left',
+    lanes: [
+      { label: 'Round of 32', matchIds: ['M73', 'M75', 'M74', 'M77', 'M83', 'M84', 'M81', 'M82'] },
+      { label: 'Round of 16', matchIds: ['M89', 'M90', 'M93', 'M94'] },
+      { label: 'Quarterfinals', matchIds: ['M97', 'M98'] },
+      { label: 'Semifinal', matchIds: ['M101'] },
+    ],
+  },
+  {
+    id: 'right',
+    lanes: [
+      { label: 'Semifinal', matchIds: ['M102'] },
+      { label: 'Quarterfinals', matchIds: ['M99', 'M100'] },
+      { label: 'Round of 16', matchIds: ['M91', 'M92', 'M95', 'M96'] },
+      { label: 'Round of 32', matchIds: ['M76', 'M78', 'M79', 'M80', 'M86', 'M85', 'M88', 'M87'] },
+    ],
+  },
+];
+const BRACKET_SLOT_STARTS = {
+  8: [1, 3, 5, 7, 9, 11, 13, 15],
+  4: [2, 6, 10, 14],
+  2: [4, 12],
+  1: [8],
+};
 
 function lineForRole(role) {
   if (role === 'GK') return 'keeper';
@@ -1082,6 +1111,8 @@ function remainingKnockoutTeams() {
 
 function BracketPage({ onNavigate, onTeamSelect }) {
   const remainingTeams = remainingKnockoutTeams();
+  const finalMatch = KNOCKOUT_MATCH_BY_ID.get('M104');
+  const thirdPlaceMatch = KNOCKOUT_MATCH_BY_ID.get('M103');
 
   return (
     <main className="app-shell">
@@ -1130,22 +1161,72 @@ function BracketPage({ onNavigate, onTeamSelect }) {
           </div>
         </section>
 
-        <section className="bracket-board" aria-label="Knockout bracket">
-          {knockoutData.rounds.map((round) => (
-            <div key={round.id} className="bracket-round">
-              <h3>{round.label}</h3>
-              <div className="bracket-match-list">
-                {round.matches.map((match) => (
-                  <BracketMatch key={match.id} match={match} onTeamSelect={onTeamSelect} />
-                ))}
+        <section className="bracket-tree" aria-label="Knockout bracket">
+          <BracketSide
+            side={BRACKET_SIDES[0].id}
+            lanes={BRACKET_SIDES[0].lanes}
+            onTeamSelect={onTeamSelect}
+          />
+
+          <div className="bracket-final-column" aria-label="Final matches">
+            {finalMatch && (
+              <div className="bracket-final-card primary">
+                <h3>Final</h3>
+                <BracketMatch match={finalMatch} onTeamSelect={onTeamSelect} />
               </div>
-            </div>
-          ))}
+            )}
+            {thirdPlaceMatch && (
+              <div className="bracket-final-card secondary">
+                <h3>Third Place</h3>
+                <BracketMatch match={thirdPlaceMatch} onTeamSelect={onTeamSelect} />
+              </div>
+            )}
+          </div>
+
+          <BracketSide
+            side={BRACKET_SIDES[1].id}
+            lanes={BRACKET_SIDES[1].lanes}
+            onTeamSelect={onTeamSelect}
+          />
         </section>
       </section>
 
       <SiteFooter />
     </main>
+  );
+}
+
+function BracketSide({ side, lanes, onTeamSelect }) {
+  const sideLabel = side === 'left' ? 'Left' : 'Right';
+
+  return (
+    <section className={`bracket-side ${side}`} aria-label={`${sideLabel} side of bracket`}>
+      {lanes.map((lane) => (
+        <BracketLane key={`${side}-${lane.label}`} lane={lane} onTeamSelect={onTeamSelect} />
+      ))}
+    </section>
+  );
+}
+
+function BracketLane({ lane, onTeamSelect }) {
+  const matches = lane.matchIds.map((matchId) => KNOCKOUT_MATCH_BY_ID.get(matchId)).filter(Boolean);
+  const slotStarts = BRACKET_SLOT_STARTS[matches.length] ?? matches.map((_, index) => index + 1);
+
+  return (
+    <div className={`bracket-lane match-count-${matches.length}`}>
+      <h3 className="bracket-lane-title">{lane.label}</h3>
+      <div className="bracket-lane-grid">
+        {matches.map((match, index) => (
+          <div
+            key={match.id}
+            className={`bracket-node ${index % 2 === 0 && matches.length > 1 ? 'pair-start' : ''}`}
+            style={{ '--slot': slotStarts[index] }}
+          >
+            <BracketMatch match={match} onTeamSelect={onTeamSelect} />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 

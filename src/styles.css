@@ -1254,44 +1254,180 @@ dd {
   border-radius: 3px;
 }
 
-.bracket-board {
+.bracket-tree {
+  --bracket-column-gap: 10px;
+  --bracket-row-min: 54px;
   display: grid;
-  grid-template-columns: minmax(220px, 1.15fr) repeat(4, minmax(210px, 1fr));
-  gap: 12px;
+  grid-template-columns: minmax(610px, 1fr) minmax(210px, 0.34fr) minmax(610px, 1fr);
+  gap: 16px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding: 2px 2px 8px;
 }
 
-.bracket-round {
-  min-width: 210px;
+.bracket-side {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(138px, 1fr));
+  gap: var(--bracket-column-gap);
+  min-width: 610px;
 }
 
-.bracket-round h3 {
-  position: sticky;
-  top: 0;
-  z-index: 1;
+.bracket-lane {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+}
+
+.bracket-lane-title,
+.bracket-final-card h3 {
   padding: 9px 10px;
   color: #253428;
   border: 1px solid rgba(23, 32, 25, 0.1);
   background: #eef2ec;
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 0.86rem;
+  text-align: center;
 }
 
-.bracket-match-list {
+.bracket-lane-grid,
+.bracket-final-column {
   display: grid;
-  gap: 9px;
+  grid-template-rows: repeat(16, minmax(var(--bracket-row-min), 1fr));
+  min-height: calc(var(--bracket-row-min) * 16);
+}
+
+.bracket-lane-grid {
   margin-top: 9px;
 }
 
+.bracket-final-column {
+  min-width: 210px;
+  padding-top: 47px;
+}
+
+.bracket-final-card {
+  display: grid;
+  align-self: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.bracket-final-card.primary {
+  grid-row: 7 / span 3;
+}
+
+.bracket-final-card.secondary {
+  grid-row: 11 / span 3;
+}
+
+.bracket-lane.match-count-8 {
+  --connector-span: 100%;
+}
+
+.bracket-lane.match-count-4 {
+  --connector-span: 200%;
+}
+
+.bracket-lane.match-count-2 {
+  --connector-span: 400%;
+}
+
+.bracket-node {
+  position: relative;
+  z-index: 0;
+  display: grid;
+  grid-row: var(--slot) / span 2;
+  min-width: 0;
+}
+
+.bracket-node::before,
+.bracket-node::after {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  content: "";
+}
+
+.bracket-side.left .bracket-lane:not(:last-child) .bracket-node::after {
+  top: 50%;
+  left: 100%;
+  width: var(--bracket-column-gap);
+  border-top: 2px solid rgba(188, 198, 190, 0.82);
+}
+
+.bracket-side.left .bracket-lane:not(:last-child) .bracket-node.pair-start::before {
+  top: 50%;
+  left: calc(100% + var(--bracket-column-gap));
+  height: var(--connector-span);
+  border-left: 2px solid rgba(188, 198, 190, 0.82);
+}
+
+.bracket-side.left .bracket-lane:last-child .bracket-node::after {
+  top: 50%;
+  left: 100%;
+  width: 16px;
+  border-top: 2px solid rgba(188, 198, 190, 0.82);
+}
+
+.bracket-side.right .bracket-lane:first-child .bracket-node::after {
+  top: 50%;
+  right: 100%;
+  width: 16px;
+  border-top: 2px solid rgba(188, 198, 190, 0.82);
+}
+
+.bracket-side.right .bracket-lane:not(:first-child) .bracket-node::after {
+  top: 50%;
+  right: 100%;
+  width: var(--bracket-column-gap);
+  border-top: 2px solid rgba(188, 198, 190, 0.82);
+}
+
+.bracket-side.right .bracket-lane:not(:first-child) .bracket-node.pair-start::before {
+  top: 50%;
+  right: calc(100% + var(--bracket-column-gap));
+  height: var(--connector-span);
+  border-left: 2px solid rgba(188, 198, 190, 0.82);
+}
+
 .bracket-match {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 7px;
   min-height: 106px;
+  min-width: 0;
   padding: 9px;
   border: 1px solid rgba(23, 32, 25, 0.1);
   background: white;
   border-radius: 8px;
+}
+
+.bracket-node .bracket-match {
+  height: 100%;
+}
+
+.bracket-tree .bracket-match-meta {
+  grid-template-columns: 42px 1fr;
+}
+
+.bracket-tree .bracket-match-meta span:nth-child(2) {
+  display: none;
+}
+
+.bracket-tree .bracket-match-meta strong {
+  text-align: right;
+}
+
+.bracket-tree .bracket-team {
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  gap: 6px;
+  padding: 6px;
+}
+
+.bracket-tree .bracket-team img,
+.bracket-tree .bracket-team-flag {
+  width: 22px;
+  height: 16px;
 }
 
 .bracket-match.complete {
@@ -1559,8 +1695,8 @@ dd {
     padding: 12px;
   }
 
-  .bracket-board {
-    grid-template-columns: repeat(5, minmax(220px, 72vw));
+  .bracket-tree {
+    grid-template-columns: minmax(610px, 1fr) minmax(210px, 0.34fr) minmax(610px, 1fr);
   }
 
   .roster-table {
