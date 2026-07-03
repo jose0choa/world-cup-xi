@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import {
   GitBranch,
   Goal,
+  RotateCcw,
   Search,
   Shield,
   Sparkles,
@@ -176,6 +177,28 @@ const BRACKET_SLOT_STARTS = {
   2: [4, 12],
   1: [8],
 };
+const BRACKET_FEEDERS = {
+  M89: ['W73', 'W75'],
+  M90: ['W74', 'W77'],
+  M91: ['W76', 'W78'],
+  M92: ['W79', 'W80'],
+  M93: ['W83', 'W84'],
+  M94: ['W81', 'W82'],
+  M95: ['W86', 'W85'],
+  M96: ['W88', 'W87'],
+  M97: ['W89', 'W90'],
+  M98: ['W93', 'W94'],
+  M99: ['W91', 'W92'],
+  M100: ['W95', 'W96'],
+  M101: ['W97', 'W98'],
+  M102: ['W99', 'W100'],
+  M104: ['W101', 'W102'],
+  M103: ['L101', 'L102'],
+};
+const ACTUAL_KNOCKOUT_RESULT_COUNT = knockoutData.rounds.reduce(
+  (count, round) => count + round.matches.filter((match) => match.winnerCode).length,
+  0,
+);
 
 function lineForRole(role) {
   if (role === 'GK') return 'keeper';
@@ -1109,10 +1132,103 @@ function remainingKnockoutTeams() {
   return [...codes].map((code) => TEAM_BY_CODE.get(code)).filter(Boolean);
 }
 
+function loserCodeForMatch(match) {
+  if (!match?.winnerCode) return '';
+  return match.teams.find((entry) => entry.code && entry.code !== match.winnerCode)?.code ?? '';
+}
+
+function entryFromBracketReference(reference, matchById, fallbackEntry) {
+  const referenceType = reference.slice(0, 1);
+  const sourceMatchId = `M${reference.slice(1)}`;
+  const sourceMatch = matchById.get(sourceMatchId);
+  const code =
+    referenceType === 'W' ? sourceMatch?.winnerCode : loserCodeForMatch(sourceMatch);
+
+  if (code) return { code };
+  return fallbackEntry ? { ...fallbackEntry } : { label: reference };
+}
+
+function buildSimulatedKnockoutMatches(predictions = {}) {
+  const matchById = new Map();
+
+  knockoutData.rounds.forEach((round) => {
+    round.matches.forEach((baseMatch) => {
+      const feeders = BRACKET_FEEDERS[baseMatch.id];
+      const teams = feeders
+        ? feeders.map((reference, index) =>
+            entryFromBracketReference(reference, matchById, baseMatch.teams[index]),
+          )
+        : baseMatch.teams.map((entry) => ({ ...entry }));
+      const predictedWinnerCode = predictions[baseMatch.id];
+      const canPredict =
+        !baseMatch.winnerCode && teams.length === 2 && teams.every((entry) => entry.code);
+      const validPrediction = canPredict
+        ? teams.find((entry) => entry.code === predictedWinnerCode)?.code
+        : '';
+      const winnerCode = baseMatch.winnerCode ?? validPrediction ?? '';
+
+      matchById.set(baseMatch.id, {
+        ...baseMatch,
+        teams,
+        status: validPrediction ? 'Projected' : baseMatch.status,
+        winnerCode,
+        canPredict,
+        isProjected: Boolean(validPrediction),
+      });
+    });
+  });
+
+  return matchById;
+}
+
+function pruneBracketPredictions(predictions) {
+  const matchById = buildSimulatedKnockoutMatches(predictions);
+
+  return Object.entries(predictions).reduce((validPredictions, [matchId, winnerCode]) => {
+    const baseMatch = KNOCKOUT_MATCH_BY_ID.get(matchId);
+    const simulatedMatch = matchById.get(matchId);
+
+    if (
+      !baseMatch?.winnerCode &&
+      simulatedMatch?.isProjected &&
+      simulatedMatch.winnerCode === winnerCode
+    ) {
+      validPredictions[matchId] = winnerCode;
+    }
+
+    return validPredictions;
+  }, {});
+}
+
 function BracketPage({ onNavigate, onTeamSelect }) {
   const remainingTeams = remainingKnockoutTeams();
-  const finalMatch = KNOCKOUT_MATCH_BY_ID.get('M104');
-  const thirdPlaceMatch = KNOCKOUT_MATCH_BY_ID.get('M103');
+  const [predictions, setPredictions] = useState({});
+  const simulatedMatchById = useMemo(
+    () => buildSimulatedKnockoutMatches(predictions),
+    [predictions],
+  );
+  const finalMatch = simulatedMatchById.get('M104');
+  const thirdPlaceMatch = simulatedMatchById.get('M103');
+  const predictionCount = Object.keys(predictions).length;
+  const projectedChampion = finalMatch?.winnerCode
+    ? TEAM_BY_CODE.get(finalMatch.winnerCode)
+    : null;
+
+  function handleWinnerSelect(match, winnerCode) {
+    if (!match.canPredict || !winnerCode) return;
+
+    setPredictions((currentPredictions) => {
+      const nextPredictions = { ...currentPredictions };
+
+      if (nextPredictions[match.id] === winnerCode) {
+        delete nextPredictions[match.id];
+      } else {
+        nextPredictions[match.id] = winnerCode;
+      }
+
+      return pruneBracketPredictions(nextPredictions);
+    });
+  }
 
   return (
     <main className="app-shell">
@@ -1161,24 +1277,62 @@ function BracketPage({ onNavigate, onTeamSelect }) {
           </div>
         </section>
 
+        <section className="bracket-sim-panel" aria-label="Bracket simulator">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">Simulator</span>
+              <h2>Prediction mode</h2>
+            </div>
+            <button
+              type="button"
+              className="bracket-reset-button"
+              onClick={() => setPredictions({})}
+              disabled={!predictionCount}
+            >
+              <RotateCcw size={16} />
+              Reset to current bracket
+            </button>
+          </div>
+
+          <div className="simulation-stats" aria-label="Simulation status">
+            <span>{predictionCount} picks active</span>
+            <span>{ACTUAL_KNOCKOUT_RESULT_COUNT} results locked</span>
+            <span>
+              {projectedChampion
+                ? `Projected champion: ${projectedChampion.name}`
+                : 'Champion open'}
+            </span>
+          </div>
+        </section>
+
         <section className="bracket-tree" aria-label="Knockout bracket">
           <BracketSide
             side={BRACKET_SIDES[0].id}
             lanes={BRACKET_SIDES[0].lanes}
+            matchById={simulatedMatchById}
             onTeamSelect={onTeamSelect}
+            onWinnerSelect={handleWinnerSelect}
           />
 
           <div className="bracket-final-column" aria-label="Final matches">
             {finalMatch && (
               <div className="bracket-final-card primary">
                 <h3>Final</h3>
-                <BracketMatch match={finalMatch} onTeamSelect={onTeamSelect} />
+                <BracketMatch
+                  match={finalMatch}
+                  onTeamSelect={onTeamSelect}
+                  onWinnerSelect={handleWinnerSelect}
+                />
               </div>
             )}
             {thirdPlaceMatch && (
               <div className="bracket-final-card secondary">
                 <h3>Third Place</h3>
-                <BracketMatch match={thirdPlaceMatch} onTeamSelect={onTeamSelect} />
+                <BracketMatch
+                  match={thirdPlaceMatch}
+                  onTeamSelect={onTeamSelect}
+                  onWinnerSelect={handleWinnerSelect}
+                />
               </div>
             )}
           </div>
@@ -1186,7 +1340,9 @@ function BracketPage({ onNavigate, onTeamSelect }) {
           <BracketSide
             side={BRACKET_SIDES[1].id}
             lanes={BRACKET_SIDES[1].lanes}
+            matchById={simulatedMatchById}
             onTeamSelect={onTeamSelect}
+            onWinnerSelect={handleWinnerSelect}
           />
         </section>
       </section>
@@ -1196,20 +1352,26 @@ function BracketPage({ onNavigate, onTeamSelect }) {
   );
 }
 
-function BracketSide({ side, lanes, onTeamSelect }) {
+function BracketSide({ side, lanes, matchById, onTeamSelect, onWinnerSelect }) {
   const sideLabel = side === 'left' ? 'Left' : 'Right';
 
   return (
     <section className={`bracket-side ${side}`} aria-label={`${sideLabel} side of bracket`}>
       {lanes.map((lane) => (
-        <BracketLane key={`${side}-${lane.label}`} lane={lane} onTeamSelect={onTeamSelect} />
+        <BracketLane
+          key={`${side}-${lane.label}`}
+          lane={lane}
+          matchById={matchById}
+          onTeamSelect={onTeamSelect}
+          onWinnerSelect={onWinnerSelect}
+        />
       ))}
     </section>
   );
 }
 
-function BracketLane({ lane, onTeamSelect }) {
-  const matches = lane.matchIds.map((matchId) => KNOCKOUT_MATCH_BY_ID.get(matchId)).filter(Boolean);
+function BracketLane({ lane, matchById, onTeamSelect, onWinnerSelect }) {
+  const matches = lane.matchIds.map((matchId) => matchById.get(matchId)).filter(Boolean);
   const slotStarts = BRACKET_SLOT_STARTS[matches.length] ?? matches.map((_, index) => index + 1);
 
   return (
@@ -1222,7 +1384,11 @@ function BracketLane({ lane, onTeamSelect }) {
             className={`bracket-node ${index % 2 === 0 && matches.length > 1 ? 'pair-start' : ''}`}
             style={{ '--slot': slotStarts[index] }}
           >
-            <BracketMatch match={match} onTeamSelect={onTeamSelect} />
+            <BracketMatch
+              match={match}
+              onTeamSelect={onTeamSelect}
+              onWinnerSelect={onWinnerSelect}
+            />
           </div>
         ))}
       </div>
@@ -1230,11 +1396,13 @@ function BracketLane({ lane, onTeamSelect }) {
   );
 }
 
-function BracketMatch({ match, onTeamSelect }) {
-  const complete = Boolean(match.winnerCode);
+function BracketMatch({ match, onTeamSelect, onWinnerSelect }) {
+  const projected = Boolean(match.isProjected);
+  const complete = Boolean(match.winnerCode && !projected);
+  const matchState = complete ? 'complete' : projected ? 'projected' : 'pending';
 
   return (
-    <article className={`bracket-match ${complete ? 'complete' : 'pending'}`}>
+    <article className={`bracket-match ${matchState} ${match.canPredict ? 'predictable' : ''}`}>
       <div className="bracket-match-meta">
         <span>{match.id}</span>
         <span>{match.date}</span>
@@ -1248,6 +1416,7 @@ function BracketMatch({ match, onTeamSelect }) {
             entry={entry}
             match={match}
             onTeamSelect={onTeamSelect}
+            onWinnerSelect={onWinnerSelect}
           />
         ))}
       </div>
@@ -1255,12 +1424,21 @@ function BracketMatch({ match, onTeamSelect }) {
   );
 }
 
-function BracketTeamSlot({ entry, match, onTeamSelect }) {
+function BracketTeamSlot({ entry, match, onTeamSelect, onWinnerSelect }) {
   const team = entry.code ? TEAM_BY_CODE.get(entry.code) : null;
   const isWinner = entry.code && match.winnerCode === entry.code;
   const isEliminated = entry.code && match.winnerCode && match.winnerCode !== entry.code;
+  const canSelectWinner = Boolean(team && match.canPredict && onWinnerSelect);
   const score = entry.score ? `${entry.score}${entry.pens ? ` (${entry.pens})` : ''}` : '';
-  const className = `bracket-team ${isWinner ? 'winner' : ''} ${isEliminated ? 'eliminated' : ''}`;
+  const className = [
+    'bracket-team',
+    isWinner ? 'winner' : '',
+    isEliminated ? 'eliminated' : '',
+    canSelectWinner ? 'selectable' : '',
+    match.isProjected && isWinner ? 'projected-winner' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   if (!team) {
     return (
@@ -1269,6 +1447,21 @@ function BracketTeamSlot({ entry, match, onTeamSelect }) {
         <span>{entry.label}</span>
         <strong>{score}</strong>
       </div>
+    );
+  }
+
+  if (canSelectWinner) {
+    return (
+      <button
+        type="button"
+        className={className}
+        title={`Project ${team.name} to advance`}
+        onClick={() => onWinnerSelect(match, entry.code)}
+      >
+        <img src={flagUrl(team)} alt="" />
+        <span>{team.name}</span>
+        <strong>{score}</strong>
+      </button>
     );
   }
 

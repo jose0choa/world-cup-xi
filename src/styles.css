@@ -1170,7 +1170,8 @@ dd {
 }
 
 .bracket-header,
-.remaining-panel {
+.remaining-panel,
+.bracket-sim-panel {
   border: 1px solid rgba(23, 32, 25, 0.1);
   background: white;
   border-radius: 8px;
@@ -1213,10 +1214,55 @@ dd {
   padding: 14px;
 }
 
+.bracket-sim-panel {
+  padding: 14px;
+}
+
 .bracket-updated {
   color: #69746b;
   font-size: 0.78rem;
   font-weight: 900;
+}
+
+.bracket-reset-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 0 12px;
+  color: #205a3c;
+  border: 1px solid rgba(36, 107, 69, 0.22);
+  background: #eef6ef;
+  border-radius: 8px;
+  font-weight: 900;
+}
+
+.bracket-reset-button:disabled {
+  color: #7a847b;
+  border-color: rgba(23, 32, 25, 0.1);
+  background: #f4f6f1;
+  cursor: not-allowed;
+}
+
+.simulation-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.simulation-stats span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 5px 9px;
+  color: #253428;
+  border: 1px solid rgba(23, 32, 25, 0.1);
+  background: #f8faf6;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 850;
 }
 
 .remaining-team-strip {
@@ -1434,6 +1480,15 @@ dd {
   border-color: rgba(36, 107, 69, 0.18);
 }
 
+.bracket-match.predictable {
+  border-style: dashed;
+}
+
+.bracket-match.projected {
+  border-color: rgba(189, 151, 56, 0.45);
+  background: #fffdf5;
+}
+
 .bracket-match-meta {
   display: grid;
   grid-template-columns: 42px 1fr auto;
@@ -1450,6 +1505,10 @@ dd {
 }
 
 .bracket-match.pending .bracket-match-meta strong {
+  color: #7a6020;
+}
+
+.bracket-match.projected .bracket-match-meta strong {
   color: #7a6020;
 }
 
@@ -1477,6 +1536,22 @@ dd {
   background: #eef6ef;
 }
 
+button.bracket-team {
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bracket-team.selectable {
+  border-color: rgba(189, 151, 56, 0.28);
+}
+
+.bracket-team.selectable:hover {
+  border-color: rgba(189, 151, 56, 0.58);
+  background: #fff7dc;
+}
+
 .bracket-team span {
   min-width: 0;
   overflow: hidden;
@@ -1502,6 +1577,11 @@ dd {
 .bracket-team.winner span,
 .bracket-team.winner strong {
   color: #205a3c;
+}
+
+.bracket-team.winner.projected-winner {
+  border-color: rgba(189, 151, 56, 0.62);
+  background: #fff2bd;
 }
 
 .bracket-team.eliminated {

@@ -1,5 +1,5 @@
 export const knockoutData = {
-  updatedAt: '2026-07-02',
+  updatedAt: '2026-07-03',
   sourceUrl: 'https://www.espn.com/soccer/bracket',
   sourceLabel: 'ESPN bracket',
   rounds: [
@@ -90,15 +90,19 @@ export const knockoutData = {
         {
           id: 'M83',
           date: 'Jul 2',
-          status: 'Upcoming',
-          teams: [{ code: 'POR' }, { code: 'CRO' }],
+          status: 'Final',
+          teams: [
+            { code: 'POR', score: '2' },
+            { code: 'CRO', score: '1' },
+          ],
+          winnerCode: 'POR',
         },
         {
           id: 'M84',
           date: 'Jul 2',
           status: 'Final',
           teams: [
-            { code: 'ESP', score: '2' },
+            { code: 'ESP', score: '3' },
             { code: 'AUT', score: '0' },
           ],
           winnerCode: 'ESP',
@@ -160,8 +164,8 @@ export const knockoutData = {
         {
           id: 'M93',
           date: 'Jul 6',
-          status: 'Awaiting',
-          teams: [{ label: 'Portugal/Croatia' }, { code: 'ESP' }],
+          status: 'Upcoming',
+          teams: [{ code: 'POR' }, { code: 'ESP' }],
         },
         { id: 'M94', date: 'Jul 6', status: 'Upcoming', teams: [{ code: 'USA' }, { code: 'BEL' }] },
         {
