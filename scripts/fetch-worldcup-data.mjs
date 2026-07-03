@@ -17,6 +17,13 @@ const FUT_GG_PLAYERS_URL = 'https://www.fut.gg/players';
 const FUT_GG_GAME = '26';
 const EA_FC_PAGE_SIZE = 100;
 const DATA_PATH = path.join(rootDir, 'src', 'data', 'worldcup-2026.json');
+const MANUAL_EA_FC_RATING_OVERRIDES = {
+  'BRA-10-neymar': {
+    rating: 83,
+    team: 'Santos',
+    source: 'Manual app override',
+  },
+};
 
 const TEAM_META = {
   'Czech Republic': { code: 'CZE', flag: 'cz', primary: '#d7141a' },
@@ -221,7 +228,7 @@ function slugify(value = '') {
 
 function ageOnOpeningDay(ageTemplate = '') {
   const match = ageTemplate.match(
-    /birth date and age2\|2026\|6\|11\|(\d{4})\|(\d{1,2})\|(\d{1,2})/,
+    /birth date and age2\|(?:[^|{}=]+=[^|{}]*\|)*2026\|6\|11\|(\d{4})\|(\d{1,2})\|(\d{1,2})/,
   );
 
   if (!match) return null;
@@ -1119,10 +1126,23 @@ async function attachEaFcRatings(teams) {
     await sleep(250);
   }
 
+  let manualMatched = 0;
+  for (const player of teams.flatMap((team) => team.players)) {
+    const override = MANUAL_EA_FC_RATING_OVERRIDES[player.id];
+    if (!override) continue;
+
+    player.eaFcRating = override.rating;
+    player.eaFcTeam = override.team;
+    player.eaFcRatingSource = override.source;
+    delete player.eaFcRatingUrl;
+    manualMatched += 1;
+  }
+
   return {
-    matched: primaryMatched + futGgMatched,
+    matched: primaryMatched + futGgMatched + manualMatched,
     primaryMatched,
     futGgMatched,
+    manualMatched,
     fallbackCandidates: fallbackCandidates.length,
     available: index.rows.length,
     legacyAvailable: legacyIndex.rows.length,
@@ -1442,7 +1462,7 @@ async function main() {
   console.log(`Attached ${leagueCount} club leagues.`);
   const eaFcRatings = await attachEaFcRatings(teams);
   console.log(
-    `Attached ${eaFcRatings.matched} EA FC ratings (${eaFcRatings.primaryMatched} official EA, ${eaFcRatings.futGgMatched} FUT.GG fallbacks) from ${eaFcRatings.available} current EA items and ${eaFcRatings.legacyAvailable} legacy EA items.`,
+    `Attached ${eaFcRatings.matched} EA FC ratings (${eaFcRatings.primaryMatched} official EA, ${eaFcRatings.futGgMatched} FUT.GG fallbacks, ${eaFcRatings.manualMatched} manual overrides) from ${eaFcRatings.available} current EA items and ${eaFcRatings.legacyAvailable} legacy EA items.`,
   );
   const photoCount = teams.flatMap((team) => team.players).filter((player) => player.photo).length;
   console.log(`Attached ${photoCount} cached player photos.`);

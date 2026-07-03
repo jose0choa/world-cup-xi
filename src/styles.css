@@ -177,7 +177,8 @@ h1 {
 
 .home-link,
 .site-footer a,
-.source-list a {
+.source-list a,
+.source-list strong {
   color: #205a3c;
   font-weight: 900;
   text-decoration: none;
@@ -1224,7 +1225,15 @@ dd {
   font-weight: 900;
 }
 
-.bracket-reset-button {
+.bracket-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bracket-reset-button,
+.bracket-share-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1238,7 +1247,14 @@ dd {
   font-weight: 900;
 }
 
-.bracket-reset-button:disabled {
+.bracket-share-button {
+  color: #7a6020;
+  border-color: rgba(189, 151, 56, 0.38);
+  background: #fff7dc;
+}
+
+.bracket-reset-button:disabled,
+.bracket-share-button:disabled {
   color: #7a847b;
   border-color: rgba(23, 32, 25, 0.1);
   background: #f4f6f1;
@@ -1263,6 +1279,12 @@ dd {
   border-radius: 8px;
   font-size: 0.8rem;
   font-weight: 850;
+}
+
+.simulation-stats .share-status {
+  color: #7a6020;
+  border-color: rgba(189, 151, 56, 0.28);
+  background: #fff7dc;
 }
 
 .remaining-team-strip {

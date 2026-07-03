@@ -6,6 +6,7 @@ import {
   Goal,
   RotateCcw,
   Search,
+  Share2,
   Shield,
   Sparkles,
   SquareStack,
@@ -199,6 +200,11 @@ const ACTUAL_KNOCKOUT_RESULT_COUNT = knockoutData.rounds.reduce(
   (count, round) => count + round.matches.filter((match) => match.winnerCode).length,
   0,
 );
+const BRACKET_SHARE_PARAM = 'picks';
+const REMAINING_PREDICTION_MATCH_IDS = knockoutData.rounds.flatMap((round) =>
+  round.matches.filter((match) => !match.winnerCode).map((match) => match.id),
+);
+const REMAINING_PREDICTION_MATCH_ID_SET = new Set(REMAINING_PREDICTION_MATCH_IDS);
 
 function lineForRole(role) {
   if (role === 'GK') return 'keeper';
@@ -1200,9 +1206,78 @@ function pruneBracketPredictions(predictions) {
   }, {});
 }
 
+function orderedBracketPredictionEntries(predictions) {
+  return REMAINING_PREDICTION_MATCH_IDS.map((matchId) => [matchId, predictions[matchId]]).filter(
+    ([, winnerCode]) => Boolean(winnerCode),
+  );
+}
+
+function encodeBracketPredictions(predictions) {
+  return orderedBracketPredictionEntries(predictions)
+    .map(([matchId, winnerCode]) => `${matchId}:${winnerCode}`)
+    .join(',');
+}
+
+function decodeBracketPredictions(encodedPredictions = '') {
+  const predictions = {};
+
+  encodedPredictions.split(',').forEach((entry) => {
+    const [matchId, winnerCode] = entry.split(':');
+    const normalizedWinnerCode = winnerCode?.toUpperCase();
+
+    if (
+      REMAINING_PREDICTION_MATCH_ID_SET.has(matchId) &&
+      normalizedWinnerCode &&
+      TEAM_BY_CODE.has(normalizedWinnerCode)
+    ) {
+      predictions[matchId] = normalizedWinnerCode;
+    }
+  });
+
+  return pruneBracketPredictions(predictions);
+}
+
+function sharedBracketPredictionsFromUrl() {
+  if (typeof window === 'undefined') return {};
+
+  const searchParams = new URLSearchParams(window.location.search);
+  const encodedPredictions = searchParams.get(BRACKET_SHARE_PARAM);
+
+  return encodedPredictions ? decodeBracketPredictions(encodedPredictions) : {};
+}
+
+function hasSharedBracketUrl() {
+  return typeof window !== 'undefined'
+    ? new URLSearchParams(window.location.search).has(BRACKET_SHARE_PARAM)
+    : false;
+}
+
+function createBracketShareUrl(predictions) {
+  if (typeof window === 'undefined') return '';
+
+  const url = new URL('/bracket', window.location.origin);
+  url.searchParams.set(BRACKET_SHARE_PARAM, encodeBracketPredictions(predictions));
+  return url.toString();
+}
+
+function clearBracketShareUrl() {
+  if (typeof window === 'undefined' || window.location.pathname !== '/bracket') return;
+
+  const searchParams = new URLSearchParams(window.location.search);
+  if (!searchParams.has(BRACKET_SHARE_PARAM)) return;
+
+  searchParams.delete(BRACKET_SHARE_PARAM);
+  const nextSearch = searchParams.toString();
+  const nextUrl = nextSearch ? `/bracket?${nextSearch}` : '/bracket';
+  window.history.replaceState({}, '', nextUrl);
+}
+
 function BracketPage({ onNavigate, onTeamSelect }) {
   const remainingTeams = remainingKnockoutTeams();
-  const [predictions, setPredictions] = useState({});
+  const [predictions, setPredictions] = useState(() => sharedBracketPredictionsFromUrl());
+  const [shareStatus, setShareStatus] = useState(() =>
+    hasSharedBracketUrl() ? 'Snapshot loaded' : '',
+  );
   const simulatedMatchById = useMemo(
     () => buildSimulatedKnockoutMatches(predictions),
     [predictions],
@@ -1210,13 +1285,40 @@ function BracketPage({ onNavigate, onTeamSelect }) {
   const finalMatch = simulatedMatchById.get('M104');
   const thirdPlaceMatch = simulatedMatchById.get('M103');
   const predictionCount = Object.keys(predictions).length;
+  const predictionTargetCount = REMAINING_PREDICTION_MATCH_IDS.length;
+  const bracketComplete = predictionCount === predictionTargetCount;
   const projectedChampion = finalMatch?.winnerCode
     ? TEAM_BY_CODE.get(finalMatch.winnerCode)
     : null;
+  const shareUrl = useMemo(
+    () => (bracketComplete ? createBracketShareUrl(predictions) : ''),
+    [bracketComplete, predictions],
+  );
+
+  useEffect(() => {
+    const syncSharedPredictions = () => {
+      const sharedPredictions = sharedBracketPredictionsFromUrl();
+      setPredictions(sharedPredictions);
+      setShareStatus(hasSharedBracketUrl() ? 'Snapshot loaded' : '');
+    };
+
+    window.addEventListener('popstate', syncSharedPredictions);
+    return () => {
+      window.removeEventListener('popstate', syncSharedPredictions);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!bracketComplete && shareStatus !== 'Snapshot loaded') {
+      setShareStatus('');
+    }
+  }, [bracketComplete, shareStatus]);
 
   function handleWinnerSelect(match, winnerCode) {
     if (!match.canPredict || !winnerCode) return;
 
+    clearBracketShareUrl();
+    setShareStatus('');
     setPredictions((currentPredictions) => {
       const nextPredictions = { ...currentPredictions };
 
@@ -1228,6 +1330,40 @@ function BracketPage({ onNavigate, onTeamSelect }) {
 
       return pruneBracketPredictions(nextPredictions);
     });
+  }
+
+  function handleResetBracket() {
+    clearBracketShareUrl();
+    setPredictions({});
+    setShareStatus('');
+  }
+
+  async function handleShareBracket() {
+    if (!bracketComplete || !shareUrl) return;
+
+    const shareData = {
+      title: 'World Cup Lineups bracket prediction',
+      text: projectedChampion
+        ? `My World Cup bracket has ${projectedChampion.name} winning it all.`
+        : 'My completed World Cup bracket prediction.',
+      url: shareUrl,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        setShareStatus('Share ready');
+        return;
+      }
+
+      await navigator.clipboard.writeText(shareUrl);
+      setShareStatus('Snapshot link copied');
+    } catch (error) {
+      if (error?.name === 'AbortError') return;
+
+      window.prompt('Copy your bracket link', shareUrl);
+      setShareStatus('Snapshot link ready');
+    }
   }
 
   return (
@@ -1283,25 +1419,40 @@ function BracketPage({ onNavigate, onTeamSelect }) {
               <span className="eyebrow">Simulator</span>
               <h2>Prediction mode</h2>
             </div>
-            <button
-              type="button"
-              className="bracket-reset-button"
-              onClick={() => setPredictions({})}
-              disabled={!predictionCount}
-            >
-              <RotateCcw size={16} />
-              Reset to current bracket
-            </button>
+            <div className="bracket-actions">
+              <button
+                type="button"
+                className="bracket-share-button"
+                onClick={handleShareBracket}
+                disabled={!bracketComplete}
+                title={bracketComplete ? 'Share this completed bracket' : 'Complete every pick to share'}
+              >
+                <Share2 size={16} />
+                Share bracket
+              </button>
+              <button
+                type="button"
+                className="bracket-reset-button"
+                onClick={handleResetBracket}
+                disabled={!predictionCount && !hasSharedBracketUrl()}
+              >
+                <RotateCcw size={16} />
+                Reset to current bracket
+              </button>
+            </div>
           </div>
 
           <div className="simulation-stats" aria-label="Simulation status">
-            <span>{predictionCount} picks active</span>
+            <span>
+              {predictionCount}/{predictionTargetCount} picks
+            </span>
             <span>{ACTUAL_KNOCKOUT_RESULT_COUNT} results locked</span>
             <span>
               {projectedChampion
                 ? `Projected champion: ${projectedChampion.name}`
                 : 'Champion open'}
             </span>
+            {shareStatus && <span className="share-status">{shareStatus}</span>}
           </div>
         </section>
 
@@ -1615,6 +1766,10 @@ function SourcesPage() {
                 FUT.GG player ratings
               </a>
               <span>Fallback FC 26 common-card ratings for players missing from the official table.</span>
+            </li>
+            <li>
+              <strong>Manual rating overrides</strong>
+              <span>Small app-level fixes for prominent players missing because of licensing/data gaps.</span>
             </li>
             <li>
               <a href={FIFA_MENS_RANKING_URL} target="_blank" rel="noreferrer">
