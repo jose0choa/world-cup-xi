@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Analytics } from '@vercel/analytics/react';
 import {
@@ -1272,12 +1272,36 @@ function clearBracketShareUrl() {
   window.history.replaceState({}, '', nextUrl);
 }
 
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+async function copyTextToClipboard(value) {
+  if (!navigator.clipboard) return false;
+
+  try {
+    await navigator.clipboard.writeText(value);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function BracketPage({ onNavigate, onTeamSelect }) {
   const remainingTeams = remainingKnockoutTeams();
+  const snapshotRef = useRef(null);
   const [predictions, setPredictions] = useState(() => sharedBracketPredictionsFromUrl());
   const [shareStatus, setShareStatus] = useState(() =>
     hasSharedBracketUrl() ? 'Snapshot loaded' : '',
   );
+  const [snapshotBusy, setSnapshotBusy] = useState(false);
   const simulatedMatchById = useMemo(
     () => buildSimulatedKnockoutMatches(predictions),
     [predictions],
@@ -1339,30 +1363,47 @@ function BracketPage({ onNavigate, onTeamSelect }) {
   }
 
   async function handleShareBracket() {
-    if (!bracketComplete || !shareUrl) return;
+    if (!bracketComplete || !shareUrl || !snapshotRef.current || snapshotBusy) return;
 
-    const shareData = {
-      title: 'World Cup Lineups bracket prediction',
-      text: projectedChampion
-        ? `My World Cup bracket has ${projectedChampion.name} winning it all.`
-        : 'My completed World Cup bracket prediction.',
-      url: shareUrl,
-    };
+    setSnapshotBusy(true);
+    setShareStatus('Creating PNG...');
 
     try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-        setShareStatus('Share ready');
+      const { toBlob } = await import('html-to-image');
+      const blob = await toBlob(snapshotRef.current, {
+        backgroundColor: '#f4f6f1',
+        cacheBust: true,
+        pixelRatio: 2,
+      });
+
+      if (!blob) throw new Error('Could not create bracket snapshot.');
+
+      const filename = `world-cup-lineups-bracket-${Date.now()}.png`;
+      const file = new File([blob], filename, { type: 'image/png' });
+      const shareText = projectedChampion
+        ? `My World Cup bracket has ${projectedChampion.name} winning it all. ${shareUrl}`
+        : `My completed World Cup bracket prediction. ${shareUrl}`;
+
+      if (navigator.share && navigator.canShare?.({ files: [file] })) {
+        await navigator.share({
+          title: 'World Cup Lineups bracket prediction',
+          text: shareText,
+          files: [file],
+        });
+        setShareStatus('Snapshot shared');
         return;
       }
 
-      await navigator.clipboard.writeText(shareUrl);
-      setShareStatus('Snapshot link copied');
+      downloadBlob(blob, filename);
+      const copied = await copyTextToClipboard(shareUrl);
+      setShareStatus(copied ? 'PNG downloaded + link copied' : 'PNG downloaded');
     } catch (error) {
       if (error?.name === 'AbortError') return;
 
-      window.prompt('Copy your bracket link', shareUrl);
-      setShareStatus('Snapshot link ready');
+      const copied = await copyTextToClipboard(shareUrl);
+      setShareStatus(copied ? 'PNG failed, link copied' : 'Snapshot failed');
+    } finally {
+      setSnapshotBusy(false);
     }
   }
 
@@ -1424,11 +1465,11 @@ function BracketPage({ onNavigate, onTeamSelect }) {
                 type="button"
                 className="bracket-share-button"
                 onClick={handleShareBracket}
-                disabled={!bracketComplete}
-                title={bracketComplete ? 'Share this completed bracket' : 'Complete every pick to share'}
+                disabled={!bracketComplete || snapshotBusy}
+                title={bracketComplete ? 'Share this completed bracket as a PNG' : 'Complete every pick to share'}
               >
                 <Share2 size={16} />
-                Share bracket
+                {snapshotBusy ? 'Creating PNG' : 'Share snapshot'}
               </button>
               <button
                 type="button"
@@ -1498,12 +1539,105 @@ function BracketPage({ onNavigate, onTeamSelect }) {
         </section>
       </section>
 
+      {bracketComplete && (
+        <BracketSnapshot
+          snapshotRef={snapshotRef}
+          matchById={simulatedMatchById}
+          finalMatch={finalMatch}
+          thirdPlaceMatch={thirdPlaceMatch}
+          projectedChampion={projectedChampion}
+          predictionCount={predictionCount}
+          predictionTargetCount={predictionTargetCount}
+          shareUrl={shareUrl}
+        />
+      )}
+
       <SiteFooter />
     </main>
   );
 }
 
-function BracketSide({ side, lanes, matchById, onTeamSelect, onWinnerSelect }) {
+function BracketSnapshot({
+  snapshotRef,
+  matchById,
+  finalMatch,
+  thirdPlaceMatch,
+  projectedChampion,
+  predictionCount,
+  predictionTargetCount,
+  shareUrl,
+}) {
+  const shareHost = shareUrl ? new URL(shareUrl).host : 'World Cup Lineups';
+
+  return (
+    <div className="snapshot-capture-wrap" aria-hidden="true">
+      <section ref={snapshotRef} className="bracket-snapshot-card">
+        <header className="snapshot-header">
+          <div className="snapshot-brand">
+            <div className="brand-mark">
+              <Trophy size={24} strokeWidth={2.4} />
+            </div>
+            <div>
+              <span>World Cup Lineups</span>
+              <h2>Bracket prediction</h2>
+            </div>
+          </div>
+
+          <div className="snapshot-champion">
+            <span>Projected champion</span>
+            <strong>{projectedChampion?.name ?? 'Open'}</strong>
+          </div>
+        </header>
+
+        <div className="snapshot-meta">
+          <span>Updated {knockoutData.updatedAt}</span>
+          <span>
+            {predictionCount}/{predictionTargetCount} picks
+          </span>
+          <span>{ACTUAL_KNOCKOUT_RESULT_COUNT} results locked</span>
+        </div>
+
+        <section className="bracket-tree snapshot-tree" aria-label="Completed bracket snapshot">
+          <BracketSide
+            side={BRACKET_SIDES[0].id}
+            lanes={BRACKET_SIDES[0].lanes}
+            matchById={matchById}
+            readOnly
+          />
+
+          <div className="bracket-final-column" aria-label="Final matches">
+            {finalMatch && (
+              <div className="bracket-final-card primary">
+                <h3>Final</h3>
+                <BracketMatch match={finalMatch} readOnly />
+              </div>
+            )}
+            {thirdPlaceMatch && (
+              <div className="bracket-final-card secondary">
+                <h3>Third Place</h3>
+                <BracketMatch match={thirdPlaceMatch} readOnly />
+              </div>
+            )}
+          </div>
+
+          <BracketSide
+            side={BRACKET_SIDES[1].id}
+            lanes={BRACKET_SIDES[1].lanes}
+            matchById={matchById}
+            readOnly
+          />
+        </section>
+
+        <footer className="snapshot-footer">
+          <span>{shareHost}</span>
+          <span>Independent fan project</span>
+        </footer>
+      </section>
+    </div>
+  );
+}
+
+function BracketSide({ side, lanes, matchById, onTeamSelect, onWinnerSelect, readOnly = false }) {
   const sideLabel = side === 'left' ? 'Left' : 'Right';
 
   return (
@@ -1515,13 +1649,14 @@ function BracketSide({ side, lanes, matchById, onTeamSelect, onWinnerSelect }) {
           matchById={matchById}
           onTeamSelect={onTeamSelect}
           onWinnerSelect={onWinnerSelect}
+          readOnly={readOnly}
         />
       ))}
     </section>
   );
 }
 
-function BracketLane({ lane, matchById, onTeamSelect, onWinnerSelect }) {
+function BracketLane({ lane, matchById, onTeamSelect, onWinnerSelect, readOnly = false }) {
   const matches = lane.matchIds.map((matchId) => matchById.get(matchId)).filter(Boolean);
   const slotStarts = BRACKET_SLOT_STARTS[matches.length] ?? matches.map((_, index) => index + 1);
 
@@ -1539,6 +1674,7 @@ function BracketLane({ lane, matchById, onTeamSelect, onWinnerSelect }) {
               match={match}
               onTeamSelect={onTeamSelect}
               onWinnerSelect={onWinnerSelect}
+              readOnly={readOnly}
             />
           </div>
         ))}
@@ -1547,7 +1683,7 @@ function BracketLane({ lane, matchById, onTeamSelect, onWinnerSelect }) {
   );
 }
 
-function BracketMatch({ match, onTeamSelect, onWinnerSelect }) {
+function BracketMatch({ match, onTeamSelect, onWinnerSelect, readOnly = false }) {
   const projected = Boolean(match.isProjected);
   const complete = Boolean(match.winnerCode && !projected);
   const matchState = complete ? 'complete' : projected ? 'projected' : 'pending';
@@ -1568,6 +1704,7 @@ function BracketMatch({ match, onTeamSelect, onWinnerSelect }) {
             match={match}
             onTeamSelect={onTeamSelect}
             onWinnerSelect={onWinnerSelect}
+            readOnly={readOnly}
           />
         ))}
       </div>
@@ -1575,11 +1712,11 @@ function BracketMatch({ match, onTeamSelect, onWinnerSelect }) {
   );
 }
 
-function BracketTeamSlot({ entry, match, onTeamSelect, onWinnerSelect }) {
+function BracketTeamSlot({ entry, match, onTeamSelect, onWinnerSelect, readOnly = false }) {
   const team = entry.code ? TEAM_BY_CODE.get(entry.code) : null;
   const isWinner = entry.code && match.winnerCode === entry.code;
   const isEliminated = entry.code && match.winnerCode && match.winnerCode !== entry.code;
-  const canSelectWinner = Boolean(team && match.canPredict && onWinnerSelect);
+  const canSelectWinner = Boolean(team && match.canPredict && onWinnerSelect && !readOnly);
   const score = entry.score ? `${entry.score}${entry.pens ? ` (${entry.pens})` : ''}` : '';
   const className = [
     'bracket-team',
@@ -1601,6 +1738,16 @@ function BracketTeamSlot({ entry, match, onTeamSelect, onWinnerSelect }) {
     );
   }
 
+  if (readOnly) {
+    return (
+      <div className={className}>
+        <img src={flagUrl(team)} alt="" crossOrigin="anonymous" />
+        <span>{team.name}</span>
+        <strong>{score}</strong>
+      </div>
+    );
+  }
+
   if (canSelectWinner) {
     return (
       <button
@@ -1609,7 +1756,7 @@ function BracketTeamSlot({ entry, match, onTeamSelect, onWinnerSelect }) {
         title={`Project ${team.name} to advance`}
         onClick={() => onWinnerSelect(match, entry.code)}
       >
-        <img src={flagUrl(team)} alt="" />
+        <img src={flagUrl(team)} alt="" crossOrigin="anonymous" />
         <span>{team.name}</span>
         <strong>{score}</strong>
       </button>
@@ -1627,7 +1774,7 @@ function BracketTeamSlot({ entry, match, onTeamSelect, onWinnerSelect }) {
         onTeamSelect(team);
       }}
     >
-      <img src={flagUrl(team)} alt="" />
+      <img src={flagUrl(team)} alt="" crossOrigin="anonymous" />
       <span>{team.name}</span>
       <strong>{score}</strong>
     </a>
