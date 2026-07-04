@@ -117,10 +117,6 @@ async function fetchText(url) {
   return response.text();
 }
 
-function escapeRegExp(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
 function splitTopLevelPipes(value) {
   const parts = [];
   let current = '';
@@ -362,99 +358,140 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function roundIdForMatchNumber(matchNumber) {
-  if (matchNumber >= 73 && matchNumber <= 88) return 'round-of-32';
-  if (matchNumber >= 89 && matchNumber <= 96) return 'round-of-16';
-  if (matchNumber >= 97 && matchNumber <= 100) return 'quarterfinals';
-  if (matchNumber >= 101 && matchNumber <= 102) return 'semifinals';
-  if (matchNumber >= 103 && matchNumber <= 104) return 'final';
-  return '';
-}
-
-function mapEspnStatus(status = '') {
-  const normalized = status.trim();
-  if (normalized === 'FT') return 'Final';
-  if (normalized === 'FT-Pens') return 'Final pens';
-  if (normalized === 'AET') return 'Final aet';
-  if (normalized === 'Upcoming') return 'Upcoming';
-  if (normalized === 'TBD') return 'Awaiting';
-  if (/^Final/i.test(normalized)) return 'Final';
-  return normalized || 'Awaiting';
-}
-
-function parseKnockoutMatches(rawHtml) {
-  const matchMap = new Map();
-  const blocks = rawHtml.matchAll(/<div class="BracketMatchup[\s\S]*?SeriesHeader__MatchNumber">Match (\d+)<\/div>[\s\S]*?<\/div><\/div><\/div><\/div>/g);
-
-  for (const block of blocks) {
-    const html = block[0];
-    const matchNumber = Number(block[1]);
-    const status = mapEspnStatus(html.match(/SeriesHeader__Status">([^<]+)</)?.[1] ?? '');
-    const teamMatches = [...html.matchAll(/BracketCell__Name[^>]*>([^<]+)<\/div>/g)].map((item) => item[1].trim());
-    const scoreMatches = [...html.matchAll(/BracketCell__Score[^>]*><div>(\d+)/g)].map((item) => item[1].trim());
-    const winnerIndex = html.includes('BracketCell__WinnerIcon')
-      ? (html.includes('BracketCell__Score--post--loser') ? 1 : 0)
-      : -1;
-    const winnerCode = '';
-
-    matchMap.set(matchNumber, {
-      status,
-      teams: teamMatches.slice(0, 2),
-      scores: scoreMatches.slice(0, 2),
-      winnerIndex,
-      winnerCode,
-    });
+function extractJsonObject(source, key) {
+  const start = source.indexOf(key);
+  if (start === -1) {
+    throw new Error(`Could not find ${key} in ESPN bracket source.`);
   }
 
-  return matchMap;
-}
+  let index = start + key.length;
+  while (/\s/.test(source[index])) index += 1;
+  if (source[index] !== '{') {
+    throw new Error(`Expected object start after ${key}.`);
+  }
 
-function teamLabelToEntry(label = '') {
-  const normalized = label.trim();
-  if (!normalized) return { label: '' };
-  const code = Object.entries(CODE_TO_TEAM).find(([, team]) => team === normalized)?.[0];
-  return code ? { code } : { label: normalized };
-}
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
 
-function updateKnockoutData(existingData, matchMap) {
-  const next = structuredClone(existingData);
+  for (; index < source.length; index += 1) {
+    const char = source[index];
 
-  for (const round of next.rounds ?? []) {
-    for (const match of round.matches ?? []) {
-      const matchNumber = Number(match.id.replace(/^M/, ''));
-      const live = matchMap.get(matchNumber);
-      if (!live) continue;
-
-      match.status = live.status;
-      if (live.teams.length === 2) {
-        match.teams = live.teams.map((team) => teamLabelToEntry(team));
+    if (inString) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === '\\') {
+        escaped = true;
+      } else if (char === '"') {
+        inString = false;
       }
-      if (live.scores.length === 2) {
-        match.teams = (match.teams ?? []).map((team, index) =>
-          live.scores[index] ? { ...team, score: live.scores[index] } : team,
-        );
-      }
-      if (live.status === 'Final' || live.status === 'Final pens' || live.status === 'Final aet') {
-        const winnerEntry = match.teams?.[live.winnerIndex] ?? null;
-        match.winnerCode = winnerEntry?.code ?? match.winnerCode ?? '';
+      continue;
+    }
+
+    if (char === '"') {
+      inString = true;
+      continue;
+    }
+
+    if (char === '{') {
+      depth += 1;
+      continue;
+    }
+
+    if (char === '}') {
+      depth -= 1;
+      if (depth === 0) {
+        return JSON.parse(source.slice(start + key.length, index + 1));
       }
     }
   }
 
-  next.updatedAt = new Date().toISOString().slice(0, 10);
-  return next;
+  throw new Error(`Could not parse ${key} from ESPN bracket source.`);
+}
+
+function parseBracketScore(score = '') {
+  const match = score.match(/^(\d+)(?:\s*\((\d+)\))?$/);
+  if (!match) return { score: '', pens: '' };
+  const [, regular, pens] = match;
+  return { score: regular, pens: pens ?? '' };
+}
+
+function statusForBracketMatch(match) {
+  if (match.statusState === 'post') {
+    if (match.statusDetail === 'FT-Pens') return 'Final pens';
+    if (match.statusDetail === 'AET') return 'Final aet';
+    return 'Final';
+  }
+
+  if (match.statusState === 'in') return 'In Progress';
+  return 'Scheduled';
+}
+
+function entryFromEspnCompetitor(competitor, includeScore = false) {
+  const code = competitor?.abbreviation && CODE_TO_TEAM[competitor.abbreviation] ? competitor.abbreviation : '';
+  const entry = code
+    ? { code }
+    : { label: cleanWikiText(competitor?.name ?? competitor?.location ?? '') };
+
+  if (includeScore) {
+    const { score, pens } = parseBracketScore(competitor?.score ?? '');
+    if (score) entry.score = score;
+    if (pens) entry.pens = pens;
+  }
+
+  return entry;
+}
+
+function updateMatchFromEspn(match, espnMatch) {
+  if (!espnMatch) return;
+
+  match.status = statusForBracketMatch(espnMatch);
+
+  const includeScore = espnMatch.statusState !== 'pre';
+  match.teams = [espnMatch.competitorOne, espnMatch.competitorTwo].map((competitor) =>
+    entryFromEspnCompetitor(competitor, includeScore),
+  );
+
+  if (espnMatch.statusState === 'post') {
+    if (espnMatch.competitorOne?.winner) match.winnerCode = espnMatch.competitorOne.abbreviation;
+    else if (espnMatch.competitorTwo?.winner) match.winnerCode = espnMatch.competitorTwo.abbreviation;
+  } else {
+    delete match.winnerCode;
+  }
 }
 
 async function fetchKnockoutData() {
   const html = await fetchText(BRACKET_URL);
-  return parseKnockoutMatches(html);
+  return extractJsonObject(html, '"bracket":');
 }
 
 async function writeKnockoutData() {
-  const matchMap = await fetchKnockoutData();
-  const updated = updateKnockoutData(existingKnockoutData, matchMap);
-  await writeFile(KNOCKOUT_PATH, `export const knockoutData = ${JSON.stringify(updated, null, 2)};\n`);
-  return updated;
+  const espnBracket = await fetchKnockoutData();
+  const sourceMatches = new Map(
+    (espnBracket.matchups ?? [])
+      .filter((match) => match.matchNumber)
+      .map((match) => [Number(match.matchNumber.replace(/\D+/g, '')), match]),
+  );
+
+  const next = structuredClone(existingKnockoutData);
+  const matchNumberById = {
+    M89: 90,
+    M90: 89,
+  };
+
+  for (const round of next.rounds ?? []) {
+    if (round.id !== 'round-of-32' && round.id !== 'round-of-16') continue;
+
+    for (const match of round.matches ?? []) {
+      const matchNumber = matchNumberById[match.id] ?? Number(match.id.replace(/^M/, ''));
+      const espnMatch = sourceMatches.get(matchNumber);
+      updateMatchFromEspn(match, espnMatch);
+    }
+  }
+
+  next.updatedAt = new Date().toISOString().slice(0, 10);
+  await writeFile(KNOCKOUT_PATH, `export const knockoutData = ${JSON.stringify(next, null, 2)};\n`);
+  return next;
 }
 
 function parseClubImageFile(raw = '') {

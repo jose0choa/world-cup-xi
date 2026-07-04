@@ -73,7 +73,7 @@ export const knockoutData = {
               "score": "0"
             }
           ],
-          "winnerCode": "SWE"
+          "winnerCode": "FRA"
         },
         {
           "id": "M76",
@@ -89,7 +89,7 @@ export const knockoutData = {
               "score": "1"
             }
           ],
-          "winnerCode": "JPN"
+          "winnerCode": "BRA"
         },
         {
           "id": "M78",
@@ -121,7 +121,7 @@ export const knockoutData = {
               "score": "0"
             }
           ],
-          "winnerCode": "ECU"
+          "winnerCode": "MEX"
         },
         {
           "id": "M80",
@@ -133,7 +133,7 @@ export const knockoutData = {
               "score": "2"
             },
             {
-              "label": "Congo DR",
+              "code": "COD",
               "score": "1"
             }
           ],
@@ -153,7 +153,7 @@ export const knockoutData = {
               "score": "1"
             }
           ],
-          "winnerCode": "CRO"
+          "winnerCode": "POR"
         },
         {
           "id": "M84",
@@ -169,7 +169,7 @@ export const knockoutData = {
               "score": "0"
             }
           ],
-          "winnerCode": "AUT"
+          "winnerCode": "ESP"
         },
         {
           "id": "M81",
@@ -177,11 +177,11 @@ export const knockoutData = {
           "status": "Final",
           "teams": [
             {
-              "label": "USA",
+              "code": "USA",
               "score": "2"
             },
             {
-              "label": "Bosnia-Herz",
+              "code": "BIH",
               "score": "0"
             }
           ],
@@ -201,7 +201,7 @@ export const knockoutData = {
               "score": "2"
             }
           ],
-          "winnerCode": "SEN"
+          "winnerCode": "BEL"
         },
         {
           "id": "M86",
@@ -217,7 +217,7 @@ export const knockoutData = {
               "score": "2"
             }
           ],
-          "winnerCode": "CPV"
+          "winnerCode": "ARG"
         },
         {
           "id": "M85",
@@ -233,7 +233,7 @@ export const knockoutData = {
               "score": "0"
             }
           ],
-          "winnerCode": "ALG"
+          "winnerCode": "SUI"
         },
         {
           "id": "M88",
@@ -241,13 +241,17 @@ export const knockoutData = {
           "status": "Final pens",
           "teams": [
             {
-              "code": "SUI"
+              "code": "AUS",
+              "score": "1",
+              "pens": "2"
             },
             {
-              "code": "ALG"
+              "code": "EGY",
+              "score": "1",
+              "pens": "4"
             }
           ],
-          "winnerCode": ""
+          "winnerCode": "EGY"
         },
         {
           "id": "M87",
@@ -263,7 +267,7 @@ export const knockoutData = {
               "score": "0"
             }
           ],
-          "winnerCode": "GHA"
+          "winnerCode": "COL"
         }
       ]
     },
@@ -274,20 +278,22 @@ export const knockoutData = {
         {
           "id": "M89",
           "date": "Jul 4",
-          "status": "Upcoming",
+          "status": "In Progress",
           "teams": [
             {
-              "code": "CAN"
+              "code": "CAN",
+              "score": "0"
             },
             {
-              "code": "MAR"
+              "code": "MAR",
+              "score": "1"
             }
           ]
         },
         {
           "id": "M90",
           "date": "Jul 4",
-          "status": "Awaiting",
+          "status": "Scheduled",
           "teams": [
             {
               "code": "PAR"
@@ -300,7 +306,7 @@ export const knockoutData = {
         {
           "id": "M91",
           "date": "Jul 5",
-          "status": "Upcoming",
+          "status": "Scheduled",
           "teams": [
             {
               "code": "BRA"
@@ -313,7 +319,7 @@ export const knockoutData = {
         {
           "id": "M92",
           "date": "Jul 5",
-          "status": "Upcoming",
+          "status": "Scheduled",
           "teams": [
             {
               "code": "MEX"
@@ -326,7 +332,7 @@ export const knockoutData = {
         {
           "id": "M93",
           "date": "Jul 6",
-          "status": "Upcoming",
+          "status": "Scheduled",
           "teams": [
             {
               "code": "POR"
@@ -339,7 +345,7 @@ export const knockoutData = {
         {
           "id": "M94",
           "date": "Jul 6",
-          "status": "Upcoming",
+          "status": "Scheduled",
           "teams": [
             {
               "code": "USA"
@@ -352,26 +358,26 @@ export const knockoutData = {
         {
           "id": "M95",
           "date": "Jul 7",
-          "status": "Awaiting",
+          "status": "Scheduled",
           "teams": [
             {
-              "label": "Argentina/Cape Verde"
+              "code": "ARG"
             },
             {
-              "label": "Australia/Egypt"
+              "code": "EGY"
             }
           ]
         },
         {
           "id": "M96",
           "date": "Jul 7",
-          "status": "Awaiting",
+          "status": "Scheduled",
           "teams": [
             {
-              "label": "Switzerland/Algeria"
+              "code": "SUI"
             },
             {
-              "label": "Colombia/Ghana"
+              "code": "COL"
             }
           ]
         }
@@ -384,20 +390,20 @@ export const knockoutData = {
         {
           "id": "M97",
           "date": "Jul 9",
-          "status": "Awaiting",
+          "status": "Scheduled",
           "teams": [
             {
-              "code": "POR"
+              "label": "W89"
             },
             {
-              "code": "ESP"
+              "label": "W90"
             }
           ]
         },
         {
           "id": "M98",
           "date": "Jul 10",
-          "status": "Awaiting",
+          "status": "Scheduled",
           "teams": [
             {
               "label": "W93"
@@ -410,7 +416,7 @@ export const knockoutData = {
         {
           "id": "M99",
           "date": "Jul 11",
-          "status": "Awaiting",
+          "status": "Scheduled",
           "teams": [
             {
               "label": "W91"
@@ -423,7 +429,7 @@ export const knockoutData = {
         {
           "id": "M100",
           "date": "Jul 11",
-          "status": "Awaiting",
+          "status": "Scheduled",
           "teams": [
             {
               "label": "W95"
@@ -442,7 +448,7 @@ export const knockoutData = {
         {
           "id": "M101",
           "date": "Jul 14",
-          "status": "Awaiting",
+          "status": "Scheduled",
           "teams": [
             {
               "label": "W97"
@@ -455,7 +461,7 @@ export const knockoutData = {
         {
           "id": "M102",
           "date": "Jul 15",
-          "status": "Awaiting",
+          "status": "Scheduled",
           "teams": [
             {
               "label": "W99"
@@ -474,7 +480,7 @@ export const knockoutData = {
         {
           "id": "M104",
           "date": "Jul 19",
-          "status": "Awaiting",
+          "status": "Scheduled",
           "teams": [
             {
               "label": "W101"
@@ -487,7 +493,7 @@ export const knockoutData = {
         {
           "id": "M103",
           "date": "Jul 18",
-          "status": "Third place",
+          "status": "Scheduled",
           "teams": [
             {
               "label": "L101"
