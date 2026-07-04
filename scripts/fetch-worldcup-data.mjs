@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { knockoutData as existingKnockoutData } from '../src/data/knockout-2026.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
@@ -17,6 +18,8 @@ const FUT_GG_PLAYERS_URL = 'https://www.fut.gg/players';
 const FUT_GG_GAME = '26';
 const EA_FC_PAGE_SIZE = 100;
 const DATA_PATH = path.join(rootDir, 'src', 'data', 'worldcup-2026.json');
+const KNOCKOUT_PATH = path.join(rootDir, 'src', 'data', 'knockout-2026.js');
+const BRACKET_URL = 'https://www.espn.com/soccer/bracket';
 const MANUAL_EA_FC_RATING_OVERRIDES = {
   'BRA-10-neymar': {
     rating: 83,
@@ -112,6 +115,10 @@ async function fetchText(url) {
   }
 
   return response.text();
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function splitTopLevelPipes(value) {
@@ -353,6 +360,101 @@ function wikiApiUrl(params) {
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function roundIdForMatchNumber(matchNumber) {
+  if (matchNumber >= 73 && matchNumber <= 88) return 'round-of-32';
+  if (matchNumber >= 89 && matchNumber <= 96) return 'round-of-16';
+  if (matchNumber >= 97 && matchNumber <= 100) return 'quarterfinals';
+  if (matchNumber >= 101 && matchNumber <= 102) return 'semifinals';
+  if (matchNumber >= 103 && matchNumber <= 104) return 'final';
+  return '';
+}
+
+function mapEspnStatus(status = '') {
+  const normalized = status.trim();
+  if (normalized === 'FT') return 'Final';
+  if (normalized === 'FT-Pens') return 'Final pens';
+  if (normalized === 'AET') return 'Final aet';
+  if (normalized === 'Upcoming') return 'Upcoming';
+  if (normalized === 'TBD') return 'Awaiting';
+  if (/^Final/i.test(normalized)) return 'Final';
+  return normalized || 'Awaiting';
+}
+
+function parseKnockoutMatches(rawHtml) {
+  const matchMap = new Map();
+  const blocks = rawHtml.matchAll(/<div class="BracketMatchup[\s\S]*?SeriesHeader__MatchNumber">Match (\d+)<\/div>[\s\S]*?<\/div><\/div><\/div><\/div>/g);
+
+  for (const block of blocks) {
+    const html = block[0];
+    const matchNumber = Number(block[1]);
+    const status = mapEspnStatus(html.match(/SeriesHeader__Status">([^<]+)</)?.[1] ?? '');
+    const teamMatches = [...html.matchAll(/BracketCell__Name[^>]*>([^<]+)<\/div>/g)].map((item) => item[1].trim());
+    const scoreMatches = [...html.matchAll(/BracketCell__Score[^>]*><div>(\d+)/g)].map((item) => item[1].trim());
+    const winnerIndex = html.includes('BracketCell__WinnerIcon')
+      ? (html.includes('BracketCell__Score--post--loser') ? 1 : 0)
+      : -1;
+    const winnerCode = '';
+
+    matchMap.set(matchNumber, {
+      status,
+      teams: teamMatches.slice(0, 2),
+      scores: scoreMatches.slice(0, 2),
+      winnerIndex,
+      winnerCode,
+    });
+  }
+
+  return matchMap;
+}
+
+function teamLabelToEntry(label = '') {
+  const normalized = label.trim();
+  if (!normalized) return { label: '' };
+  const code = Object.entries(CODE_TO_TEAM).find(([, team]) => team === normalized)?.[0];
+  return code ? { code } : { label: normalized };
+}
+
+function updateKnockoutData(existingData, matchMap) {
+  const next = structuredClone(existingData);
+
+  for (const round of next.rounds ?? []) {
+    for (const match of round.matches ?? []) {
+      const matchNumber = Number(match.id.replace(/^M/, ''));
+      const live = matchMap.get(matchNumber);
+      if (!live) continue;
+
+      match.status = live.status;
+      if (live.teams.length === 2) {
+        match.teams = live.teams.map((team) => teamLabelToEntry(team));
+      }
+      if (live.scores.length === 2) {
+        match.teams = (match.teams ?? []).map((team, index) =>
+          live.scores[index] ? { ...team, score: live.scores[index] } : team,
+        );
+      }
+      if (live.status === 'Final' || live.status === 'Final pens' || live.status === 'Final aet') {
+        const winnerEntry = match.teams?.[live.winnerIndex] ?? null;
+        match.winnerCode = winnerEntry?.code ?? match.winnerCode ?? '';
+      }
+    }
+  }
+
+  next.updatedAt = new Date().toISOString().slice(0, 10);
+  return next;
+}
+
+async function fetchKnockoutData() {
+  const html = await fetchText(BRACKET_URL);
+  return parseKnockoutMatches(html);
+}
+
+async function writeKnockoutData() {
+  const matchMap = await fetchKnockoutData();
+  const updated = updateKnockoutData(existingKnockoutData, matchMap);
+  await writeFile(KNOCKOUT_PATH, `export const knockoutData = ${JSON.stringify(updated, null, 2)};\n`);
+  return updated;
 }
 
 function parseClubImageFile(raw = '') {
@@ -1473,6 +1575,8 @@ async function main() {
 
   attachLineups(teams, lineupGroups.flat());
 
+  const knockoutData = await writeKnockoutData();
+
   teams.sort((a, b) => a.group.localeCompare(b.group) || a.name.localeCompare(b.name));
 
   const data = {
@@ -1498,6 +1602,7 @@ async function main() {
   console.log(
     `Generated ${data.totals.teams} teams, ${data.totals.players} players, ${data.totals.lineups} latest lineups, ${logoCount} logo aliases, ${leagueCount} leagues, ${eaFcRatings.matched} EA FC ratings, ${photoCount} player photos.`,
   );
+  console.log(`Updated bracket data for ${knockoutData.rounds?.length ?? 0} rounds.`);
 }
 
 main().catch((error) => {
