@@ -1900,7 +1900,13 @@ function SourcesPage() {
               <a href={worldCupData.source.groups} target="_blank" rel="noreferrer">
                 Wikipedia match/group data
               </a>
-              <span>Latest lineup and match details where available.</span>
+              <span>Group-stage lineup and match details where available.</span>
+            </li>
+            <li>
+              <a href={worldCupData.source.lineups} target="_blank" rel="noreferrer">
+                Sky Sports match lineups
+              </a>
+              <span>Knockout-stage team sheets where 11 starters are available.</span>
             </li>
             <li>
               <a href={worldCupData.source.eaFcRatings} target="_blank" rel="noreferrer">

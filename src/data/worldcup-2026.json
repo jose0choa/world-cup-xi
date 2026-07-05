@@ -1,12 +1,13 @@
 {
-  "generatedAt": "2026-07-04T18:17:56.476Z",
+  "generatedAt": "2026-07-05T17:40:37.380Z",
   "tournament": "FIFA World Cup 2026",
   "source": {
     "squads": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
     "groups": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup",
+    "lineups": "https://www.skysports.com/football/world-cup/results",
     "eaFcRatings": "https://www.ea.com/en/games/ea-sports-fc/ratings",
     "eaFcFallbackRatings": "https://www.fut.gg/players",
-    "note": "Squads and clubs are parsed from the Wikipedia squad page, which cites the FIFA squad list. Club logos are fetched from Wikipedia page image metadata, club leagues are fetched from Wikidata league metadata with club infobox fallbacks, and EA FC ratings are matched from the official EA Sports FC 26 ratings table with FUT.GG EA FC 26 common-card fallbacks for players omitted from the official table. Player photos are loaded from Wikipedia page summaries in the app."
+    "note": "Squads and clubs are parsed from the Wikipedia squad page, which cites the FIFA squad list. Group-stage lineups are parsed from Wikipedia match tables, knockout-stage lineups are parsed from Sky Sports team-sheet pages when 11 starters are available, club logos are fetched from Wikipedia page image metadata, club leagues are fetched from Wikidata league metadata with club infobox fallbacks, and EA FC ratings are matched from the official EA Sports FC 26 ratings table with FUT.GG EA FC 26 common-card fallbacks for players omitted from the official table. Player photos are loaded from Wikipedia page summaries in the app."
   },
   "totals": {
     "teams": 48,
@@ -1405,13 +1406,13 @@
         "26": "MEX-26-brian-gutierrez"
       },
       "latestLineup": {
-        "group": "A",
-        "date": "2026-06-24",
-        "score": "0–3",
-        "match": "Czech Republic vs Mexico",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_A#Czech_Republic_vs_Mexico",
+        "group": "Knockout",
+        "date": "2026-07-01",
+        "score": "2–0",
+        "match": "Mexico vs Ecuador",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549842",
         "team": "Mexico",
-        "opponent": "Czech Republic",
+        "opponent": "Ecuador",
         "starters": [
           {
             "role": "GK",
@@ -1441,7 +1442,7 @@
             "role": "CB",
             "number": 3,
             "name": "César Montes",
-            "captain": false,
+            "captain": true,
             "playerId": "MEX-3-cesar-montes",
             "page": "César Montes",
             "club": "Lokomotiv Moscow",
@@ -1451,37 +1452,25 @@
           },
           {
             "role": "CB",
-            "number": 4,
-            "name": "Edson Álvarez",
-            "captain": true,
-            "playerId": "MEX-4-edson-alvarez",
-            "page": "Edson Álvarez",
-            "club": "Fenerbahçe",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Fenerbah%C3%A7e.svg/120px-Fenerbah%C3%A7e.svg.png",
+            "number": 5,
+            "name": "Johan Vásquez",
+            "captain": false,
+            "playerId": "MEX-5-johan-vasquez",
+            "page": "Johan Vásquez (footballer, born 1998)",
+            "club": "Genoa",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2c/Genoa_CFC_crest.svg/120px-Genoa_CFC_crest.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
             "role": "LB",
-            "number": 20,
-            "name": "Mateo Chávez",
+            "number": 23,
+            "name": "Jesús Gallardo",
             "captain": false,
-            "playerId": "MEX-20-mateo-chavez",
-            "page": "Mateo Chávez",
-            "club": "AZ",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/AZ_Alkmaar.svg/120px-AZ_Alkmaar.svg.png",
-            "photo": "",
-            "squadPosition": "DF"
-          },
-          {
-            "role": "DM",
-            "number": 15,
-            "name": "Israel Reyes",
-            "captain": false,
-            "playerId": "MEX-15-israel-reyes",
-            "page": "Israel Reyes",
-            "club": "América",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Club_Am%C3%A9rica_crest.svg/120px-Club_Am%C3%A9rica_crest.svg.png",
+            "playerId": "MEX-23-jesus-gallardo",
+            "page": "Jesús Gallardo",
+            "club": "Toluca",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Club_Toluca_Logo.svg/120px-Club_Toluca_Logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -1494,6 +1483,18 @@
             "page": "Gilberto Mora (footballer, born 2008)",
             "club": "Tijuana",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/2/29/Club_Tijuana_logo.svg/120px-Club_Tijuana_logo.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "CM",
+            "number": 6,
+            "name": "Érik Lira",
+            "captain": false,
+            "playerId": "MEX-6-erik-lira",
+            "page": "Érik Lira",
+            "club": "Cruz Azul",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cruz_Azul_2026.png/120px-Cruz_Azul_2026.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -1523,13 +1524,13 @@
           },
           {
             "role": "CF",
-            "number": 22,
-            "name": "Guillermo Martínez",
+            "number": 9,
+            "name": "Raúl Jiménez",
             "captain": false,
-            "playerId": "MEX-22-guillermo-martinez",
-            "page": "Guillermo Martínez (footballer)",
-            "club": "Pumas UNAM",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b7/Club_Universidad_Nacional_logo.svg/120px-Club_Universidad_Nacional_logo.svg.png",
+            "playerId": "MEX-9-raul-jimenez",
+            "page": "Raúl Jiménez",
+            "club": "Fulham",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Fulham_FC_%28shield%29.svg/120px-Fulham_FC_%28shield%29.svg.png",
             "photo": "",
             "squadPosition": "FW"
           },
@@ -2133,13 +2134,13 @@
         "26": "RSA-26-bradley-cross"
       },
       "latestLineup": {
-        "group": "A",
-        "date": "2026-06-24",
-        "score": "1–0",
-        "match": "South Africa vs South Korea",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_A#South_Africa_vs_South_Korea",
+        "group": "Knockout",
+        "date": "2026-06-28",
+        "score": "0–1",
+        "match": "South Africa vs Canada",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549838",
         "team": "South Africa",
-        "opponent": "South Korea",
+        "opponent": "Canada",
         "starters": [
           {
             "role": "GK",
@@ -2203,6 +2204,18 @@
           },
           {
             "role": "CM",
+            "number": 4,
+            "name": "Teboho Mokoena",
+            "captain": false,
+            "playerId": "RSA-4-teboho-mokoena",
+            "page": "Teboho Mokoena (soccer, born 1997)",
+            "club": "Mamelodi Sundowns",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c6/Mamelodi_Sundowns_F.C.svg/120px-Mamelodi_Sundowns_F.C.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "CM",
             "number": 13,
             "name": "Sphephelo Sithole",
             "captain": false,
@@ -2214,19 +2227,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "CM",
-            "number": 5,
-            "name": "Thalente Mbatha",
-            "captain": false,
-            "playerId": "RSA-5-thalente-mbatha",
-            "page": "Thalente Mbatha",
-            "club": "Orlando Pirates",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/95/Orlando_Pirates_FC_logo.svg/120px-Orlando_Pirates_FC_logo.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "RW",
+            "role": "RF",
             "number": 12,
             "name": "Thapelo Maseko",
             "captain": false,
@@ -2238,7 +2239,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "AM",
+            "role": "CF",
             "number": 10,
             "name": "Relebohile Mofokeng",
             "captain": false,
@@ -2250,7 +2251,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "LW",
+            "role": "CF",
             "number": 7,
             "name": "Oswin Appollis",
             "captain": false,
@@ -2262,7 +2263,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "CF",
+            "role": "LF",
             "number": 17,
             "name": "Evidence Makgopa",
             "captain": false,
@@ -3593,13 +3594,13 @@
         "26": "BIH-26-ermin-mahmic"
       },
       "latestLineup": {
-        "group": "B",
-        "date": "2026-06-24",
-        "score": "3–1",
-        "match": "Bosnia and Herzegovina vs Qatar",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_B#Bosnia_and_Herzegovina_vs_Qatar",
+        "group": "Knockout",
+        "date": "2026-07-02",
+        "score": "2–0",
+        "match": "United States vs Bosnia and Herzegovina",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549845",
         "team": "Bosnia and Herzegovina",
-        "opponent": "Qatar",
+        "opponent": "United States",
         "starters": [
           {
             "role": "GK",
@@ -3614,14 +3615,14 @@
             "squadPosition": "GK"
           },
           {
-            "role": "RB",
-            "number": 24,
-            "name": "Arjan Malić",
+            "role": "RWB",
+            "number": 7,
+            "name": "Amar Dedić",
             "captain": false,
-            "playerId": "BIH-24-arjan-malic",
-            "page": "Arjan Malić",
-            "club": "Sturm Graz",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/91/SK_Sturm_Graz_logo.svg/120px-SK_Sturm_Graz_logo.svg.png",
+            "playerId": "BIH-7-amar-dedic",
+            "page": "Amar Dedić",
+            "club": "Benfica",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/SL_Benfica_logo.svg/120px-SL_Benfica_logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -3639,6 +3640,18 @@
           },
           {
             "role": "CB",
+            "number": 4,
+            "name": "Tarik Muharemović",
+            "captain": false,
+            "playerId": "BIH-4-tarik-muharemovic",
+            "page": "Tarik Muharemović",
+            "club": "Sassuolo",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1c/US_Sassuolo_Calcio_logo.svg/120px-US_Sassuolo_Calcio_logo.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
+          },
+          {
+            "role": "CB",
             "number": 21,
             "name": "Stjepan Radeljić",
             "captain": false,
@@ -3650,7 +3663,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "LB",
+            "role": "LWB",
             "number": 5,
             "name": "Sead Kolašinac",
             "captain": false,
@@ -3662,16 +3675,16 @@
             "squadPosition": "DF"
           },
           {
-            "role": "RM",
-            "number": 20,
-            "name": "Esmir Bajraktarević",
+            "role": "CM",
+            "number": 8,
+            "name": "Armin Gigović",
             "captain": false,
-            "playerId": "BIH-20-esmir-bajraktarevic",
-            "page": "Esmir Bajraktarević",
-            "club": "PSV Eindhoven",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/05/PSV_Eindhoven.svg/120px-PSV_Eindhoven.svg.png",
+            "playerId": "BIH-8-armin-gigovic",
+            "page": "Armin Gigović",
+            "club": "Young Boys",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/BSC_Young_Boys.svg/120px-BSC_Young_Boys.svg.png",
             "photo": "",
-            "squadPosition": "FW"
+            "squadPosition": "MF"
           },
           {
             "role": "CM",
@@ -3686,19 +3699,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "CM",
-            "number": 13,
-            "name": "Ivan Bašić",
-            "captain": false,
-            "playerId": "BIH-13-ivan-basic",
-            "page": "Ivan Bašić",
-            "club": "Astana",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/96/FC_Astana_Logo.svg/120px-FC_Astana_Logo.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "LM",
+            "role": "RF",
             "number": 19,
             "name": "Kerim Alajbegović",
             "captain": false,
@@ -3711,18 +3712,6 @@
           },
           {
             "role": "CF",
-            "number": 10,
-            "name": "Ermedin Demirović",
-            "captain": false,
-            "playerId": "BIH-10-ermedin-demirovic",
-            "page": "Ermedin Demirović",
-            "club": "VfB Stuttgart",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/VfB_Stuttgart_1893_Logo.svg/120px-VfB_Stuttgart_1893_Logo.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "CF",
             "number": 11,
             "name": "Edin Džeko",
             "captain": true,
@@ -3730,6 +3719,18 @@
             "page": "Edin Džeko",
             "club": "Schalke 04",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/FC_Schalke_04_Logo.svg/120px-FC_Schalke_04_Logo.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "LF",
+            "number": 10,
+            "name": "Ermedin Demirović",
+            "captain": false,
+            "playerId": "BIH-10-ermedin-demirovic",
+            "page": "Ermedin Demirović",
+            "club": "VfB Stuttgart",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/VfB_Stuttgart_1893_Logo.svg/120px-VfB_Stuttgart_1893_Logo.svg.png",
             "photo": "",
             "squadPosition": "FW"
           }
@@ -4321,13 +4322,13 @@
         "26": "CAN-26-jayden-nelson"
       },
       "latestLineup": {
-        "group": "B",
-        "date": "2026-06-24",
-        "score": "2–1",
-        "match": "Switzerland vs Canada",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_B#Switzerland_vs_Canada",
+        "group": "Knockout",
+        "date": "2026-07-04",
+        "score": "0–3",
+        "match": "Canada vs Morocco",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549854",
         "team": "Canada",
-        "opponent": "Switzerland",
+        "opponent": "Morocco",
         "starters": [
           {
             "role": "GK",
@@ -4342,7 +4343,7 @@
             "squadPosition": "GK"
           },
           {
-            "role": "RB",
+            "role": "RWB",
             "number": 2,
             "name": "Alistair Johnston",
             "captain": false,
@@ -4350,6 +4351,18 @@
             "page": "Alistair Johnston",
             "club": "Celtic",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/71/Celtic_FC_crest.svg/120px-Celtic_FC_crest.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
+          },
+          {
+            "role": "CB",
+            "number": 15,
+            "name": "Moïse Bombito",
+            "captain": false,
+            "playerId": "CAN-15-moise-bombito",
+            "page": "Moïse Bombito",
+            "club": "Nice",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2e/OGC_Nice_logo.svg/120px-OGC_Nice_logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -4367,18 +4380,6 @@
           },
           {
             "role": "CB",
-            "number": 13,
-            "name": "Derek Cornelius",
-            "captain": false,
-            "playerId": "CAN-13-derek-cornelius",
-            "page": "Derek Cornelius",
-            "club": "Rangers",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Rangers_FC.svg/120px-Rangers_FC.svg.png",
-            "photo": "",
-            "squadPosition": "DF"
-          },
-          {
-            "role": "LB",
             "number": 22,
             "name": "Richie Laryea",
             "captain": false,
@@ -4390,7 +4391,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "RM",
+            "role": "RF",
             "number": 17,
             "name": "Tajon Buchanan",
             "captain": false,
@@ -4402,31 +4403,31 @@
             "squadPosition": "FW"
           },
           {
-            "role": "CM",
-            "number": 25,
-            "name": "Nathan Saliba",
+            "role": "LWB",
+            "number": 23,
+            "name": "Niko Sigur",
             "captain": false,
-            "playerId": "CAN-25-nathan-saliba",
-            "page": "Nathan Saliba",
-            "club": "Anderlecht",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/77/R.S.C._Anderlecht.svg/120px-R.S.C._Anderlecht.svg.png",
+            "playerId": "CAN-23-niko-sigur",
+            "page": "Niko Sigur",
+            "club": "Hajduk Split",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/HNK_Hajduk_Split_logo.svg/120px-HNK_Hajduk_Split_logo.svg.png",
             "photo": "",
-            "squadPosition": "MF"
+            "squadPosition": "DF"
           },
           {
             "role": "CM",
-            "number": 6,
-            "name": "Mathieu Choinière",
-            "captain": false,
-            "playerId": "CAN-6-mathieu-choiniere",
-            "page": "Mathieu Choinière",
+            "number": 7,
+            "name": "Stephen Eustáquio",
+            "captain": true,
+            "playerId": "CAN-7-stephen-eustaquio",
+            "page": "Stephen Eustáquio",
             "club": "Los Angeles FC",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Los_Angeles_Football_Club.svg/120px-Los_Angeles_Football_Club.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
           {
-            "role": "LM",
+            "role": "CF",
             "number": 20,
             "name": "Ali Ahmed",
             "captain": false,
@@ -4441,7 +4442,7 @@
             "role": "CF",
             "number": 10,
             "name": "Jonathan David",
-            "captain": true,
+            "captain": false,
             "playerId": "CAN-10-jonathan-david",
             "page": "Jonathan David",
             "club": "Juventus",
@@ -4450,14 +4451,14 @@
             "squadPosition": "FW"
           },
           {
-            "role": "CF",
-            "number": 9,
-            "name": "Cyle Larin",
+            "role": "LF",
+            "number": 12,
+            "name": "Tani Oluwaseyi",
             "captain": false,
-            "playerId": "CAN-9-cyle-larin",
-            "page": "Cyle Larin",
-            "club": "Southampton",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c9/FC_Southampton.svg/120px-FC_Southampton.svg.png",
+            "playerId": "CAN-12-tani-oluwaseyi",
+            "page": "Tani Oluwaseyi",
+            "club": "Villarreal",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Villarreal_CF_logo-en.svg/120px-Villarreal_CF_logo-en.svg.png",
             "photo": "",
             "squadPosition": "FW"
           }
@@ -5779,13 +5780,13 @@
         "26": "SUI-26-cedric-itten"
       },
       "latestLineup": {
-        "group": "B",
-        "date": "2026-06-24",
-        "score": "2–1",
-        "match": "Switzerland vs Canada",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_B#Switzerland_vs_Canada",
+        "group": "Knockout",
+        "date": "2026-07-03",
+        "score": "2–0",
+        "match": "Switzerland vs Algeria",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549848",
         "team": "Switzerland",
-        "opponent": "Canada",
+        "opponent": "Algeria",
         "starters": [
           {
             "role": "GK",
@@ -5800,16 +5801,16 @@
             "squadPosition": "GK"
           },
           {
-            "role": "RB",
-            "number": 25,
-            "name": "Luca Jaquez",
+            "role": "RWB",
+            "number": 6,
+            "name": "Denis Zakaria",
             "captain": false,
-            "playerId": "SUI-25-luca-jaquez",
-            "page": "Luca Jaquez",
-            "club": "VfB Stuttgart",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/VfB_Stuttgart_1893_Logo.svg/120px-VfB_Stuttgart_1893_Logo.svg.png",
+            "playerId": "SUI-6-denis-zakaria",
+            "page": "Denis Zakaria",
+            "club": "Monaco",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cf/LogoASMonacoFC2021.svg/120px-LogoASMonacoFC2021.svg.png",
             "photo": "",
-            "squadPosition": "DF"
+            "squadPosition": "MF"
           },
           {
             "role": "CB",
@@ -5836,7 +5837,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "LB",
+            "role": "CB",
             "number": 13,
             "name": "Ricardo Rodriguez",
             "captain": false,
@@ -5846,18 +5847,6 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/1/13/Real_betis_logo.svg/120px-Real_betis_logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
-          },
-          {
-            "role": "RM",
-            "number": 15,
-            "name": "Djibril Sow",
-            "captain": false,
-            "playerId": "SUI-15-djibril-sow",
-            "page": "Djibril Sow",
-            "club": "Sevilla",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Sevilla_FC_logo.svg/120px-Sevilla_FC_logo.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
           },
           {
             "role": "CM",
@@ -5884,7 +5873,31 @@
             "squadPosition": "MF"
           },
           {
-            "role": "LM",
+            "role": "RF",
+            "number": 11,
+            "name": "Dan Ndoye",
+            "captain": false,
+            "playerId": "SUI-11-dan-ndoye",
+            "page": "Dan Ndoye",
+            "club": "Nottingham Forest",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e5/Nottingham_Forest_F.C._logo.svg/120px-Nottingham_Forest_F.C._logo.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "LWB",
+            "number": 9,
+            "name": "Johan Manzambi",
+            "captain": false,
+            "playerId": "SUI-9-johan-manzambi",
+            "page": "Johan Manzambi",
+            "club": "SC Freiburg",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/SC_Freiburg_logo.svg/120px-SC_Freiburg_logo.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "CF",
             "number": 17,
             "name": "Rubén Vargas",
             "captain": false,
@@ -5896,7 +5909,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "CF",
+            "role": "LF",
             "number": 7,
             "name": "Breel Embolo",
             "captain": false,
@@ -5906,18 +5919,6 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Stade_Rennais_FC.svg/120px-Stade_Rennais_FC.svg.png",
             "photo": "",
             "squadPosition": "FW"
-          },
-          {
-            "role": "CF",
-            "number": 9,
-            "name": "Johan Manzambi",
-            "captain": false,
-            "playerId": "SUI-9-johan-manzambi",
-            "page": "Johan Manzambi",
-            "club": "SC Freiburg",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/SC_Freiburg_logo.svg/120px-SC_Freiburg_logo.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
           }
         ]
       }
@@ -6508,13 +6509,13 @@
         "26": "BRA-26-rayan"
       },
       "latestLineup": {
-        "group": "C",
-        "date": "2026-06-24",
-        "score": "0–3",
-        "match": "Scotland vs Brazil",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_C#Scotland_vs_Brazil",
+        "group": "Knockout",
+        "date": "2026-06-29",
+        "score": "2–1",
+        "match": "Brazil vs Japan",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549839",
         "team": "Brazil",
-        "opponent": "Scotland",
+        "opponent": "Japan",
         "starters": [
           {
             "role": "GK",
@@ -7964,13 +7965,13 @@
         "26": "MAR-26-anass-salah-eddine"
       },
       "latestLineup": {
-        "group": "C",
-        "date": "2026-06-24",
-        "score": "4–2",
-        "match": "Morocco vs Haiti",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_C#Morocco_vs_Haiti",
+        "group": "Knockout",
+        "date": "2026-07-04",
+        "score": "0–3",
+        "match": "Canada vs Morocco",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549854",
         "team": "Morocco",
-        "opponent": "Haiti",
+        "opponent": "Canada",
         "starters": [
           {
             "role": "GK",
@@ -7998,6 +7999,18 @@
           },
           {
             "role": "CB",
+            "number": 14,
+            "name": "Issa Diop",
+            "captain": false,
+            "playerId": "MAR-14-issa-diop",
+            "page": "Issa Diop (footballer)",
+            "club": "Fulham",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Fulham_FC_%28shield%29.svg/120px-Fulham_FC_%28shield%29.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
+          },
+          {
+            "role": "CB",
             "number": 25,
             "name": "Redouane Halhal",
             "captain": false,
@@ -8009,38 +8022,26 @@
             "squadPosition": "DF"
           },
           {
-            "role": "CB",
-            "number": 18,
-            "name": "Chadi Riad",
-            "captain": false,
-            "playerId": "MAR-18-chadi-riad",
-            "page": "Chadi Riad",
-            "club": "Crystal Palace",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Crystal_Palace_FC_logo_%282022%29.svg/120px-Crystal_Palace_FC_logo_%282022%29.svg.png",
-            "photo": "",
-            "squadPosition": "DF"
-          },
-          {
             "role": "LB",
-            "number": 26,
-            "name": "Anass Salah-Eddine",
+            "number": 3,
+            "name": "Noussair Mazraoui",
             "captain": false,
-            "playerId": "MAR-26-anass-salah-eddine",
-            "page": "Anass Salah-Eddine",
-            "club": "PSV Eindhoven",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/05/PSV_Eindhoven.svg/120px-PSV_Eindhoven.svg.png",
+            "playerId": "MAR-3-noussair-mazraoui",
+            "page": "Noussair Mazraoui",
+            "club": "Manchester United",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/120px-Manchester_United_FC_crest.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
-            "role": "CM",
-            "number": 4,
-            "name": "Sofyan Amrabat",
+            "role": "RM",
+            "number": 6,
+            "name": "Ayyoub Bouaddi",
             "captain": false,
-            "playerId": "MAR-4-sofyan-amrabat",
-            "page": "Sofyan Amrabat",
-            "club": "Real Betis",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/1/13/Real_betis_logo.svg/120px-Real_betis_logo.svg.png",
+            "playerId": "MAR-6-ayyoub-bouaddi",
+            "page": "Ayyoub Bouaddi",
+            "club": "Lille",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/Lille_OSC_2018_logo.svg/120px-Lille_OSC_2018_logo.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -8057,7 +8058,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RW",
+            "role": "CF",
             "number": 10,
             "name": "Brahim Díaz",
             "captain": false,
@@ -8069,19 +8070,19 @@
             "squadPosition": "FW"
           },
           {
-            "role": "AM",
-            "number": 11,
-            "name": "Ismael Saibari",
+            "role": "CM",
+            "number": 8,
+            "name": "Azzedine Ounahi",
             "captain": false,
-            "playerId": "MAR-11-ismael-saibari",
-            "page": "Ismael Saibari",
-            "club": "PSV Eindhoven",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/05/PSV_Eindhoven.svg/120px-PSV_Eindhoven.svg.png",
+            "playerId": "MAR-8-azzedine-ounahi",
+            "page": "Azzedine Ounahi",
+            "club": "Girona",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Girona_FC_Logo.svg/120px-Girona_FC_Logo.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
           {
-            "role": "LW",
+            "role": "CM",
             "number": 23,
             "name": "Bilal El Khannouss",
             "captain": false,
@@ -8093,16 +8094,16 @@
             "squadPosition": "MF"
           },
           {
-            "role": "CF",
-            "number": 20,
-            "name": "Ayoub El Kaabi",
+            "role": "LM",
+            "number": 11,
+            "name": "Ismael Saibari",
             "captain": false,
-            "playerId": "MAR-20-ayoub-el-kaabi",
-            "page": "Ayoub El Kaabi",
-            "club": "Olympiacos",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Olympiacos_FC_crest.svg/120px-Olympiacos_FC_crest.svg.png",
+            "playerId": "MAR-11-ismael-saibari",
+            "page": "Ismael Saibari",
+            "club": "PSV Eindhoven",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/05/PSV_Eindhoven.svg/120px-PSV_Eindhoven.svg.png",
             "photo": "",
-            "squadPosition": "FW"
+            "squadPosition": "MF"
           }
         ]
       }
@@ -9424,13 +9425,13 @@
         "26": "AUS-26-tete-yengi"
       },
       "latestLineup": {
-        "group": "D",
-        "date": "2026-06-25",
-        "score": "0–0",
-        "match": "Paraguay vs Australia",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_D#Paraguay_vs_Australia",
+        "group": "Knockout",
+        "date": "2026-07-03",
+        "score": "1–1",
+        "match": "Australia vs Egypt",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549851",
         "team": "Australia",
-        "opponent": "Paraguay",
+        "opponent": "Egypt",
         "starters": [
           {
             "role": "GK",
@@ -9445,7 +9446,7 @@
             "squadPosition": "GK"
           },
           {
-            "role": "CB",
+            "role": "RWB",
             "number": 3,
             "name": "Alessandro Circati",
             "captain": false,
@@ -9481,7 +9482,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "RWB",
+            "role": "CB",
             "number": 5,
             "name": "Jordan Bos",
             "captain": false,
@@ -9529,7 +9530,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "RF",
+            "role": "CF",
             "number": 20,
             "name": "Cristian Volpato",
             "captain": false,
@@ -9539,6 +9540,18 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1c/US_Sassuolo_Calcio_logo.svg/120px-US_Sassuolo_Calcio_logo.svg.png",
             "photo": "",
             "squadPosition": "FW"
+          },
+          {
+            "role": "CM",
+            "number": 8,
+            "name": "Connor Metcalfe",
+            "captain": false,
+            "playerId": "AUS-8-connor-metcalfe",
+            "page": "Connor Metcalfe",
+            "club": "FC St. Pauli",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/FC_St._Pauli_logo_%282018%29.svg/120px-FC_St._Pauli_logo_%282018%29.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
           },
           {
             "role": "CF",
@@ -9551,18 +9564,6 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/Watford.svg/120px-Watford.svg.png",
             "photo": "",
             "squadPosition": "FW"
-          },
-          {
-            "role": "LF",
-            "number": 8,
-            "name": "Connor Metcalfe",
-            "captain": false,
-            "playerId": "AUS-8-connor-metcalfe",
-            "page": "Connor Metcalfe",
-            "club": "FC St. Pauli",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/FC_St._Pauli_logo_%282018%29.svg/120px-FC_St._Pauli_logo_%282018%29.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
           }
         ]
       }
@@ -10152,13 +10153,13 @@
         "26": "PAR-26-alexandro-maidana"
       },
       "latestLineup": {
-        "group": "D",
-        "date": "2026-06-25",
-        "score": "0–0",
-        "match": "Paraguay vs Australia",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_D#Paraguay_vs_Australia",
+        "group": "Knockout",
+        "date": "2026-07-04",
+        "score": "0–1",
+        "match": "Paraguay vs France",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549855",
         "team": "Paraguay",
-        "opponent": "Australia",
+        "opponent": "France",
         "starters": [
           {
             "role": "GK",
@@ -10171,6 +10172,18 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Sanlorenzo_almagro_logo2026.png/120px-Sanlorenzo_almagro_logo2026.png",
             "photo": "",
             "squadPosition": "GK"
+          },
+          {
+            "role": "RWB",
+            "number": 4,
+            "name": "Juan José Cáceres",
+            "captain": false,
+            "playerId": "PAR-4-juan-jose-caceres",
+            "page": "Juan José Cáceres",
+            "club": "Dynamo Moscow",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e7/Dynamo_Moscow_logo.svg/120px-Dynamo_Moscow_logo.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
           },
           {
             "role": "CB",
@@ -10209,38 +10222,26 @@
             "squadPosition": "DF"
           },
           {
-            "role": "RWB",
-            "number": 4,
-            "name": "Juan José Cáceres",
-            "captain": false,
-            "playerId": "PAR-4-juan-jose-caceres",
-            "page": "Juan José Cáceres",
-            "club": "Dynamo Moscow",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e7/Dynamo_Moscow_logo.svg/120px-Dynamo_Moscow_logo.svg.png",
-            "photo": "",
-            "squadPosition": "DF"
-          },
-          {
             "role": "LWB",
-            "number": 26,
-            "name": "Alexandro Maidana",
+            "number": 6,
+            "name": "Júnior Alonso",
             "captain": false,
-            "playerId": "PAR-26-alexandro-maidana",
-            "page": "Alexandro Maidana",
-            "club": "Talleres",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Escudo_Talleres_2015.svg/120px-Escudo_Talleres_2015.svg.png",
+            "playerId": "PAR-6-junior-alonso",
+            "page": "Júnior Alonso",
+            "club": "Atlético Mineiro",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Logo_of_Clube_Atl%C3%A9tico_Mineiro.svg/120px-Logo_of_Clube_Atl%C3%A9tico_Mineiro.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
-            "role": "CM",
-            "number": 14,
-            "name": "Andrés Cubas",
+            "role": "RWB",
+            "number": 10,
+            "name": "Miguel Almirón",
             "captain": false,
-            "playerId": "PAR-14-andres-cubas",
-            "page": "Andrés Cubas",
-            "club": "Vancouver Whitecaps FC",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Vancouver_Whitecaps_logo.svg/120px-Vancouver_Whitecaps_logo.svg.png",
+            "playerId": "PAR-10-miguel-almiron",
+            "page": "Miguel Almirón",
+            "club": "Atlanta United FC",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/bb/Atlanta_MLS.svg/120px-Atlanta_MLS.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -10258,6 +10259,18 @@
           },
           {
             "role": "CM",
+            "number": 14,
+            "name": "Andrés Cubas",
+            "captain": false,
+            "playerId": "PAR-14-andres-cubas",
+            "page": "Andrés Cubas",
+            "club": "Vancouver Whitecaps FC",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Vancouver_Whitecaps_logo.svg/120px-Vancouver_Whitecaps_logo.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "LWB",
             "number": 23,
             "name": "Matías Galarza",
             "captain": false,
@@ -10267,18 +10280,6 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/bb/Atlanta_MLS.svg/120px-Atlanta_MLS.svg.png",
             "photo": "",
             "squadPosition": "MF"
-          },
-          {
-            "role": "CF",
-            "number": 21,
-            "name": "Gabriel Ávalos",
-            "captain": false,
-            "playerId": "PAR-21-gabriel-avalos",
-            "page": "Gabriel Ávalos",
-            "club": "Independiente",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Escudo_del_Club_Atl%C3%A9tico_Independiente.svg/120px-Escudo_del_Club_Atl%C3%A9tico_Independiente.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
           },
           {
             "role": "CF",
@@ -11608,79 +11609,79 @@
         "26": "USA-26-alejandro-zendejas"
       },
       "latestLineup": {
-        "group": "D",
-        "date": "2026-06-25",
-        "score": "3–2",
-        "match": "Turkey vs United States",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_D#Turkey_vs_United_States",
+        "group": "Knockout",
+        "date": "2026-07-02",
+        "score": "2–0",
+        "match": "United States vs Bosnia and Herzegovina",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549845",
         "team": "United States",
-        "opponent": "Turkey",
+        "opponent": "Bosnia and Herzegovina",
         "starters": [
           {
             "role": "GK",
-            "number": 1,
-            "name": "Matt Turner",
+            "number": 24,
+            "name": "Matt Freese",
             "captain": false,
-            "playerId": "USA-1-matt-turner",
-            "page": "Matt Turner (soccer)",
-            "club": "New England Revolution",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Logo_of_New_England_Revolution_%282021%29.svg/120px-Logo_of_New_England_Revolution_%282021%29.svg.png",
+            "playerId": "USA-24-matt-freese",
+            "page": "Matt Freese",
+            "club": "New York City FC",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_New_York_City_FC_2025.svg/120px-Logo_New_York_City_FC_2025.svg.png",
             "photo": "",
             "squadPosition": "GK"
           },
           {
-            "role": "RB",
-            "number": 23,
-            "name": "Joe Scally",
+            "role": "RWB",
+            "number": 16,
+            "name": "Alex Freeman",
             "captain": false,
-            "playerId": "USA-23-joe-scally",
-            "page": "Joe Scally",
-            "club": "Borussia Mönchengladbach",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Borussia_M%C3%B6nchengladbach_logo.svg/120px-Borussia_M%C3%B6nchengladbach_logo.svg.png",
+            "playerId": "USA-16-alex-freeman",
+            "page": "Alex Freeman",
+            "club": "Villarreal",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Villarreal_CF_logo-en.svg/120px-Villarreal_CF_logo-en.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
             "role": "CB",
-            "number": 12,
-            "name": "Miles Robinson",
+            "number": 3,
+            "name": "Chris Richards",
             "captain": false,
-            "playerId": "USA-12-miles-robinson",
-            "page": "Miles Robinson (soccer)",
-            "club": "FC Cincinnati",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/78/FC_Cincinnati_primary_logo_2018.svg/120px-FC_Cincinnati_primary_logo_2018.svg.png",
+            "playerId": "USA-3-chris-richards",
+            "page": "Chris Richards (soccer)",
+            "club": "Crystal Palace",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Crystal_Palace_FC_logo_%282022%29.svg/120px-Crystal_Palace_FC_logo_%282022%29.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
             "role": "CB",
-            "number": 22,
-            "name": "Mark McKenzie",
-            "captain": false,
-            "playerId": "USA-22-mark-mckenzie",
-            "page": "Mark McKenzie (soccer, born 1999)",
-            "club": "Toulouse",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/6/63/Toulouse_FC_2018_logo.svg/120px-Toulouse_FC_2018_logo.svg.png",
+            "number": 13,
+            "name": "Tim Ream",
+            "captain": true,
+            "playerId": "USA-13-tim-ream",
+            "page": "Tim Ream",
+            "club": "Charlotte FC",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/91/Charlotte_FC_logo.svg/120px-Charlotte_FC_logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
-            "role": "LB",
-            "number": 6,
-            "name": "Auston Trusty",
+            "role": "CB",
+            "number": 5,
+            "name": "Antonee Robinson",
             "captain": false,
-            "playerId": "USA-6-auston-trusty",
-            "page": "Auston Trusty",
-            "club": "Celtic",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/71/Celtic_FC_crest.svg/120px-Celtic_FC_crest.svg.png",
+            "playerId": "USA-5-antonee-robinson",
+            "page": "Antonee Robinson",
+            "club": "Fulham",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Fulham_FC_%28shield%29.svg/120px-Fulham_FC_%28shield%29.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
-            "role": "DM",
+            "role": "CM",
             "number": 8,
             "name": "Weston McKennie",
-            "captain": true,
+            "captain": false,
             "playerId": "USA-8-weston-mckennie",
             "page": "Weston McKennie",
             "club": "Juventus",
@@ -11690,61 +11691,61 @@
           },
           {
             "role": "CM",
-            "number": 14,
-            "name": "Sebastian Berhalter",
+            "number": 4,
+            "name": "Tyler Adams",
             "captain": false,
-            "playerId": "USA-14-sebastian-berhalter",
-            "page": "Sebastian Berhalter",
-            "club": "Vancouver Whitecaps FC",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Vancouver_Whitecaps_logo.svg/120px-Vancouver_Whitecaps_logo.svg.png",
+            "playerId": "USA-4-tyler-adams",
+            "page": "Tyler Adams",
+            "club": "Bournemouth",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e5/AFC_Bournemouth_%282013%29.svg/120px-AFC_Bournemouth_%282013%29.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
           {
             "role": "CM",
-            "number": 7,
-            "name": "Giovanni Reyna",
+            "number": 17,
+            "name": "Malik Tillman",
             "captain": false,
-            "playerId": "USA-7-giovanni-reyna",
-            "page": "Giovanni Reyna",
-            "club": "Borussia Mönchengladbach",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Borussia_M%C3%B6nchengladbach_logo.svg/120px-Borussia_M%C3%B6nchengladbach_logo.svg.png",
+            "playerId": "USA-17-malik-tillman",
+            "page": "Malik Tillman",
+            "club": "Bayer Leverkusen",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/59/Bayer_04_Leverkusen_logo.svg/120px-Bayer_04_Leverkusen_logo.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
           {
-            "role": "RF",
-            "number": 11,
-            "name": "Brenden Aaronson",
+            "role": "LWB",
+            "number": 2,
+            "name": "Sergiño Dest",
             "captain": false,
-            "playerId": "USA-11-brenden-aaronson",
-            "page": "Brenden Aaronson",
-            "club": "Leeds United",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/54/Leeds_United_F.C._logo.svg/120px-Leeds_United_F.C._logo.svg.png",
+            "playerId": "USA-2-sergino-dest",
+            "page": "Sergiño Dest",
+            "club": "PSV Eindhoven",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/05/PSV_Eindhoven.svg/120px-PSV_Eindhoven.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
+          },
+          {
+            "role": "CF",
+            "number": 20,
+            "name": "Folarin Balogun",
+            "captain": false,
+            "playerId": "USA-20-folarin-balogun",
+            "page": "Folarin Balogun",
+            "club": "Monaco",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cf/LogoASMonacoFC2021.svg/120px-LogoASMonacoFC2021.svg.png",
             "photo": "",
             "squadPosition": "FW"
           },
           {
             "role": "CF",
-            "number": 9,
-            "name": "Ricardo Pepi",
+            "number": 10,
+            "name": "Christian Pulisic",
             "captain": false,
-            "playerId": "USA-9-ricardo-pepi",
-            "page": "Ricardo Pepi",
-            "club": "PSV Eindhoven",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/05/PSV_Eindhoven.svg/120px-PSV_Eindhoven.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "LF",
-            "number": 21,
-            "name": "Timothy Weah",
-            "captain": false,
-            "playerId": "USA-21-timothy-weah",
-            "page": "Timothy Weah",
-            "club": "Marseille",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Olympique_de_Marseille_2026_logo.svg/120px-Olympique_de_Marseille_2026_logo.svg.png",
+            "playerId": "USA-10-christian-pulisic",
+            "page": "Christian Pulisic",
+            "club": "Milan",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Logo_of_AC_Milan.svg/120px-Logo_of_AC_Milan.svg.png",
             "photo": "",
             "squadPosition": "FW"
           }
@@ -13064,13 +13065,13 @@
         "26": "ECU-26-yaimar-medina"
       },
       "latestLineup": {
-        "group": "E",
-        "date": "2026-06-25",
-        "score": "2–1",
-        "match": "Ecuador vs Germany",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_E#Ecuador_vs_Germany",
+        "group": "Knockout",
+        "date": "2026-07-01",
+        "score": "2–0",
+        "match": "Mexico vs Ecuador",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549842",
         "team": "Ecuador",
-        "opponent": "Germany",
+        "opponent": "Mexico",
         "starters": [
           {
             "role": "GK",
@@ -13085,7 +13086,7 @@
             "squadPosition": "GK"
           },
           {
-            "role": "RB",
+            "role": "CM",
             "number": 21,
             "name": "Alan Franco",
             "captain": false,
@@ -13121,7 +13122,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "LB",
+            "role": "CB",
             "number": 3,
             "name": "Piero Hincapié",
             "captain": false,
@@ -13133,7 +13134,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "RM",
+            "role": "RF",
             "number": 9,
             "name": "John Yeboah",
             "captain": false,
@@ -13169,7 +13170,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "LM",
+            "role": "CF",
             "number": 20,
             "name": "Nilson Angulo",
             "captain": false,
@@ -13193,7 +13194,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "CF",
+            "role": "LF",
             "number": 13,
             "name": "Enner Valencia",
             "captain": false,
@@ -13792,13 +13793,13 @@
         "26": "GER-26-deniz-undav"
       },
       "latestLineup": {
-        "group": "E",
-        "date": "2026-06-25",
-        "score": "2–1",
-        "match": "Ecuador vs Germany",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_E#Ecuador_vs_Germany",
+        "group": "Knockout",
+        "date": "2026-06-29",
+        "score": "1–1",
+        "match": "Germany vs Paraguay",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549840",
         "team": "Germany",
-        "opponent": "Ecuador",
+        "opponent": "Paraguay",
         "starters": [
           {
             "role": "GK",
@@ -13850,15 +13851,27 @@
           },
           {
             "role": "LB",
-            "number": 22,
-            "name": "David Raum",
+            "number": 18,
+            "name": "Nathaniel Brown",
             "captain": false,
-            "playerId": "GER-22-david-raum",
-            "page": "David Raum",
-            "club": "RB Leipzig",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/RB_Leipzig_2014_logo.svg/120px-RB_Leipzig_2014_logo.svg.png",
+            "playerId": "GER-18-nathaniel-brown",
+            "page": "Nathaniel Brown (footballer)",
+            "club": "Eintracht Frankfurt",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Eintracht_Frankfurt_crest.svg/120px-Eintracht_Frankfurt_crest.svg.png",
             "photo": "",
             "squadPosition": "DF"
+          },
+          {
+            "role": "RM",
+            "number": 19,
+            "name": "Leroy Sané",
+            "captain": false,
+            "playerId": "GER-19-leroy-sane",
+            "page": "Leroy Sané",
+            "club": "Galatasaray",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Galatasaray_S.K._Logo_2026_5-stars.svg/120px-Galatasaray_S.K._Logo_2026_5-stars.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
           },
           {
             "role": "CM",
@@ -13885,31 +13898,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RW",
-            "number": 19,
-            "name": "Leroy Sané",
-            "captain": false,
-            "playerId": "GER-19-leroy-sane",
-            "page": "Leroy Sané",
-            "club": "Galatasaray",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Galatasaray_S.K._Logo_2026_5-stars.svg/120px-Galatasaray_S.K._Logo_2026_5-stars.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "AM",
-            "number": 10,
-            "name": "Jamal Musiala",
-            "captain": false,
-            "playerId": "GER-10-jamal-musiala",
-            "page": "Jamal Musiala",
-            "club": "Bayern Munich",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/FC_Bayern_M%C3%BCnchen_logo_%282024%29.svg/120px-FC_Bayern_M%C3%BCnchen_logo_%282024%29.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "LW",
+            "role": "LM",
             "number": 17,
             "name": "Florian Wirtz",
             "captain": false,
@@ -13929,6 +13918,18 @@
             "page": "Kai Havertz",
             "club": "Arsenal",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/120px-Arsenal_FC.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "CF",
+            "number": 26,
+            "name": "Deniz Undav",
+            "captain": false,
+            "playerId": "GER-26-deniz-undav",
+            "page": "Deniz Undav",
+            "club": "VfB Stuttgart",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/VfB_Stuttgart_1893_Logo.svg/120px-VfB_Stuttgart_1893_Logo.svg.png",
             "photo": "",
             "squadPosition": "FW"
           }
@@ -14520,13 +14521,13 @@
         "26": "CIV-26-christ-inao-oulai"
       },
       "latestLineup": {
-        "group": "E",
-        "date": "2026-06-25",
-        "score": "0–2",
-        "match": "Curaçao vs Ivory Coast",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_E#Curaçao_vs_Ivory_Coast",
+        "group": "Knockout",
+        "date": "2026-06-30",
+        "score": "1–2",
+        "match": "Ivory Coast vs Norway",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549843",
         "team": "Ivory Coast",
-        "opponent": "Curaçao",
+        "opponent": "Norway",
         "starters": [
           {
             "role": "GK",
@@ -14566,30 +14567,30 @@
           },
           {
             "role": "CB",
-            "number": 2,
-            "name": "Ousmane Diomande",
+            "number": 20,
+            "name": "Emmanuel Agbadou",
             "captain": false,
-            "playerId": "CIV-2-ousmane-diomande",
-            "page": "Ousmane Diomande",
-            "club": "Sporting CP",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/95/Sporting_CP_crest.svg/120px-Sporting_CP_crest.svg.png",
+            "playerId": "CIV-20-emmanuel-agbadou",
+            "page": "Emmanuel Agbadou",
+            "club": "Beşiktaş",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/BesiktasJK-Logo.svg/120px-BesiktasJK-Logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
             "role": "LB",
-            "number": 13,
-            "name": "Christopher Opéri",
+            "number": 3,
+            "name": "Ghislain Konan",
             "captain": false,
-            "playerId": "CIV-13-christopher-operi",
-            "page": "Christopher Opéri",
-            "club": "İstanbul Başakşehir",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/%C4%B0stanbul_Ba%C5%9Fak%C5%9Fehir_logo.svg/120px-%C4%B0stanbul_Ba%C5%9Fak%C5%9Fehir_logo.svg.png",
+            "playerId": "CIV-3-ghislain-konan",
+            "page": "Ghislain Konan",
+            "club": "Gil Vicente",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/Gil_Vicente_F.C.png/120px-Gil_Vicente_F.C.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
-            "role": "DM",
+            "role": "CM",
             "number": 18,
             "name": "Ibrahim Sangaré",
             "captain": false,
@@ -14601,7 +14602,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "CM",
+            "role": "RF",
             "number": 19,
             "name": "Nicolas Pépé",
             "captain": false,
@@ -14625,31 +14626,19 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RF",
-            "number": 15,
-            "name": "Amad Diallo",
+            "role": "CM",
+            "number": 26,
+            "name": "Christ Inao Oulaï",
             "captain": false,
-            "playerId": "CIV-15-amad-diallo",
-            "page": "Amad Diallo",
-            "club": "Manchester United",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/120px-Manchester_United_FC_crest.svg.png",
+            "playerId": "CIV-26-christ-inao-oulai",
+            "page": "Christ Inao Oulaï",
+            "club": "Trabzonspor",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/d/de/Trabzonspor_Amblem.svg/120px-Trabzonspor_Amblem.svg.png",
             "photo": "",
-            "squadPosition": "FW"
+            "squadPosition": "MF"
           },
           {
             "role": "CF",
-            "number": 9,
-            "name": "Ange-Yoan Bonny",
-            "captain": false,
-            "playerId": "CIV-9-ange-yoan-bonny",
-            "page": "Ange-Yoan Bonny",
-            "club": "Inter Milan",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/120px-FC_Internazionale_Milano_2021.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "LF",
             "number": 11,
             "name": "Yan Diomande",
             "captain": false,
@@ -14657,6 +14646,18 @@
             "page": "Yan Diomande",
             "club": "RB Leipzig",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/RB_Leipzig_2014_logo.svg/120px-RB_Leipzig_2014_logo.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "LF",
+            "number": 9,
+            "name": "Ange-Yoan Bonny",
+            "captain": false,
+            "playerId": "CIV-9-ange-yoan-bonny",
+            "page": "Ange-Yoan Bonny",
+            "club": "Inter Milan",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/120px-FC_Internazionale_Milano_2021.svg.png",
             "photo": "",
             "squadPosition": "FW"
           }
@@ -15250,13 +15251,13 @@
         "26": "JPN-26-kento-shiogai"
       },
       "latestLineup": {
-        "group": "F",
-        "date": "2026-06-25",
-        "score": "1–1",
-        "match": "Japan vs Sweden",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_F#Japan_vs_Sweden",
+        "group": "Knockout",
+        "date": "2026-06-29",
+        "score": "2–1",
+        "match": "Brazil vs Japan",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549839",
         "team": "Japan",
-        "opponent": "Sweden",
+        "opponent": "Brazil",
         "starters": [
           {
             "role": "GK",
@@ -15272,25 +15273,25 @@
           },
           {
             "role": "CB",
-            "number": 20,
-            "name": "Ayumu Seko",
+            "number": 22,
+            "name": "Takehiro Tomiyasu",
             "captain": false,
-            "playerId": "JPN-20-ayumu-seko",
-            "page": "Ayumu Seko",
-            "club": "Le Havre",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fc/Le_Havre_AC_logo.svg/120px-Le_Havre_AC_logo.svg.png",
+            "playerId": "JPN-22-takehiro-tomiyasu",
+            "page": "Takehiro Tomiyasu",
+            "club": "Ajax",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Logo_AFC_Ajax_%281928-1991%2C_2025-%29.png/120px-Logo_AFC_Ajax_%281928-1991%2C_2025-%29.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
             "role": "CB",
-            "number": 4,
-            "name": "Kō Itakura",
-            "captain": true,
-            "playerId": "JPN-4-ko-itakura",
-            "page": "Kō Itakura",
-            "club": "Ajax",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Logo_AFC_Ajax_%281928-1991%2C_2025-%29.png/120px-Logo_AFC_Ajax_%281928-1991%2C_2025-%29.png",
+            "number": 3,
+            "name": "Shōgo Taniguchi",
+            "captain": false,
+            "playerId": "JPN-3-shogo-taniguchi",
+            "page": "Shōgo Taniguchi",
+            "club": "Sint-Truiden",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f1/K._Sint-Truidense_V.V._logo.png/120px-K._Sint-Truidense_V.V._logo.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -15308,15 +15309,27 @@
           },
           {
             "role": "RWB",
-            "number": 2,
-            "name": "Yukinari Sugawara",
-            "captain": false,
-            "playerId": "JPN-2-yukinari-sugawara",
-            "page": "Yukinari Sugawara",
-            "club": "Werder Bremen",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/SV-Werder-Bremen-Logo.svg/120px-SV-Werder-Bremen-Logo.svg.png",
+            "number": 10,
+            "name": "Ritsu Dōan",
+            "captain": true,
+            "playerId": "JPN-10-ritsu-doan",
+            "page": "Ritsu Dōan",
+            "club": "Eintracht Frankfurt",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Eintracht_Frankfurt_crest.svg/120px-Eintracht_Frankfurt_crest.svg.png",
             "photo": "",
-            "squadPosition": "DF"
+            "squadPosition": "MF"
+          },
+          {
+            "role": "CM",
+            "number": 24,
+            "name": "Kaishū Sano",
+            "captain": false,
+            "playerId": "JPN-24-kaishu-sano",
+            "page": "Kaishū Sano",
+            "club": "Mainz 05",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/1._FSV_Mainz_05_logo.svg/120px-1._FSV_Mainz_05_logo.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
           },
           {
             "role": "CM",
@@ -15332,18 +15345,6 @@
           },
           {
             "role": "CM",
-            "number": 7,
-            "name": "Ao Tanaka",
-            "captain": false,
-            "playerId": "JPN-7-ao-tanaka",
-            "page": "Ao Tanaka",
-            "club": "Leeds United",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/54/Leeds_United_F.C._logo.svg/120px-Leeds_United_F.C._logo.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "LWB",
             "number": 13,
             "name": "Keito Nakamura",
             "captain": false,
@@ -15355,14 +15356,26 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RF",
-            "number": 10,
-            "name": "Ritsu Dōan",
+            "role": "CM",
+            "number": 14,
+            "name": "Junya Itō",
             "captain": false,
-            "playerId": "JPN-10-ritsu-doan",
-            "page": "Ritsu Dōan",
-            "club": "Eintracht Frankfurt",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Eintracht_Frankfurt_crest.svg/120px-Eintracht_Frankfurt_crest.svg.png",
+            "playerId": "JPN-14-junya-ito",
+            "page": "Junya Itō",
+            "club": "Genk",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Logo_KRC_Genk.png/120px-Logo_KRC_Genk.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "LWB",
+            "number": 11,
+            "name": "Daizen Maeda",
+            "captain": false,
+            "playerId": "JPN-11-daizen-maeda",
+            "page": "Daizen Maeda",
+            "club": "Celtic",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/71/Celtic_FC_crest.svg/120px-Celtic_FC_crest.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -15377,18 +15390,6 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Feyenoord_logo_since_2024.svg/120px-Feyenoord_logo_since_2024.svg.png",
             "photo": "",
             "squadPosition": "FW"
-          },
-          {
-            "role": "LF",
-            "number": 11,
-            "name": "Daizen Maeda",
-            "captain": false,
-            "playerId": "JPN-11-daizen-maeda",
-            "page": "Daizen Maeda",
-            "club": "Celtic",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/71/Celtic_FC_crest.svg/120px-Celtic_FC_crest.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
           }
         ]
       }
@@ -15978,13 +15979,13 @@
         "26": "NED-26-quinten-timber"
       },
       "latestLineup": {
-        "group": "F",
-        "date": "2026-06-25",
-        "score": "1–3",
-        "match": "Tunisia vs Netherlands",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_F#Tunisia_vs_Netherlands",
+        "group": "Knockout",
+        "date": "2026-06-30",
+        "score": "1–1",
+        "match": "Netherlands vs Morocco",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549841",
         "team": "Netherlands",
-        "opponent": "Tunisia",
+        "opponent": "Morocco",
         "starters": [
           {
             "role": "GK",
@@ -15999,19 +16000,7 @@
             "squadPosition": "GK"
           },
           {
-            "role": "RB",
-            "number": 22,
-            "name": "Denzel Dumfries",
-            "captain": false,
-            "playerId": "NED-22-denzel-dumfries",
-            "page": "Denzel Dumfries",
-            "club": "Inter Milan",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/120px-FC_Internazionale_Milano_2021.svg.png",
-            "photo": "",
-            "squadPosition": "DF"
-          },
-          {
-            "role": "CB",
+            "role": "RWB",
             "number": 6,
             "name": "Jan Paul van Hecke",
             "captain": false,
@@ -16035,7 +16024,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "LB",
+            "role": "CB",
             "number": 5,
             "name": "Nathan Aké",
             "captain": false,
@@ -16047,16 +16036,16 @@
             "squadPosition": "DF"
           },
           {
-            "role": "DM",
-            "number": 21,
-            "name": "Frenkie de Jong",
+            "role": "CB",
+            "number": 22,
+            "name": "Denzel Dumfries",
             "captain": false,
-            "playerId": "NED-21-frenkie-de-jong",
-            "page": "Frenkie de Jong",
-            "club": "Barcelona",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/120px-FC_Barcelona_%28crest%29.svg.png",
+            "playerId": "NED-22-denzel-dumfries",
+            "page": "Denzel Dumfries",
+            "club": "Inter Milan",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/120px-FC_Internazionale_Milano_2021.svg.png",
             "photo": "",
-            "squadPosition": "MF"
+            "squadPosition": "DF"
           },
           {
             "role": "CM",
@@ -16072,42 +16061,42 @@
           },
           {
             "role": "CM",
-            "number": 14,
-            "name": "Tijjani Reijnders",
+            "number": 21,
+            "name": "Frenkie de Jong",
             "captain": false,
-            "playerId": "NED-14-tijjani-reijnders",
-            "page": "Tijjani Reijnders",
-            "club": "Manchester City",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/120px-Manchester_City_FC_badge.svg.png",
+            "playerId": "NED-21-frenkie-de-jong",
+            "page": "Frenkie de Jong",
+            "club": "Barcelona",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/120px-FC_Barcelona_%28crest%29.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
           {
-            "role": "RF",
-            "number": 18,
-            "name": "Donyell Malen",
+            "role": "LWB",
+            "number": 15,
+            "name": "Micky van de Ven",
             "captain": false,
-            "playerId": "NED-18-donyell-malen",
-            "page": "Donyell Malen",
-            "club": "Roma",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/AS_Roma_logo_%282017%29.svg/120px-AS_Roma_logo_%282017%29.svg.png",
+            "playerId": "NED-15-micky-van-de-ven",
+            "page": "Micky van de Ven",
+            "club": "Tottenham Hotspur",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Tottenham_Hotspur.svg/120px-Tottenham_Hotspur.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
+          },
+          {
+            "role": "RF",
+            "number": 24,
+            "name": "Crysencio Summerville",
+            "captain": false,
+            "playerId": "NED-24-crysencio-summerville",
+            "page": "Crysencio Summerville",
+            "club": "West Ham United",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/West_Ham_United_FC_logo.svg/120px-West_Ham_United_FC_logo.svg.png",
             "photo": "",
             "squadPosition": "FW"
           },
           {
             "role": "CF",
-            "number": 19,
-            "name": "Brian Brobbey",
-            "captain": false,
-            "playerId": "NED-19-brian-brobbey",
-            "page": "Brian Brobbey",
-            "club": "Sunderland",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Logo_Sunderland.svg/120px-Logo_Sunderland.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "LF",
             "number": 11,
             "name": "Cody Gakpo",
             "captain": false,
@@ -16115,6 +16104,18 @@
             "page": "Cody Gakpo",
             "club": "Liverpool",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/120px-Liverpool_FC.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "LF",
+            "number": 19,
+            "name": "Brian Brobbey",
+            "captain": false,
+            "playerId": "NED-19-brian-brobbey",
+            "page": "Brian Brobbey",
+            "club": "Sunderland",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Logo_Sunderland.svg/120px-Logo_Sunderland.svg.png",
             "photo": "",
             "squadPosition": "FW"
           }
@@ -16708,13 +16709,13 @@
         "26": "SWE-26-taha-ali"
       },
       "latestLineup": {
-        "group": "F",
-        "date": "2026-06-25",
-        "score": "1–1",
-        "match": "Japan vs Sweden",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_F#Japan_vs_Sweden",
+        "group": "Knockout",
+        "date": "2026-06-30",
+        "score": "3–0",
+        "match": "France vs Sweden",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549844",
         "team": "Sweden",
-        "opponent": "Japan",
+        "opponent": "France",
         "starters": [
           {
             "role": "GK",
@@ -16727,6 +16728,18 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Derby_County_crest.svg/120px-Derby_County_crest.svg.png",
             "photo": "",
             "squadPosition": "GK"
+          },
+          {
+            "role": "RWB",
+            "number": 8,
+            "name": "Daniel Svensson",
+            "captain": false,
+            "playerId": "SWE-8-daniel-svensson",
+            "page": "Daniel Svensson (footballer, born 2002)",
+            "club": "Borussia Dortmund",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Borussia_Dortmund_logo.svg/120px-Borussia_Dortmund_logo.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
           },
           {
             "role": "CB",
@@ -16742,13 +16755,13 @@
           },
           {
             "role": "CB",
-            "number": 4,
-            "name": "Isak Hien",
-            "captain": false,
-            "playerId": "SWE-4-isak-hien",
-            "page": "Isak Hien",
-            "club": "Atalanta",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Atalanta_BC_new_logo.svg/120px-Atalanta_BC_new_logo.svg.png",
+            "number": 3,
+            "name": "Victor Lindelöf",
+            "captain": true,
+            "playerId": "SWE-3-victor-lindelof",
+            "page": "Victor Lindelöf",
+            "club": "Aston Villa",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Aston_Villa_FC_new_crest.svg/120px-Aston_Villa_FC_new_crest.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -16765,28 +16778,28 @@
             "squadPosition": "DF"
           },
           {
-            "role": "RWB",
-            "number": 21,
-            "name": "Alexander Bernhardsson",
+            "role": "RF",
+            "number": 11,
+            "name": "Anthony Elanga",
             "captain": false,
-            "playerId": "SWE-21-alexander-bernhardsson",
-            "page": "Alexander Bernhardsson",
-            "club": "Holstein Kiel",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Holstein_Kiel_Logo.svg/120px-Holstein_Kiel_Logo.svg.png",
+            "playerId": "SWE-11-anthony-elanga",
+            "page": "Anthony Elanga",
+            "club": "Newcastle United",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Newcastle_United_Logo.svg/120px-Newcastle_United_Logo.svg.png",
             "photo": "",
-            "squadPosition": "DF"
+            "squadPosition": "FW"
           },
           {
             "role": "CM",
-            "number": 3,
-            "name": "Victor Lindelöf",
-            "captain": true,
-            "playerId": "SWE-3-victor-lindelof",
-            "page": "Victor Lindelöf",
-            "club": "Aston Villa",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Aston_Villa_FC_new_crest.svg/120px-Aston_Villa_FC_new_crest.svg.png",
+            "number": 7,
+            "name": "Lucas Bergvall",
+            "captain": false,
+            "playerId": "SWE-7-lucas-bergvall",
+            "page": "Lucas Bergvall",
+            "club": "Tottenham Hotspur",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Tottenham_Hotspur.svg/120px-Tottenham_Hotspur.svg.png",
             "photo": "",
-            "squadPosition": "DF"
+            "squadPosition": "MF"
           },
           {
             "role": "CM",
@@ -16811,18 +16824,6 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Mjallby_AIF_logo.svg/120px-Mjallby_AIF_logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
-          },
-          {
-            "role": "RF",
-            "number": 11,
-            "name": "Anthony Elanga",
-            "captain": false,
-            "playerId": "SWE-11-anthony-elanga",
-            "page": "Anthony Elanga",
-            "club": "Newcastle United",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Newcastle_United_Logo.svg/120px-Newcastle_United_Logo.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
           },
           {
             "role": "CF",
@@ -18168,13 +18169,13 @@
         "26": "BEL-26-matias-fernandez-pardo"
       },
       "latestLineup": {
-        "group": "G",
-        "date": "2026-06-26",
-        "score": "1–5",
-        "match": "New Zealand vs Belgium",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_G#New_Zealand_vs_Belgium",
+        "group": "Knockout",
+        "date": "2026-07-01",
+        "score": "3–2",
+        "match": "Belgium vs Senegal",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549846",
         "team": "Belgium",
-        "opponent": "New Zealand",
+        "opponent": "Senegal",
         "starters": [
           {
             "role": "GK",
@@ -18261,31 +18262,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RW",
-            "number": 11,
-            "name": "Jérémy Doku",
-            "captain": false,
-            "playerId": "BEL-11-jeremy-doku",
-            "page": "Jérémy Doku",
-            "club": "Manchester City",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/120px-Manchester_City_FC_badge.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "AM",
-            "number": 7,
-            "name": "Kevin De Bruyne",
-            "captain": false,
-            "playerId": "BEL-7-kevin-de-bruyne",
-            "page": "Kevin De Bruyne",
-            "club": "Napoli",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/SSC_Napoli_2025_%28white_and_azure%29.svg/120px-SSC_Napoli_2025_%28white_and_azure%29.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "LW",
+            "role": "RF",
             "number": 10,
             "name": "Leandro Trossard",
             "captain": false,
@@ -18297,7 +18274,31 @@
             "squadPosition": "FW"
           },
           {
+            "role": "CM",
+            "number": 7,
+            "name": "Kevin De Bruyne",
+            "captain": false,
+            "playerId": "BEL-7-kevin-de-bruyne",
+            "page": "Kevin De Bruyne",
+            "club": "Napoli",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/SSC_Napoli_2025_%28white_and_azure%29.svg/120px-SSC_Napoli_2025_%28white_and_azure%29.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
             "role": "CF",
+            "number": 11,
+            "name": "Jérémy Doku",
+            "captain": false,
+            "playerId": "BEL-11-jeremy-doku",
+            "page": "Jérémy Doku",
+            "club": "Manchester City",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/120px-Manchester_City_FC_badge.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "LF",
             "number": 17,
             "name": "Charles De Ketelaere",
             "captain": false,
@@ -18896,13 +18897,13 @@
         "26": "EGY-26-mohamed-alaa"
       },
       "latestLineup": {
-        "group": "G",
-        "date": "2026-06-26",
+        "group": "Knockout",
+        "date": "2026-07-03",
         "score": "1–1",
-        "match": "Egypt vs Iran",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_G#Egypt_vs_Iran",
+        "match": "Australia vs Egypt",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549851",
         "team": "Egypt",
-        "opponent": "Iran",
+        "opponent": "Australia",
         "starters": [
           {
             "role": "GK",
@@ -18930,6 +18931,18 @@
           },
           {
             "role": "CB",
+            "number": 2,
+            "name": "Yasser Ibrahim",
+            "captain": false,
+            "playerId": "EGY-2-yasser-ibrahim",
+            "page": "Yasser Ibrahim",
+            "club": "Al Ahly",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Al_Ahly_SC_logo.svg/120px-Al_Ahly_SC_logo.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
+          },
+          {
+            "role": "CB",
             "number": 5,
             "name": "Ramy Rabia",
             "captain": false,
@@ -18941,55 +18954,19 @@
             "squadPosition": "DF"
           },
           {
-            "role": "CB",
-            "number": 6,
-            "name": "Mohamed Abdelmonem",
-            "captain": false,
-            "playerId": "EGY-6-mohamed-abdelmonem",
-            "page": "Mohamed Abdelmonem",
-            "club": "Nice",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2e/OGC_Nice_logo.svg/120px-OGC_Nice_logo.svg.png",
-            "photo": "",
-            "squadPosition": "DF"
-          },
-          {
             "role": "LB",
-            "number": 13,
-            "name": "Ahmed Fatouh",
+            "number": 15,
+            "name": "Karim Hafez",
             "captain": false,
-            "playerId": "EGY-13-ahmed-fatouh",
-            "page": "Ahmed Fatouh",
-            "club": "Zamalek",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ef/Zamalek_SC_logo.svg/120px-Zamalek_SC_logo.svg.png",
-            "photo": "",
-            "squadPosition": "DF"
-          },
-          {
-            "role": "CM",
-            "number": 21,
-            "name": "Mahmoud Saber",
-            "captain": false,
-            "playerId": "EGY-21-mahmoud-saber",
-            "page": "Mahmoud Saber",
-            "club": "ZED",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/3/39/ZED_FC_logo.png/120px-ZED_FC_logo.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "CM",
-            "number": 17,
-            "name": "Mohanad Lasheen",
-            "captain": false,
-            "playerId": "EGY-17-mohanad-lasheen",
-            "page": "Mohanad Lasheen",
+            "playerId": "EGY-15-karim-hafez",
+            "page": "Karim Hafez",
             "club": "Pyramids",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Pyramids_FC_%282020%29.png/120px-Pyramids_FC_%282020%29.png",
             "photo": "",
-            "squadPosition": "MF"
+            "squadPosition": "DF"
           },
           {
-            "role": "RW",
+            "role": "RM",
             "number": 8,
             "name": "Emam Ashour",
             "captain": false,
@@ -19001,7 +18978,43 @@
             "squadPosition": "MF"
           },
           {
-            "role": "AM",
+            "role": "CM",
+            "number": 14,
+            "name": "Hamdy Fathy",
+            "captain": false,
+            "playerId": "EGY-14-hamdy-fathy",
+            "page": "Hamdy Fathy",
+            "club": "Al-Wakrah",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/2/26/Al-Wakrah_SC_logo.svg/120px-Al-Wakrah_SC_logo.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "CM",
+            "number": 19,
+            "name": "Marwan Attia",
+            "captain": false,
+            "playerId": "EGY-19-marwan-attia",
+            "page": "Marwan Attia",
+            "club": "Al Ahly",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Al_Ahly_SC_logo.svg/120px-Al_Ahly_SC_logo.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "CF",
+            "number": 22,
+            "name": "Omar Marmoush",
+            "captain": false,
+            "playerId": "EGY-22-omar-marmoush",
+            "page": "Omar Marmoush",
+            "club": "Manchester City",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/120px-Manchester_City_FC_badge.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "CF",
             "number": 10,
             "name": "Mohamed Salah",
             "captain": true,
@@ -19013,19 +19026,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "LW",
-            "number": 7,
-            "name": "Trézéguet",
-            "captain": false,
-            "playerId": "EGY-7-trezeguet",
-            "page": "Trézéguet (Egyptian footballer)",
-            "club": "Al Ahly",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Al_Ahly_SC_logo.svg/120px-Al_Ahly_SC_logo.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "CF",
+            "role": "LM",
             "number": 11,
             "name": "Mostafa Ziko",
             "captain": false,
@@ -21080,13 +21081,13 @@
         "26": "CPV-26-helio-varela"
       },
       "latestLineup": {
-        "group": "H",
-        "date": "2026-06-26",
-        "score": "0–0",
-        "match": "Cape Verde vs Saudi Arabia",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_H#Cape_Verde_vs_Saudi_Arabia",
+        "group": "Knockout",
+        "date": "2026-07-03",
+        "score": "3–2",
+        "match": "Argentina vs Cape Verde",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549852",
         "team": "Cape Verde",
-        "opponent": "Saudi Arabia",
+        "opponent": "Argentina",
         "starters": [
           {
             "role": "GK",
@@ -21102,13 +21103,13 @@
           },
           {
             "role": "RB",
-            "number": 24,
-            "name": "Wagner Pina",
+            "number": 22,
+            "name": "Steven Moreira",
             "captain": false,
-            "playerId": "CPV-24-wagner-pina",
-            "page": "Wagner Pina",
-            "club": "Trabzonspor",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/d/de/Trabzonspor_Amblem.svg/120px-Trabzonspor_Amblem.svg.png",
+            "playerId": "CPV-22-steven-moreira",
+            "page": "Steven Moreira",
+            "club": "Columbus Crew",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Columbus_Crew_logo_2021.svg/120px-Columbus_Crew_logo_2021.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -21138,18 +21139,18 @@
           },
           {
             "role": "LB",
-            "number": 8,
-            "name": "João Paulo",
+            "number": 13,
+            "name": "Sidny Lopes Cabral",
             "captain": false,
-            "playerId": "CPV-8-joao-paulo",
-            "page": "João Paulo Fernandes (footballer)",
-            "club": "FCSB",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Fcsb-logo.svg/120px-Fcsb-logo.svg.png",
+            "playerId": "CPV-13-sidny-lopes-cabral",
+            "page": "Sidny Lopes Cabral",
+            "club": "Benfica",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/SL_Benfica_logo.svg/120px-SL_Benfica_logo.svg.png",
             "photo": "",
-            "squadPosition": "MF"
+            "squadPosition": "DF"
           },
           {
-            "role": "DM",
+            "role": "RM",
             "number": 6,
             "name": "Kevin Pina",
             "captain": false,
@@ -21157,6 +21158,30 @@
             "page": "Kevin Pina (footballer)",
             "club": "Krasnodar",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/3/30/FC_Krasnodar_logo.svg/120px-FC_Krasnodar_logo.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "CF",
+            "number": 20,
+            "name": "Ryan Mendes",
+            "captain": true,
+            "playerId": "CPV-20-ryan-mendes",
+            "page": "Ryan Mendes",
+            "club": "Iğdır",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/6/61/I%C4%9Fd%C4%B1r_F.K._crest.png/120px-I%C4%9Fd%C4%B1r_F.K._crest.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "CM",
+            "number": 15,
+            "name": "Laros Duarte",
+            "captain": false,
+            "playerId": "CPV-15-laros-duarte",
+            "page": "Laros Duarte",
+            "club": "Puskás Akadémia",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/4/44/Pusk%C3%A1s_Akad%C3%A9mia_FC_logo.svg/120px-Pusk%C3%A1s_Akad%C3%A9mia_FC_logo.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -21174,49 +21199,25 @@
           },
           {
             "role": "CM",
-            "number": 10,
-            "name": "Jamiro Monteiro",
+            "number": 7,
+            "name": "Jovane Cabral",
             "captain": false,
-            "playerId": "CPV-10-jamiro-monteiro",
-            "page": "Jamiro Monteiro",
-            "club": "PEC Zwolle",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/PEC_Zwolle_logo.svg/120px-PEC_Zwolle_logo.svg.png",
+            "playerId": "CPV-7-jovane-cabral",
+            "page": "Jovane Cabral",
+            "club": "Estrela Amadora",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/S%C3%ADmbolo_Estrela_da_Amadora.svg/120px-S%C3%ADmbolo_Estrela_da_Amadora.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
           {
-            "role": "RF",
-            "number": 20,
-            "name": "Ryan Mendes",
-            "captain": true,
-            "playerId": "CPV-20-ryan-mendes",
-            "page": "Ryan Mendes",
-            "club": "Iğdır",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/6/61/I%C4%9Fd%C4%B1r_F.K._crest.png/120px-I%C4%9Fd%C4%B1r_F.K._crest.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "CF",
-            "number": 19,
-            "name": "Dailon Livramento",
+            "role": "LM",
+            "number": 21,
+            "name": "Nuno da Costa",
             "captain": false,
-            "playerId": "CPV-19-dailon-livramento",
-            "page": "Dailon Livramento",
-            "club": "Casa Pia",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/6/68/Casa_Pia_A.C._logo.svg/120px-Casa_Pia_A.C._logo.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "LF",
-            "number": 17,
-            "name": "Willy Semedo",
-            "captain": false,
-            "playerId": "CPV-17-willy-semedo",
-            "page": "Willy Semedo",
-            "club": "Omonia",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/AC_Omonia_logo.svg/120px-AC_Omonia_logo.svg.png",
+            "playerId": "CPV-21-nuno-da-costa",
+            "page": "Nuno da Costa",
+            "club": "İstanbul Başakşehir",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/%C4%B0stanbul_Ba%C5%9Fak%C5%9Fehir_logo.svg/120px-%C4%B0stanbul_Ba%C5%9Fak%C5%9Fehir_logo.svg.png",
             "photo": "",
             "squadPosition": "MF"
           }
@@ -22538,13 +22539,13 @@
         "26": "ESP-26-borja-iglesias"
       },
       "latestLineup": {
-        "group": "H",
-        "date": "2026-06-26",
-        "score": "0–1",
-        "match": "Uruguay vs Spain",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_H#Uruguay_vs_Spain",
+        "group": "Knockout",
+        "date": "2026-07-02",
+        "score": "3–0",
+        "match": "Spain vs Austria",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549849",
         "team": "Spain",
-        "opponent": "Uruguay",
+        "opponent": "Austria",
         "starters": [
           {
             "role": "GK",
@@ -22560,13 +22561,13 @@
           },
           {
             "role": "RB",
-            "number": 5,
-            "name": "Marcos Llorente",
+            "number": 12,
+            "name": "Pedro Porro",
             "captain": false,
-            "playerId": "ESP-5-marcos-llorente",
-            "page": "Marcos Llorente",
-            "club": "Atlético Madrid",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Atletico_Madrid_Logo_2024.svg/120px-Atletico_Madrid_Logo_2024.svg.png",
+            "playerId": "ESP-12-pedro-porro",
+            "page": "Pedro Porro",
+            "club": "Tottenham Hotspur",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Tottenham_Hotspur.svg/120px-Tottenham_Hotspur.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -22607,7 +22608,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "DM",
+            "role": "CM",
             "number": 16,
             "name": "Rodri",
             "captain": true,
@@ -22615,18 +22616,6 @@
             "page": "Rodri (footballer, born 1996)",
             "club": "Manchester City",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/120px-Manchester_City_FC_badge.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "CM",
-            "number": 6,
-            "name": "Mikel Merino",
-            "captain": false,
-            "playerId": "ESP-6-mikel-merino",
-            "page": "Mikel Merino",
-            "club": "Arsenal",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/120px-Arsenal_FC.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -22656,18 +22645,18 @@
           },
           {
             "role": "CF",
-            "number": 21,
-            "name": "Mikel Oyarzabal",
+            "number": 10,
+            "name": "Dani Olmo",
             "captain": false,
-            "playerId": "ESP-21-mikel-oyarzabal",
-            "page": "Mikel Oyarzabal",
-            "club": "Real Sociedad",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f1/Real_Sociedad_logo.svg/120px-Real_Sociedad_logo.svg.png",
+            "playerId": "ESP-10-dani-olmo",
+            "page": "Dani Olmo",
+            "club": "Barcelona",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/120px-FC_Barcelona_%28crest%29.svg.png",
             "photo": "",
             "squadPosition": "FW"
           },
           {
-            "role": "LF",
+            "role": "CM",
             "number": 15,
             "name": "Álex Baena",
             "captain": false,
@@ -22677,6 +22666,18 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Atletico_Madrid_Logo_2024.svg/120px-Atletico_Madrid_Logo_2024.svg.png",
             "photo": "",
             "squadPosition": "MF"
+          },
+          {
+            "role": "LF",
+            "number": 21,
+            "name": "Mikel Oyarzabal",
+            "captain": false,
+            "playerId": "ESP-21-mikel-oyarzabal",
+            "page": "Mikel Oyarzabal",
+            "club": "Real Sociedad",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f1/Real_Sociedad_logo.svg/120px-Real_Sociedad_logo.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
           }
         ]
       }
@@ -23994,13 +23995,13 @@
         "26": "FRA-26-maxence-lacroix"
       },
       "latestLineup": {
-        "group": "I",
-        "date": "2026-06-26",
-        "score": "1–4",
-        "match": "Norway vs France",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_I#Norway_vs_France",
+        "group": "Knockout",
+        "date": "2026-07-04",
+        "score": "0–1",
+        "match": "Paraguay vs France",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549855",
         "team": "France",
-        "opponent": "Norway",
+        "opponent": "Paraguay",
         "starters": [
           {
             "role": "GK",
@@ -24040,39 +24041,27 @@
           },
           {
             "role": "CB",
-            "number": 26,
-            "name": "Maxence Lacroix",
+            "number": 17,
+            "name": "William Saliba",
             "captain": false,
-            "playerId": "FRA-26-maxence-lacroix",
-            "page": "Maxence Lacroix",
-            "club": "Crystal Palace",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Crystal_Palace_FC_logo_%282022%29.svg/120px-Crystal_Palace_FC_logo_%282022%29.svg.png",
+            "playerId": "FRA-17-william-saliba",
+            "page": "William Saliba",
+            "club": "Arsenal",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/120px-Arsenal_FC.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
             "role": "LB",
-            "number": 19,
-            "name": "Théo Hernandez",
+            "number": 3,
+            "name": "Lucas Digne",
             "captain": false,
-            "playerId": "FRA-19-theo-hernandez",
-            "page": "Théo Hernandez",
-            "club": "Al-Hilal",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Al_Hilal_SFC_Logo.svg/120px-Al_Hilal_SFC_Logo.svg.png",
+            "playerId": "FRA-3-lucas-digne",
+            "page": "Lucas Digne",
+            "club": "Aston Villa",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Aston_Villa_FC_new_crest.svg/120px-Aston_Villa_FC_new_crest.svg.png",
             "photo": "",
             "squadPosition": "DF"
-          },
-          {
-            "role": "CM",
-            "number": 8,
-            "name": "Aurélien Tchouaméni",
-            "captain": false,
-            "playerId": "FRA-8-aurelien-tchouameni",
-            "page": "Aurélien Tchouaméni",
-            "club": "Real Madrid",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/120px-Real_Madrid_CF.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
           },
           {
             "role": "CM",
@@ -24087,7 +24076,19 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RW",
+            "role": "CM",
+            "number": 14,
+            "name": "Adrien Rabiot",
+            "captain": false,
+            "playerId": "FRA-14-adrien-rabiot",
+            "page": "Adrien Rabiot",
+            "club": "Milan",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Logo_of_AC_Milan.svg/120px-Logo_of_AC_Milan.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "RF",
             "number": 7,
             "name": "Ousmane Dembélé",
             "captain": false,
@@ -24099,7 +24100,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "AM",
+            "role": "CF",
             "number": 11,
             "name": "Michael Olise",
             "captain": false,
@@ -24111,19 +24112,19 @@
             "squadPosition": "FW"
           },
           {
-            "role": "LW",
-            "number": 20,
-            "name": "Désiré Doué",
+            "role": "CF",
+            "number": 12,
+            "name": "Bradley Barcola",
             "captain": false,
-            "playerId": "FRA-20-desire-doue",
-            "page": "Désiré Doué",
+            "playerId": "FRA-12-bradley-barcola",
+            "page": "Bradley Barcola",
             "club": "Paris Saint-Germain",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/Paris_Saint-Germain_F.C..svg/120px-Paris_Saint-Germain_F.C..svg.png",
             "photo": "",
             "squadPosition": "FW"
           },
           {
-            "role": "CF",
+            "role": "LF",
             "number": 10,
             "name": "Kylian Mbappé",
             "captain": true,
@@ -25452,79 +25453,103 @@
         "26": "NOR-26-julian-ryerson"
       },
       "latestLineup": {
-        "group": "I",
-        "date": "2026-06-26",
-        "score": "1–4",
-        "match": "Norway vs France",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_I#Norway_vs_France",
+        "group": "Knockout",
+        "date": "2026-06-30",
+        "score": "1–2",
+        "match": "Ivory Coast vs Norway",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549843",
         "team": "Norway",
-        "opponent": "France",
+        "opponent": "Ivory Coast",
         "starters": [
           {
             "role": "GK",
-            "number": 13,
-            "name": "Egil Selvik",
+            "number": 1,
+            "name": "Ørjan Nyland",
             "captain": false,
-            "playerId": "NOR-13-egil-selvik",
-            "page": "Egil Selvik",
-            "club": "Watford",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/Watford.svg/120px-Watford.svg.png",
+            "playerId": "NOR-1-rjan-nyland",
+            "page": "Ørjan Nyland",
+            "club": "Sevilla",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Sevilla_FC_logo.svg/120px-Sevilla_FC_logo.svg.png",
             "photo": "",
             "squadPosition": "GK"
           },
           {
             "role": "RB",
-            "number": 14,
-            "name": "Fredrik Aursnes",
+            "number": 16,
+            "name": "Marcus Holmgren Pedersen",
             "captain": false,
-            "playerId": "NOR-14-fredrik-aursnes",
-            "page": "Fredrik Aursnes",
-            "club": "Benfica",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/SL_Benfica_logo.svg/120px-SL_Benfica_logo.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "CB",
-            "number": 25,
-            "name": "Henrik Falchener",
-            "captain": false,
-            "playerId": "NOR-25-henrik-falchener",
-            "page": "Henrik Falchener",
-            "club": "Viking",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/1/13/Viking_FK_logo_2020.svg/120px-Viking_FK_logo_2020.svg.png",
+            "playerId": "NOR-16-marcus-holmgren-pedersen",
+            "page": "Marcus Holmgren Pedersen",
+            "club": "Torino",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2e/Torino_FC_Logo.svg/120px-Torino_FC_Logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
             "role": "CB",
-            "number": 4,
-            "name": "Leo Østigård",
+            "number": 3,
+            "name": "Kristoffer Ajer",
             "captain": false,
-            "playerId": "NOR-4-leo-stigard",
-            "page": "Leo Østigård",
-            "club": "Genoa",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2c/Genoa_CFC_crest.svg/120px-Genoa_CFC_crest.svg.png",
+            "playerId": "NOR-3-kristoffer-ajer",
+            "page": "Kristoffer Ajer",
+            "club": "Brentford",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/Brentford_FC_crest.svg/120px-Brentford_FC_crest.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
+          },
+          {
+            "role": "CB",
+            "number": 17,
+            "name": "Torbjørn Heggem",
+            "captain": false,
+            "playerId": "NOR-17-torbj-rn-heggem",
+            "page": "Torbjørn Heggem",
+            "club": "Bologna",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Bologna_F.C._1909_logo.svg/120px-Bologna_F.C._1909_logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
             "role": "LB",
-            "number": 15,
-            "name": "Fredrik André Bjørkan",
+            "number": 5,
+            "name": "David Møller Wolfe",
             "captain": false,
-            "playerId": "NOR-15-fredrik-andre-bj-rkan",
-            "page": "Fredrik André Bjørkan",
-            "club": "Bodø/Glimt",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8d/FK_Bodo_Glimt_logo.svg/120px-FK_Bodo_Glimt_logo.svg.png",
+            "playerId": "NOR-5-david-m-ller-wolfe",
+            "page": "David Møller Wolfe",
+            "club": "Wolverhampton Wanderers",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c9/Wolverhampton_Wanderers_FC_crest.svg/120px-Wolverhampton_Wanderers_FC_crest.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
-            "role": "DM",
+            "role": "RM",
+            "number": 10,
+            "name": "Martin Ødegaard",
+            "captain": true,
+            "playerId": "NOR-10-martin-degaard",
+            "page": "Martin Ødegaard",
+            "club": "Arsenal",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/120px-Arsenal_FC.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "CM",
+            "number": 8,
+            "name": "Sander Berge",
+            "captain": false,
+            "playerId": "NOR-8-sander-berge",
+            "page": "Sander Berge",
+            "club": "Fulham",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Fulham_FC_%28shield%29.svg/120px-Fulham_FC_%28shield%29.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "CM",
             "number": 6,
             "name": "Patrick Berg",
-            "captain": true,
+            "captain": false,
             "playerId": "NOR-6-patrick-berg",
             "page": "Patrick Berg",
             "club": "Bodø/Glimt",
@@ -25533,62 +25558,38 @@
             "squadPosition": "MF"
           },
           {
-            "role": "CM",
-            "number": 18,
-            "name": "Kristian Thorstvedt",
-            "captain": false,
-            "playerId": "NOR-18-kristian-thorstvedt",
-            "page": "Kristian Thorstvedt",
-            "club": "Sassuolo",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1c/US_Sassuolo_Calcio_logo.svg/120px-US_Sassuolo_Calcio_logo.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "CM",
-            "number": 19,
-            "name": "Thelo Aasgaard",
-            "captain": false,
-            "playerId": "NOR-19-thelo-aasgaard",
-            "page": "Thelo Aasgaard",
-            "club": "Rangers",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Rangers_FC.svg/120px-Rangers_FC.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "RF",
-            "number": 22,
-            "name": "Oscar Bobb",
-            "captain": false,
-            "playerId": "NOR-22-oscar-bobb",
-            "page": "Oscar Bobb",
-            "club": "Fulham",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Fulham_FC_%28shield%29.svg/120px-Fulham_FC_%28shield%29.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
             "role": "CF",
-            "number": 11,
-            "name": "Jørgen Strand Larsen",
+            "number": 7,
+            "name": "Alexander Sørloth",
             "captain": false,
-            "playerId": "NOR-11-j-rgen-strand-larsen",
-            "page": "Jørgen Strand Larsen",
-            "club": "Crystal Palace",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Crystal_Palace_FC_logo_%282022%29.svg/120px-Crystal_Palace_FC_logo_%282022%29.svg.png",
+            "playerId": "NOR-7-alexander-s-rloth",
+            "page": "Alexander Sørloth",
+            "club": "Atlético Madrid",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Atletico_Madrid_Logo_2024.svg/120px-Atletico_Madrid_Logo_2024.svg.png",
             "photo": "",
             "squadPosition": "FW"
           },
           {
-            "role": "LF",
-            "number": 21,
-            "name": "Andreas Schjelderup",
+            "role": "CF",
+            "number": 9,
+            "name": "Erling Haaland",
             "captain": false,
-            "playerId": "NOR-21-andreas-schjelderup",
-            "page": "Andreas Schjelderup",
-            "club": "Benfica",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/SL_Benfica_logo.svg/120px-SL_Benfica_logo.svg.png",
+            "playerId": "NOR-9-erling-haaland",
+            "page": "Erling Haaland",
+            "club": "Manchester City",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/120px-Manchester_City_FC_badge.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "LM",
+            "number": 20,
+            "name": "Antonio Nusa",
+            "captain": false,
+            "playerId": "NOR-20-antonio-nusa",
+            "page": "Antonio Nusa",
+            "club": "RB Leipzig",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/RB_Leipzig_2014_logo.svg/120px-RB_Leipzig_2014_logo.svg.png",
             "photo": "",
             "squadPosition": "MF"
           }
@@ -26180,13 +26181,13 @@
         "26": "SEN-26-pape-gueye"
       },
       "latestLineup": {
-        "group": "I",
-        "date": "2026-06-26",
-        "score": "5–0",
-        "match": "Senegal vs Iraq",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_I#Senegal_vs_Iraq",
+        "group": "Knockout",
+        "date": "2026-07-01",
+        "score": "3–2",
+        "match": "Belgium vs Senegal",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549846",
         "team": "Senegal",
-        "opponent": "Iraq",
+        "opponent": "Belgium",
         "starters": [
           {
             "role": "GK",
@@ -26201,7 +26202,7 @@
             "squadPosition": "GK"
           },
           {
-            "role": "RB",
+            "role": "CB",
             "number": 15,
             "name": "Krépin Diatta",
             "captain": false,
@@ -26213,16 +26214,16 @@
             "squadPosition": "DF"
           },
           {
-            "role": "CB",
-            "number": 4,
-            "name": "Abdoulaye Seck",
+            "role": "RWB",
+            "number": 6,
+            "name": "Pathé Ciss",
             "captain": false,
-            "playerId": "SEN-4-abdoulaye-seck",
-            "page": "Abdoulaye Seck (footballer, born 1992)",
-            "club": "Maccabi Haifa",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/1/15/Maccabi_Haifa_FC_Logo_2023.png/120px-Maccabi_Haifa_FC_Logo_2023.png",
+            "playerId": "SEN-6-pathe-ciss",
+            "page": "Pathé Ciss",
+            "club": "Rayo Vallecano",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Rayo_Vallecano_logo.svg/120px-Rayo_Vallecano_logo.svg.png",
             "photo": "",
-            "squadPosition": "DF"
+            "squadPosition": "MF"
           },
           {
             "role": "CB",
@@ -26237,7 +26238,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "LB",
+            "role": "CB",
             "number": 14,
             "name": "Ismail Jakobs",
             "captain": false,
@@ -26247,18 +26248,6 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Galatasaray_S.K._Logo_2026_5-stars.svg/120px-Galatasaray_S.K._Logo_2026_5-stars.svg.png",
             "photo": "",
             "squadPosition": "DF"
-          },
-          {
-            "role": "DM",
-            "number": 5,
-            "name": "Idrissa Gueye",
-            "captain": true,
-            "playerId": "SEN-5-idrissa-gueye",
-            "page": "Idrissa Gueye",
-            "club": "Everton",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7c/Everton_FC_logo.svg/120px-Everton_FC_logo.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
           },
           {
             "role": "CM",
@@ -26274,25 +26263,37 @@
           },
           {
             "role": "CM",
-            "number": 8,
-            "name": "Lamine Camara",
+            "number": 5,
+            "name": "Idrissa Gueye",
+            "captain": true,
+            "playerId": "SEN-5-idrissa-gueye",
+            "page": "Idrissa Gueye",
+            "club": "Everton",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7c/Everton_FC_logo.svg/120px-Everton_FC_logo.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "LWB",
+            "number": 26,
+            "name": "Pape Gueye",
             "captain": false,
-            "playerId": "SEN-8-lamine-camara",
-            "page": "Lamine Camara",
-            "club": "Monaco",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cf/LogoASMonacoFC2021.svg/120px-LogoASMonacoFC2021.svg.png",
+            "playerId": "SEN-26-pape-gueye",
+            "page": "Pape Gueye",
+            "club": "Villarreal",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Villarreal_CF_logo-en.svg/120px-Villarreal_CF_logo-en.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
           {
             "role": "RF",
-            "number": 20,
-            "name": "Ibrahim Mbaye",
+            "number": 13,
+            "name": "Iliman Ndiaye",
             "captain": false,
-            "playerId": "SEN-20-ibrahim-mbaye",
-            "page": "Ibrahim Mbaye",
-            "club": "Paris Saint-Germain",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/Paris_Saint-Germain_F.C..svg/120px-Paris_Saint-Germain_F.C..svg.png",
+            "playerId": "SEN-13-iliman-ndiaye",
+            "page": "Iliman Ndiaye",
+            "club": "Everton",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7c/Everton_FC_logo.svg/120px-Everton_FC_logo.svg.png",
             "photo": "",
             "squadPosition": "FW"
           },
@@ -26908,23 +26909,23 @@
         "26": "ALG-26-samir-chergui"
       },
       "latestLineup": {
-        "group": "J",
-        "date": "2026-06-27",
-        "score": "3–3",
-        "match": "Algeria vs Austria",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_J#Algeria_vs_Austria",
+        "group": "Knockout",
+        "date": "2026-07-03",
+        "score": "2–0",
+        "match": "Switzerland vs Algeria",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549848",
         "team": "Algeria",
-        "opponent": "Austria",
+        "opponent": "Switzerland",
         "starters": [
           {
             "role": "GK",
-            "number": 16,
-            "name": "Oussama Benbot",
+            "number": 23,
+            "name": "Luca Zidane",
             "captain": false,
-            "playerId": "ALG-16-oussama-benbot",
-            "page": "Oussama Benbot",
-            "club": "USM Alger",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Usma3stars.png/120px-Usma3stars.png",
+            "playerId": "ALG-23-luca-zidane",
+            "page": "Luca Zidane",
+            "club": "Granada",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d5/Logo_of_Granada_Club_de_F%C3%BAtbol.svg/120px-Logo_of_Granada_Club_de_F%C3%BAtbol.svg.png",
             "photo": "",
             "squadPosition": "GK"
           },
@@ -26966,25 +26967,25 @@
           },
           {
             "role": "LB",
-            "number": 13,
-            "name": "Jaouen Hadjam",
+            "number": 15,
+            "name": "Rayan Aït-Nouri",
             "captain": false,
-            "playerId": "ALG-13-jaouen-hadjam",
-            "page": "Jaouen Hadjam",
-            "club": "Young Boys",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/BSC_Young_Boys.svg/120px-BSC_Young_Boys.svg.png",
+            "playerId": "ALG-15-rayan-ait-nouri",
+            "page": "Rayan Aït-Nouri",
+            "club": "Manchester City",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/120px-Manchester_City_FC_badge.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
-            "role": "CM",
-            "number": 10,
-            "name": "Farès Chaïbi",
+            "role": "RM",
+            "number": 6,
+            "name": "Ramiz Zerrouki",
             "captain": false,
-            "playerId": "ALG-10-fares-chaibi",
-            "page": "Farès Chaïbi",
-            "club": "Eintracht Frankfurt",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Eintracht_Frankfurt_crest.svg/120px-Eintracht_Frankfurt_crest.svg.png",
+            "playerId": "ALG-6-ramiz-zerrouki",
+            "page": "Ramiz Zerrouki",
+            "club": "Twente",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e3/FC_Twente.svg/120px-FC_Twente.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -27001,7 +27002,19 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RW",
+            "role": "CM",
+            "number": 10,
+            "name": "Farès Chaïbi",
+            "captain": false,
+            "playerId": "ALG-10-fares-chaibi",
+            "page": "Farès Chaïbi",
+            "club": "Eintracht Frankfurt",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Eintracht_Frankfurt_crest.svg/120px-Eintracht_Frankfurt_crest.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "CF",
             "number": 7,
             "name": "Riyad Mahrez",
             "captain": true,
@@ -27013,7 +27026,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "AM",
+            "role": "CM",
             "number": 22,
             "name": "Ibrahim Maza",
             "captain": false,
@@ -27025,7 +27038,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "LW",
+            "role": "LM",
             "number": 8,
             "name": "Houssem Aouar",
             "captain": false,
@@ -27035,18 +27048,6 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Al-Ittihad_Club_%28Jeddah%29_logo.svg/120px-Al-Ittihad_Club_%28Jeddah%29_logo.svg.png",
             "photo": "",
             "squadPosition": "MF"
-          },
-          {
-            "role": "CF",
-            "number": 9,
-            "name": "Amine Gouiri",
-            "captain": false,
-            "playerId": "ALG-9-amine-gouiri",
-            "page": "Amine Gouiri",
-            "club": "Marseille",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Olympique_de_Marseille_2026_logo.svg/120px-Olympique_de_Marseille_2026_logo.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
           }
         ]
       }
@@ -27638,13 +27639,13 @@
         "26": "ARG-26-nahuel-molina"
       },
       "latestLineup": {
-        "group": "J",
-        "date": "2026-06-27",
-        "score": "1–3",
-        "match": "Jordan vs Argentina",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_J#Jordan_vs_Argentina",
+        "group": "Knockout",
+        "date": "2026-07-03",
+        "score": "3–2",
+        "match": "Argentina vs Cape Verde",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549852",
         "team": "Argentina",
-        "opponent": "Jordan",
+        "opponent": "Cape Verde",
         "starters": [
           {
             "role": "GK",
@@ -27660,95 +27661,95 @@
           },
           {
             "role": "RB",
-            "number": 14,
-            "name": "Exequiel Palacios",
+            "number": 26,
+            "name": "Nahuel Molina",
             "captain": false,
-            "playerId": "ARG-14-exequiel-palacios",
-            "page": "Exequiel Palacios",
-            "club": "Bayer Leverkusen",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/59/Bayer_04_Leverkusen_logo.svg/120px-Bayer_04_Leverkusen_logo.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "CB",
-            "number": 19,
-            "name": "Nicolás Otamendi",
-            "captain": true,
-            "playerId": "ARG-19-nicolas-otamendi",
-            "page": "Nicolás Otamendi",
-            "club": "Benfica",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/SL_Benfica_logo.svg/120px-SL_Benfica_logo.svg.png",
+            "playerId": "ARG-26-nahuel-molina",
+            "page": "Nahuel Molina",
+            "club": "Atlético Madrid",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Atletico_Madrid_Logo_2024.svg/120px-Atletico_Madrid_Logo_2024.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
             "role": "CB",
-            "number": 2,
-            "name": "Marcos Senesi",
+            "number": 13,
+            "name": "Cristian Romero",
             "captain": false,
-            "playerId": "ARG-2-marcos-senesi",
-            "page": "Marcos Senesi",
-            "club": "Bournemouth",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e5/AFC_Bournemouth_%282013%29.svg/120px-AFC_Bournemouth_%282013%29.svg.png",
+            "playerId": "ARG-13-cristian-romero",
+            "page": "Cristian Romero",
+            "club": "Tottenham Hotspur",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Tottenham_Hotspur.svg/120px-Tottenham_Hotspur.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
+          },
+          {
+            "role": "CB",
+            "number": 6,
+            "name": "Lisandro Martínez",
+            "captain": false,
+            "playerId": "ARG-6-lisandro-martinez",
+            "page": "Lisandro Martínez",
+            "club": "Manchester United",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/120px-Manchester_United_FC_crest.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
             "role": "LB",
-            "number": 3,
-            "name": "Nicolás Tagliafico",
+            "number": 25,
+            "name": "Facundo Medina",
             "captain": false,
-            "playerId": "ARG-3-nicolas-tagliafico",
-            "page": "Nicolás Tagliafico",
-            "club": "Lyon",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1c/Olympique_Lyonnais_logo.svg/120px-Olympique_Lyonnais_logo.svg.png",
+            "playerId": "ARG-25-facundo-medina",
+            "page": "Facundo Medina",
+            "club": "Marseille",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Olympique_de_Marseille_2026_logo.svg/120px-Olympique_de_Marseille_2026_logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
-            "role": "DM",
-            "number": 5,
-            "name": "Leandro Paredes",
+            "role": "CM",
+            "number": 7,
+            "name": "Rodrigo De Paul",
             "captain": false,
-            "playerId": "ARG-5-leandro-paredes",
-            "page": "Leandro Paredes",
-            "club": "Boca Juniors",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Boca_Juniors_logo18.svg/120px-Boca_Juniors_logo18.svg.png",
+            "playerId": "ARG-7-rodrigo-de-paul",
+            "page": "Rodrigo De Paul",
+            "club": "Inter Miami CF",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Inter_Miami_CF_logo.svg/120px-Inter_Miami_CF_logo.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
           {
             "role": "CM",
-            "number": 18,
-            "name": "Nico Paz",
+            "number": 20,
+            "name": "Alexis Mac Allister",
             "captain": false,
-            "playerId": "ARG-18-nico-paz",
-            "page": "Nico Paz",
-            "club": "Como",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Calcio_Como_-_logo_%28Italy%2C_2019-%29.svg/120px-Calcio_Como_-_logo_%28Italy%2C_2019-%29.svg.png",
+            "playerId": "ARG-20-alexis-mac-allister",
+            "page": "Alexis Mac Allister",
+            "club": "Liverpool",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/120px-Liverpool_FC.svg.png",
             "photo": "",
-            "squadPosition": "FW"
+            "squadPosition": "MF"
           },
           {
             "role": "CM",
-            "number": 11,
-            "name": "Giovani Lo Celso",
+            "number": 24,
+            "name": "Enzo Fernández",
             "captain": false,
-            "playerId": "ARG-11-giovani-lo-celso",
-            "page": "Giovani Lo Celso",
-            "club": "Real Betis",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/1/13/Real_betis_logo.svg/120px-Real_betis_logo.svg.png",
+            "playerId": "ARG-24-enzo-fernandez",
+            "page": "Enzo Fernández",
+            "club": "Chelsea",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/120px-Chelsea_FC.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
           {
             "role": "RF",
-            "number": 17,
-            "name": "Giuliano Simeone",
+            "number": 16,
+            "name": "Thiago Almada",
             "captain": false,
-            "playerId": "ARG-17-giuliano-simeone",
-            "page": "Giuliano Simeone",
+            "playerId": "ARG-16-thiago-almada",
+            "page": "Thiago Almada",
             "club": "Atlético Madrid",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Atletico_Madrid_Logo_2024.svg/120px-Atletico_Madrid_Logo_2024.svg.png",
             "photo": "",
@@ -27756,6 +27757,18 @@
           },
           {
             "role": "CF",
+            "number": 10,
+            "name": "Lionel Messi",
+            "captain": true,
+            "playerId": "ARG-10-lionel-messi",
+            "page": "Lionel Messi",
+            "club": "Inter Miami CF",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Inter_Miami_CF_logo.svg/120px-Inter_Miami_CF_logo.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "LF",
             "number": 22,
             "name": "Lautaro Martínez",
             "captain": false,
@@ -27763,18 +27776,6 @@
             "page": "Lautaro Martínez",
             "club": "Inter Milan",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/120px-FC_Internazionale_Milano_2021.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "LF",
-            "number": 9,
-            "name": "Julián Alvarez",
-            "captain": false,
-            "playerId": "ARG-9-julian-alvarez",
-            "page": "Julián Alvarez",
-            "club": "Atlético Madrid",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Atletico_Madrid_Logo_2024.svg/120px-Atletico_Madrid_Logo_2024.svg.png",
             "photo": "",
             "squadPosition": "FW"
           }
@@ -28368,13 +28369,13 @@
         "26": "AUT-26-alessandro-schopf"
       },
       "latestLineup": {
-        "group": "J",
-        "date": "2026-06-27",
-        "score": "3–3",
-        "match": "Algeria vs Austria",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_J#Algeria_vs_Austria",
+        "group": "Knockout",
+        "date": "2026-07-02",
+        "score": "3–0",
+        "match": "Spain vs Austria",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549849",
         "team": "Austria",
-        "opponent": "Algeria",
+        "opponent": "Spain",
         "starters": [
           {
             "role": "GK",
@@ -28389,7 +28390,7 @@
             "squadPosition": "GK"
           },
           {
-            "role": "RB",
+            "role": "CB",
             "number": 5,
             "name": "Stefan Posch",
             "captain": false,
@@ -28402,13 +28403,13 @@
           },
           {
             "role": "CB",
-            "number": 15,
-            "name": "Philipp Lienhart",
+            "number": 3,
+            "name": "Kevin Danso",
             "captain": false,
-            "playerId": "AUT-15-philipp-lienhart",
-            "page": "Philipp Lienhart",
-            "club": "SC Freiburg",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/SC_Freiburg_logo.svg/120px-SC_Freiburg_logo.svg.png",
+            "playerId": "AUT-3-kevin-danso",
+            "page": "Kevin Danso",
+            "club": "Tottenham Hotspur",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Tottenham_Hotspur.svg/120px-Tottenham_Hotspur.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -28425,16 +28426,16 @@
             "squadPosition": "DF"
           },
           {
-            "role": "LB",
-            "number": 16,
-            "name": "Phillipp Mwene",
+            "role": "RWB",
+            "number": 20,
+            "name": "Konrad Laimer",
             "captain": false,
-            "playerId": "AUT-16-phillipp-mwene",
-            "page": "Phillipp Mwene",
-            "club": "Mainz 05",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/1._FSV_Mainz_05_logo.svg/120px-1._FSV_Mainz_05_logo.svg.png",
+            "playerId": "AUT-20-konrad-laimer",
+            "page": "Konrad Laimer",
+            "club": "Bayern Munich",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/FC_Bayern_M%C3%BCnchen_logo_%282024%29.svg/120px-FC_Bayern_M%C3%BCnchen_logo_%282024%29.svg.png",
             "photo": "",
-            "squadPosition": "DF"
+            "squadPosition": "MF"
           },
           {
             "role": "CM",
@@ -28461,19 +28462,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RW",
-            "number": 20,
-            "name": "Konrad Laimer",
-            "captain": false,
-            "playerId": "AUT-20-konrad-laimer",
-            "page": "Konrad Laimer",
-            "club": "Bayern Munich",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/FC_Bayern_M%C3%BCnchen_logo_%282024%29.svg/120px-FC_Bayern_M%C3%BCnchen_logo_%282024%29.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "AM",
+            "role": "CM",
             "number": 18,
             "name": "Romano Schmid",
             "captain": false,
@@ -28485,7 +28474,19 @@
             "squadPosition": "MF"
           },
           {
-            "role": "LW",
+            "role": "CM",
+            "number": 24,
+            "name": "Paul Wanner",
+            "captain": false,
+            "playerId": "AUT-24-paul-wanner",
+            "page": "Paul Wanner",
+            "club": "PSV Eindhoven",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/05/PSV_Eindhoven.svg/120px-PSV_Eindhoven.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "LWB",
             "number": 9,
             "name": "Marcel Sabitzer",
             "captain": false,
@@ -28498,13 +28499,13 @@
           },
           {
             "role": "CF",
-            "number": 7,
-            "name": "Marko Arnautović",
+            "number": 11,
+            "name": "Michael Gregoritsch",
             "captain": false,
-            "playerId": "AUT-7-marko-arnautovic",
-            "page": "Marko Arnautović",
-            "club": "Red Star Belgrade",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Red_Star_Belgrade_crest.svg/120px-Red_Star_Belgrade_crest.svg.png",
+            "playerId": "AUT-11-michael-gregoritsch",
+            "page": "Michael Gregoritsch",
+            "club": "FC Augsburg",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c5/FC_Augsburg_logo.svg/120px-FC_Augsburg_logo.svg.png",
             "photo": "",
             "squadPosition": "FW"
           }
@@ -29824,13 +29825,13 @@
         "26": "COL-26-andres-gomez"
       },
       "latestLineup": {
-        "group": "K",
-        "date": "2026-06-27",
-        "score": "0–0",
-        "match": "Colombia vs Portugal",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_K#Colombia_vs_Portugal",
+        "group": "Knockout",
+        "date": "2026-07-04",
+        "score": "1–0",
+        "match": "Colombia vs Ghana",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549853",
         "team": "Colombia",
-        "opponent": "Portugal",
+        "opponent": "Ghana",
         "starters": [
           {
             "role": "GK",
@@ -29845,14 +29846,14 @@
             "squadPosition": "GK"
           },
           {
-            "role": "RB",
-            "number": 4,
-            "name": "Santiago Arias",
+            "role": "RWB",
+            "number": 2,
+            "name": "Daniel Muñoz",
             "captain": false,
-            "playerId": "COL-4-santiago-arias",
-            "page": "Santiago Arias",
-            "club": "Independiente",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Escudo_del_Club_Atl%C3%A9tico_Independiente.svg/120px-Escudo_del_Club_Atl%C3%A9tico_Independiente.svg.png",
+            "playerId": "COL-2-daniel-munoz",
+            "page": "Daniel Muñoz (footballer)",
+            "club": "Crystal Palace",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Crystal_Palace_FC_logo_%282022%29.svg/120px-Crystal_Palace_FC_logo_%282022%29.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -29881,31 +29882,19 @@
             "squadPosition": "DF"
           },
           {
-            "role": "LB",
-            "number": 22,
-            "name": "Deiver Machado",
+            "role": "CB",
+            "number": 17,
+            "name": "Johan Mojica",
             "captain": false,
-            "playerId": "COL-22-deiver-machado",
-            "page": "Deiver Machado",
-            "club": "Nantes",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Logo_FC_Nantes_%28avec_fond%29_-_2019.svg/120px-Logo_FC_Nantes_%28avec_fond%29_-_2019.svg.png",
+            "playerId": "COL-17-johan-mojica",
+            "page": "Johan Mojica",
+            "club": "Mallorca",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e0/Rcd_mallorca.svg/120px-Rcd_mallorca.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
           {
-            "role": "DM",
-            "number": 16,
-            "name": "Jefferson Lerma",
-            "captain": false,
-            "playerId": "COL-16-jefferson-lerma",
-            "page": "Jefferson Lerma",
-            "club": "Crystal Palace",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Crystal_Palace_FC_logo_%282022%29.svg/120px-Crystal_Palace_FC_logo_%282022%29.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "CM",
+            "role": "LWB",
             "number": 14,
             "name": "Gustavo Puerta",
             "captain": false,
@@ -29915,6 +29904,18 @@
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Racing_de_Santander_logo.svg/120px-Racing_de_Santander_logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
+          },
+          {
+            "role": "CM",
+            "number": 16,
+            "name": "Jefferson Lerma",
+            "captain": false,
+            "playerId": "COL-16-jefferson-lerma",
+            "page": "Jefferson Lerma",
+            "club": "Crystal Palace",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Crystal_Palace_FC_logo_%282022%29.svg/120px-Crystal_Palace_FC_logo_%282022%29.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
           },
           {
             "role": "CM",
@@ -29929,7 +29930,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RF",
+            "role": "CM",
             "number": 10,
             "name": "James Rodríguez",
             "captain": true,
@@ -29953,7 +29954,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "LF",
+            "role": "CF",
             "number": 7,
             "name": "Luis Díaz",
             "captain": false,
@@ -30556,13 +30557,13 @@
         "26": "COD-26-arthur-masuaku"
       },
       "latestLineup": {
-        "group": "K",
-        "date": "2026-06-27",
-        "score": "3–1",
-        "match": "DR Congo vs Uzbekistan",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_K#DR_Congo_vs_Uzbekistan",
+        "group": "Knockout",
+        "date": "2026-07-01",
+        "score": "2–1",
+        "match": "England vs DR Congo",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549847",
         "team": "DR Congo",
-        "opponent": "Uzbekistan",
+        "opponent": "England",
         "starters": [
           {
             "role": "GK",
@@ -30626,15 +30627,15 @@
           },
           {
             "role": "RM",
-            "number": 9,
-            "name": "Brian Cipenga",
+            "number": 6,
+            "name": "Ngal'ayel Mukau",
             "captain": false,
-            "playerId": "COD-9-brian-cipenga",
-            "page": "Brian Cipenga",
-            "club": "Castellón",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Logo_of_CD_Castell%C3%B3n.svg/120px-Logo_of_CD_Castell%C3%B3n.svg.png",
+            "playerId": "COD-6-ngalayel-mukau",
+            "page": "Ngal'ayel Mukau",
+            "club": "Lille",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/Lille_OSC_2018_logo.svg/120px-Lille_OSC_2018_logo.svg.png",
             "photo": "",
-            "squadPosition": "FW"
+            "squadPosition": "MF"
           },
           {
             "role": "CM",
@@ -30674,18 +30675,6 @@
           },
           {
             "role": "CF",
-            "number": 17,
-            "name": "Cédric Bakambu",
-            "captain": false,
-            "playerId": "COD-17-cedric-bakambu",
-            "page": "Cédric Bakambu",
-            "club": "Real Betis",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/1/13/Real_betis_logo.svg/120px-Real_betis_logo.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "CF",
             "number": 20,
             "name": "Yoane Wissa",
             "captain": false,
@@ -30693,6 +30682,18 @@
             "page": "Yoane Wissa",
             "club": "Newcastle United",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Newcastle_United_Logo.svg/120px-Newcastle_United_Logo.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "CF",
+            "number": 9,
+            "name": "Brian Cipenga",
+            "captain": false,
+            "playerId": "COD-9-brian-cipenga",
+            "page": "Brian Cipenga",
+            "club": "Castellón",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Logo_of_CD_Castell%C3%B3n.svg/120px-Logo_of_CD_Castell%C3%B3n.svg.png",
             "photo": "",
             "squadPosition": "FW"
           }
@@ -31284,13 +31285,13 @@
         "26": "POR-26-francisco-conceicao"
       },
       "latestLineup": {
-        "group": "K",
-        "date": "2026-06-27",
-        "score": "0–0",
-        "match": "Colombia vs Portugal",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_K#Colombia_vs_Portugal",
+        "group": "Knockout",
+        "date": "2026-07-03",
+        "score": "2–1",
+        "match": "Portugal vs Croatia",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549850",
         "team": "Portugal",
-        "opponent": "Colombia",
+        "opponent": "Croatia",
         "starters": [
           {
             "role": "GK",
@@ -31354,13 +31355,13 @@
           },
           {
             "role": "CM",
-            "number": 21,
-            "name": "Rúben Neves",
+            "number": 15,
+            "name": "João Neves",
             "captain": false,
-            "playerId": "POR-21-ruben-neves",
-            "page": "Rúben Neves",
-            "club": "Al-Hilal",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Al_Hilal_SFC_Logo.svg/120px-Al_Hilal_SFC_Logo.svg.png",
+            "playerId": "POR-15-joao-neves",
+            "page": "João Neves",
+            "club": "Paris Saint-Germain",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/Paris_Saint-Germain_F.C..svg/120px-Paris_Saint-Germain_F.C..svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -31377,7 +31378,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RW",
+            "role": "RF",
             "number": 18,
             "name": "Pedro Neto",
             "captain": false,
@@ -31389,7 +31390,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "AM",
+            "role": "CM",
             "number": 8,
             "name": "Bruno Fernandes",
             "captain": false,
@@ -31401,19 +31402,19 @@
             "squadPosition": "MF"
           },
           {
-            "role": "LW",
-            "number": 11,
-            "name": "João Félix",
+            "role": "CF",
+            "number": 17,
+            "name": "Rafael Leão",
             "captain": false,
-            "playerId": "POR-11-joao-felix",
-            "page": "João Félix",
-            "club": "Al-Nassr",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Nassr_FC_Logo.svg/120px-Nassr_FC_Logo.svg.png",
+            "playerId": "POR-17-rafael-leao",
+            "page": "Rafael Leão",
+            "club": "Milan",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Logo_of_AC_Milan.svg/120px-Logo_of_AC_Milan.svg.png",
             "photo": "",
             "squadPosition": "FW"
           },
           {
-            "role": "CF",
+            "role": "LF",
             "number": 7,
             "name": "Cristiano Ronaldo",
             "captain": true,
@@ -32742,13 +32743,13 @@
         "26": "CRO-26-petar-musa"
       },
       "latestLineup": {
-        "group": "L",
-        "date": "2026-06-27",
+        "group": "Knockout",
+        "date": "2026-07-03",
         "score": "2–1",
-        "match": "Croatia vs Ghana",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_L#Croatia_vs_Ghana",
+        "match": "Portugal vs Croatia",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549850",
         "team": "Croatia",
-        "opponent": "Ghana",
+        "opponent": "Portugal",
         "starters": [
           {
             "role": "GK",
@@ -32763,7 +32764,7 @@
             "squadPosition": "GK"
           },
           {
-            "role": "RB",
+            "role": "CB",
             "number": 2,
             "name": "Josip Stanišić",
             "captain": false,
@@ -32799,7 +32800,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "LB",
+            "role": "CF",
             "number": 14,
             "name": "Ivan Perišić",
             "captain": false,
@@ -32811,7 +32812,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "CM",
+            "role": "RWB",
             "number": 10,
             "name": "Luka Modrić",
             "captain": true,
@@ -32835,19 +32836,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RW",
-            "number": 17,
-            "name": "Petar Sučić",
-            "captain": false,
-            "playerId": "CRO-17-petar-sucic",
-            "page": "Petar Sučić",
-            "club": "Inter Milan",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/120px-FC_Internazionale_Milano_2021.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "AM",
+            "role": "CM",
             "number": 13,
             "name": "Nikola Vlašić",
             "captain": false,
@@ -32859,7 +32848,19 @@
             "squadPosition": "MF"
           },
           {
-            "role": "LW",
+            "role": "CM",
+            "number": 17,
+            "name": "Petar Sučić",
+            "captain": false,
+            "playerId": "CRO-17-petar-sucic",
+            "page": "Petar Sučić",
+            "club": "Inter Milan",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/120px-FC_Internazionale_Milano_2021.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "LWB",
             "number": 16,
             "name": "Martin Baturina",
             "captain": false,
@@ -33470,13 +33471,13 @@
         "26": "ENG-26-jarell-quansah"
       },
       "latestLineup": {
-        "group": "L",
-        "date": "2026-06-27",
-        "score": "0–2",
-        "match": "Panama vs England",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_L#Panama_vs_England",
+        "group": "Knockout",
+        "date": "2026-07-01",
+        "score": "2–1",
+        "match": "England vs DR Congo",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549847",
         "team": "England",
-        "opponent": "Panama",
+        "opponent": "DR Congo",
         "starters": [
           {
             "role": "GK",
@@ -33492,13 +33493,13 @@
           },
           {
             "role": "RB",
-            "number": 26,
-            "name": "Jarell Quansah",
+            "number": 25,
+            "name": "Djed Spence",
             "captain": false,
-            "playerId": "ENG-26-jarell-quansah",
-            "page": "Jarell Quansah",
-            "club": "Bayer Leverkusen",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/59/Bayer_04_Leverkusen_logo.svg/120px-Bayer_04_Leverkusen_logo.svg.png",
+            "playerId": "ENG-25-djed-spence",
+            "page": "Djed Spence",
+            "club": "Tottenham Hotspur",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Tottenham_Hotspur.svg/120px-Tottenham_Hotspur.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -33552,6 +33553,30 @@
           },
           {
             "role": "CM",
+            "number": 4,
+            "name": "Declan Rice",
+            "captain": false,
+            "playerId": "ENG-4-declan-rice",
+            "page": "Declan Rice",
+            "club": "Arsenal",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/120px-Arsenal_FC.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "RF",
+            "number": 20,
+            "name": "Noni Madueke",
+            "captain": false,
+            "playerId": "ENG-20-noni-madueke",
+            "page": "Noni Madueke",
+            "club": "Arsenal",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/120px-Arsenal_FC.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "CM",
             "number": 10,
             "name": "Jude Bellingham",
             "captain": false,
@@ -33563,31 +33588,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RW",
-            "number": 7,
-            "name": "Bukayo Saka",
-            "captain": false,
-            "playerId": "ENG-7-bukayo-saka",
-            "page": "Bukayo Saka",
-            "club": "Arsenal",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/120px-Arsenal_FC.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "AM",
-            "number": 17,
-            "name": "Morgan Rogers",
-            "captain": false,
-            "playerId": "ENG-17-morgan-rogers",
-            "page": "Morgan Rogers",
-            "club": "Aston Villa",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Aston_Villa_FC_new_crest.svg/120px-Aston_Villa_FC_new_crest.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "LW",
+            "role": "CF",
             "number": 11,
             "name": "Marcus Rashford",
             "captain": false,
@@ -33599,7 +33600,7 @@
             "squadPosition": "FW"
           },
           {
-            "role": "CF",
+            "role": "LF",
             "number": 9,
             "name": "Harry Kane",
             "captain": true,
@@ -34198,23 +34199,23 @@
         "26": "GHA-26-marvin-senaya"
       },
       "latestLineup": {
-        "group": "L",
-        "date": "2026-06-27",
-        "score": "2–1",
-        "match": "Croatia vs Ghana",
-        "sourceUrl": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_L#Croatia_vs_Ghana",
+        "group": "Knockout",
+        "date": "2026-07-04",
+        "score": "1–0",
+        "match": "Colombia vs Ghana",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549853",
         "team": "Ghana",
-        "opponent": "Croatia",
+        "opponent": "Colombia",
         "starters": [
           {
             "role": "GK",
-            "number": 16,
-            "name": "Benjamin Asare",
+            "number": 1,
+            "name": "Lawrence Ati-Zigi",
             "captain": false,
-            "playerId": "GHA-16-benjamin-asare",
-            "page": "Benjamin Asare",
-            "club": "Hearts of Oak",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/01/Accra_hearts_of_oak_sc.png/120px-Accra_hearts_of_oak_sc.png",
+            "playerId": "GHA-1-lawrence-ati-zigi",
+            "page": "Lawrence Ati-Zigi",
+            "club": "St. Gallen",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/FC_St._Gallen_logo.svg/120px-FC_St._Gallen_logo.svg.png",
             "photo": "",
             "squadPosition": "GK"
           },
@@ -34232,18 +34233,6 @@
           },
           {
             "role": "CB",
-            "number": 4,
-            "name": "Jonas Adjetey",
-            "captain": false,
-            "playerId": "GHA-4-jonas-adjetey",
-            "page": "Jonas Adjetey",
-            "club": "VfL Wolfsburg",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/VfL_Wolfsburg_logo_2026.svg/120px-VfL_Wolfsburg_logo_2026.svg.png",
-            "photo": "",
-            "squadPosition": "DF"
-          },
-          {
-            "role": "CB",
             "number": 23,
             "name": "Derrick Luckassen",
             "captain": false,
@@ -34251,6 +34240,18 @@
             "page": "Derrick Luckassen",
             "club": "Pafos",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Pafos_FC_crest.svg/120px-Pafos_FC_crest.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
+          },
+          {
+            "role": "CB",
+            "number": 18,
+            "name": "Jerome Opoku",
+            "captain": false,
+            "playerId": "GHA-18-jerome-opoku",
+            "page": "Jerome Opoku",
+            "club": "İstanbul Başakşehir",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/%C4%B0stanbul_Ba%C5%9Fak%C5%9Fehir_logo.svg/120px-%C4%B0stanbul_Ba%C5%9Fak%C5%9Fehir_logo.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -34267,7 +34268,7 @@
             "squadPosition": "DF"
           },
           {
-            "role": "DM",
+            "role": "RM",
             "number": 5,
             "name": "Thomas Partey",
             "captain": false,
@@ -34279,14 +34280,26 @@
             "squadPosition": "MF"
           },
           {
-            "role": "CM",
-            "number": 15,
-            "name": "Elisha Owusu",
+            "role": "CF",
+            "number": 19,
+            "name": "Iñaki Williams",
             "captain": false,
-            "playerId": "GHA-15-elisha-owusu",
-            "page": "Elisha Owusu",
-            "club": "Auxerre",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/51/AJAuxerreLogo.svg/120px-AJAuxerreLogo.svg.png",
+            "playerId": "GHA-19-inaki-williams",
+            "page": "Iñaki Williams",
+            "club": "Athletic Bilbao",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Club_Athletic_Bilbao_logo.svg/120px-Club_Athletic_Bilbao_logo.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "CM",
+            "number": 3,
+            "name": "Caleb Yirenkyi",
+            "captain": false,
+            "playerId": "GHA-3-caleb-yirenkyi",
+            "page": "Caleb Yirenkyi",
+            "club": "Nordsjælland",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/2/23/FC_Nordsj%C3%A6lland_logo.svg/120px-FC_Nordsj%C3%A6lland_logo.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -34303,7 +34316,7 @@
             "squadPosition": "MF"
           },
           {
-            "role": "RF",
+            "role": "LM",
             "number": 11,
             "name": "Antoine Semenyo",
             "captain": false,
@@ -34323,18 +34336,6 @@
             "page": "Jordan Ayew",
             "club": "Leicester City",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2d/Leicester_City_crest.svg/120px-Leicester_City_crest.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "LF",
-            "number": 22,
-            "name": "Kamaldeen Sulemana",
-            "captain": false,
-            "playerId": "GHA-22-kamaldeen-sulemana",
-            "page": "Kamaldeen Sulemana",
-            "club": "Atalanta",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Atalanta_BC_new_logo.svg/120px-Atalanta_BC_new_logo.svg.png",
             "photo": "",
             "squadPosition": "FW"
           }

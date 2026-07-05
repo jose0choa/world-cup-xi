@@ -1,5 +1,5 @@
 export const knockoutData = {
-  "updatedAt": "2026-07-04",
+  "updatedAt": "2026-07-05",
   "sourceUrl": "https://www.espn.com/soccer/bracket",
   "sourceLabel": "ESPN bracket",
   "rounds": [
@@ -278,7 +278,7 @@ export const knockoutData = {
         {
           "id": "M89",
           "date": "Jul 4",
-          "status": "In Progress",
+          "status": "Final",
           "teams": [
             {
               "code": "CAN",
@@ -286,22 +286,26 @@ export const knockoutData = {
             },
             {
               "code": "MAR",
-              "score": "1"
+              "score": "3"
             }
-          ]
+          ],
+          "winnerCode": "MAR"
         },
         {
           "id": "M90",
           "date": "Jul 4",
-          "status": "Scheduled",
+          "status": "Final",
           "teams": [
             {
-              "code": "PAR"
+              "code": "PAR",
+              "score": "0"
             },
             {
-              "code": "FRA"
+              "code": "FRA",
+              "score": "1"
             }
-          ]
+          ],
+          "winnerCode": "FRA"
         },
         {
           "id": "M91",

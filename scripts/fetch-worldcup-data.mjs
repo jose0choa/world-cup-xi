@@ -10,6 +10,9 @@ const SQUADS_URL =
   'https://en.wikipedia.org/w/index.php?title=2026_FIFA_World_Cup_squads&action=raw';
 const GROUP_PAGE = (letter) =>
   `https://en.wikipedia.org/w/index.php?title=2026_FIFA_World_Cup_Group_${letter}&action=raw`;
+const SKY_KNOCKOUT_LINEUP_IDS = Array.from({ length: 32 }, (_, index) => 549838 + index);
+const SKY_LINEUP_PAGE = (matchId) => `https://www.skysports.com/football/x-v-y/teams/${matchId}`;
+const SKY_WORLD_CUP_RESULTS_PAGE = 'https://www.skysports.com/football/world-cup/results';
 const WIKI_API = 'https://en.wikipedia.org/w/api.php';
 const EA_FC_RATINGS_PAGE = 'https://www.ea.com/en/games/ea-sports-fc/ratings';
 const EA_FC_RATINGS_NEXT_DATA = 'https://www.ea.com/_next/data';
@@ -85,7 +88,10 @@ const CODE_TO_TEAM = Object.fromEntries(
 
 const TEAM_ALIASES = {
   Czechia: 'Czech Republic',
+  'Bos&Herz': 'Bosnia and Herzegovina',
+  'Bosnia-Herzegovina': 'Bosnia and Herzegovina',
   'Korea Republic': 'South Korea',
+  'S. Africa': 'South Africa',
   'Côte d’Ivoire': 'Ivory Coast',
   "Côte d'Ivoire": 'Ivory Coast',
   USA: 'United States',
@@ -208,6 +214,43 @@ function cleanWikiText(value = '') {
     .replace(/&nbsp;/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+function decodeHtmlEntities(value = '') {
+  const namedEntities = {
+    amp: '&',
+    apos: "'",
+    gt: '>',
+    lt: '<',
+    nbsp: ' ',
+    quot: '"',
+  };
+
+  return value.replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (entity, code) => {
+    if (code[0] === '#') {
+      const isHex = code[1]?.toLowerCase() === 'x';
+      const number = Number.parseInt(code.slice(isHex ? 2 : 1), isHex ? 16 : 10);
+      return Number.isFinite(number) ? String.fromCodePoint(number) : entity;
+    }
+
+    return namedEntities[code.toLowerCase()] ?? entity;
+  });
+}
+
+function cleanHtmlText(value = '') {
+  return decodeHtmlEntities(value)
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
+    .replace(/<svg\b[^>]*>[\s\S]*?<\/svg>/gi, '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function htmlAttributeValue(source = '', attributeName) {
+  const match = source.match(new RegExp(`${attributeName}=(["'])([\\s\\S]*?)\\1`, 'i'));
+  return decodeHtmlEntities(match?.[2] ?? '').trim();
 }
 
 function wikiLinkTarget(value = '') {
@@ -1458,6 +1501,186 @@ function parseStarters(tableText) {
   return starters;
 }
 
+function parseSkyPageDate(raw) {
+  const match = raw.match(/<title>Starting Lineups - [^|]+?\|\s*(\d{2})\.(\d{2})\.(\d{4})<\/title>/i);
+  if (!match) return '';
+
+  const [, day, month, year] = match;
+  return `${year}-${month}-${day}`;
+}
+
+function parseSkyCanonicalUrl(raw, fallbackUrl) {
+  const linkMatch = raw.match(/<link\s+rel=["']canonical["'][^>]*>/i);
+  return htmlAttributeValue(linkMatch?.[0] ?? '', 'href') || fallbackUrl;
+}
+
+function parseSkyScore(raw) {
+  const score = ['home', 'away'].map((side) => {
+    const match = raw.match(
+      new RegExp(`data-update=["']score-${side}["'][^>]*>([\\s\\S]*?)<\\/span>`, 'i'),
+    );
+    return cleanHtmlText(match?.[1] ?? '');
+  });
+
+  return score.every(Boolean) ? `${score[0]}–${score[1]}` : '';
+}
+
+function parseSkyPlayerName(playerHtml) {
+  const initialMatch = playerHtml.match(/<span[^>]*sdc-site-team-lineup__player-initial[^>]*>/i);
+  const surnameMatch = playerHtml.match(
+    /<span[^>]*sdc-site-team-lineup__player-surname[^>]*>([\s\S]*?)<\/span>/i,
+  );
+  const firstName = htmlAttributeValue(initialMatch?.[0] ?? '', 'title');
+  const surname = cleanHtmlText(surnameMatch?.[1] ?? '');
+  const name = [firstName, surname].filter(Boolean).join(' ').trim();
+
+  if (name) return name;
+
+  return cleanHtmlText(playerHtml.replace(/<ul[^>]*sdc-site-team-lineup__events[^>]*>[\s\S]*?<\/ul>/gi, ''))
+    .replace(/\s+\([^)]*\)\s*$/, '')
+    .trim();
+}
+
+function parseSkyPlayerRows(playersHtml) {
+  const starters = [];
+  const rowPattern =
+    /<dt[^>]*sdc-site-team-lineup__player-number[^>]*>\s*(\d+)\s*<\/dt>\s*<dd[^>]*sdc-site-team-lineup__player-name[^>]*>([\s\S]*?)<\/dd>/gi;
+  let match;
+
+  while ((match = rowPattern.exec(playersHtml))) {
+    const [, number, playerHtml] = match;
+    starters.push({
+      role: '',
+      number: Number(number),
+      name: parseSkyPlayerName(playerHtml),
+      captain: /\(c\)/i.test(cleanHtmlText(playerHtml)),
+    });
+  }
+
+  return starters;
+}
+
+function parseSkyLineupColumns(raw) {
+  const lineupSection =
+    raw.match(/<div[^>]*sdc-site-team-lineup\b[\s\S]*?<div[^>]*sdc-site-team-lineup__key\b/i)?.[0] ??
+    raw;
+  const columnPattern =
+    /<div[^>]*class="[^"]*sdc-site-team-lineup__col[^"]*"[^>]*>([\s\S]*?)(?=<div[^>]*class="[^"]*sdc-site-team-lineup__col|<div[^>]*class="[^"]*sdc-site-team-lineup__officials|<div[^>]*class="[^"]*sdc-site-team-lineup__key)/gi;
+  const columns = [];
+  let match;
+
+  while ((match = columnPattern.exec(lineupSection))) {
+    const columnHtml = match[1];
+    const team = cleanHtmlText(
+      columnHtml.match(/<h4[^>]*sdc-site-team-lineup__team-name[^>]*>([\s\S]*?)<\/h4>/i)?.[1] ?? '',
+    );
+    const startersHtml =
+      columnHtml.match(/<dl[^>]*class="sdc-site-team-lineup__players"[^>]*>([\s\S]*?)<\/dl>/i)?.[1] ??
+      '';
+
+    columns.push({
+      team: TEAM_ALIASES[team] ?? team,
+      starters: parseSkyPlayerRows(startersHtml),
+    });
+  }
+
+  return columns;
+}
+
+function parseLineupsFromSkyPage(raw, sourceUrl) {
+  const date = parseSkyPageDate(raw);
+  const columns = parseSkyLineupColumns(raw).filter((column) => column.team);
+
+  if (!date || columns.length < 2 || columns.some((column) => column.starters.length !== 11)) {
+    return [];
+  }
+
+  const [home, away] = columns;
+  const base = {
+    group: 'Knockout',
+    date,
+    score: parseSkyScore(raw),
+    match: `${home.team} vs ${away.team}`,
+    sourceUrl: parseSkyCanonicalUrl(raw, sourceUrl),
+  };
+
+  return [
+    {
+      ...base,
+      team: home.team,
+      opponent: away.team,
+      starters: home.starters,
+    },
+    {
+      ...base,
+      team: away.team,
+      opponent: home.team,
+      starters: away.starters,
+    },
+  ];
+}
+
+const INFERRED_ROLE_PATTERNS = {
+  GK: {
+    1: ['GK'],
+  },
+  DF: {
+    1: ['CB'],
+    2: ['CB', 'CB'],
+    3: ['CB', 'CB', 'CB'],
+    4: ['RB', 'CB', 'CB', 'LB'],
+    5: ['RWB', 'CB', 'CB', 'CB', 'LWB'],
+    6: ['RWB', 'CB', 'CB', 'CB', 'CB', 'LWB'],
+  },
+  MF: {
+    1: ['CM'],
+    2: ['CM', 'CM'],
+    3: ['CM', 'CM', 'CM'],
+    4: ['RM', 'CM', 'CM', 'LM'],
+    5: ['RM', 'CM', 'CM', 'CM', 'LM'],
+    6: ['RM', 'CM', 'CM', 'CM', 'CM', 'LM'],
+  },
+  FW: {
+    1: ['CF'],
+    2: ['CF', 'CF'],
+    3: ['RF', 'CF', 'LF'],
+    4: ['RF', 'CF', 'CF', 'LF'],
+  },
+};
+
+function inferredRoles(position, count) {
+  const pattern = INFERRED_ROLE_PATTERNS[position]?.[count];
+  if (pattern) return pattern;
+  if (position === 'GK') return Array.from({ length: count }, () => 'GK');
+  if (position === 'DF') return Array.from({ length: count }, () => 'CB');
+  if (position === 'FW') return Array.from({ length: count }, () => 'CF');
+  return Array.from({ length: count }, () => 'CM');
+}
+
+function inferLineupRoles(starters) {
+  if (starters.every((starter) => starter.role)) return starters;
+
+  const nextStarters = starters.map((starter) => ({ ...starter }));
+  const positions = ['GK', 'DF', 'MF', 'FW'];
+
+  for (const position of positions) {
+    const indexes = nextStarters
+      .map((starter, index) => ({ starter, index }))
+      .filter(({ starter }) => !starter.role && starter.squadPosition === position)
+      .map(({ index }) => index);
+    const roles = inferredRoles(position, indexes.length);
+
+    indexes.forEach((starterIndex, roleIndex) => {
+      nextStarters[starterIndex].role = roles[roleIndex];
+    });
+  }
+
+  return nextStarters.map((starter) => ({
+    ...starter,
+    role: starter.role || inferredRoles(starter.squadPosition || 'MF', 1)[0],
+  }));
+}
+
 function normalizeLineupRoles(starters) {
   const centerBacks = starters.filter((player) => player.role === 'CB').length;
   if (centerBacks < 3) return starters;
@@ -1528,23 +1751,27 @@ function attachLineups(teams, lineups) {
     const team = teamsByName.get(teamName);
     if (!team) continue;
 
-    const enrichedStarters = normalizeLineupRoles(lineup.starters.map((starter) => {
-      const normalizedStarter = normalizeName(starter.name);
-      const player =
-        team.players.find((candidate) => candidate.number === starter.number) ??
-        team.players.find((candidate) => normalizeName(candidate.name) === normalizedStarter);
+    const enrichedStarters = normalizeLineupRoles(
+      inferLineupRoles(
+        lineup.starters.map((starter) => {
+          const normalizedStarter = normalizeName(starter.name);
+          const player =
+            team.players.find((candidate) => candidate.number === starter.number) ??
+            team.players.find((candidate) => normalizeName(candidate.name) === normalizedStarter);
 
-      return {
-        ...starter,
-        playerId: player?.id ?? '',
-        name: player?.name ?? starter.name,
-        page: player?.page ?? '',
-        club: player?.club ?? '',
-        clubLogo: player?.clubLogo ?? '',
-        photo: player?.photo ?? '',
-        squadPosition: player?.position ?? '',
-      };
-    }));
+          return {
+            ...starter,
+            playerId: player?.id ?? '',
+            name: player?.name ?? starter.name,
+            page: player?.page ?? '',
+            club: player?.club ?? '',
+            clubLogo: player?.clubLogo ?? '',
+            photo: player?.photo ?? '',
+            squadPosition: player?.position ?? '',
+          };
+        }),
+      ),
+    );
 
     const nextLineup = { ...lineup, starters: enrichedStarters };
     if (!team.latestLineup || nextLineup.date >= team.latestLineup.date) {
@@ -1609,8 +1836,23 @@ async function main() {
   const lineupGroups = await Promise.all(
     groupLetters.map(async (letter) => parseLineupsFromGroup(await fetchText(GROUP_PAGE(letter)), letter)),
   );
+  const knockoutLineupGroups = await Promise.all(
+    SKY_KNOCKOUT_LINEUP_IDS.map(async (matchId) => {
+      const sourceUrl = SKY_LINEUP_PAGE(matchId);
+      try {
+        return parseLineupsFromSkyPage(await fetchText(sourceUrl), sourceUrl);
+      } catch (error) {
+        console.warn(`Skipped Sky lineup page ${matchId}: ${error.message}`);
+        return [];
+      }
+    }),
+  );
+  const allLineups = [...lineupGroups.flat(), ...knockoutLineupGroups.flat()];
 
-  attachLineups(teams, lineupGroups.flat());
+  attachLineups(teams, allLineups);
+  console.log(
+    `Attached ${allLineups.length} lineup entries (${knockoutLineupGroups.flat().length} knockout entries).`,
+  );
 
   const knockoutData = await writeKnockoutData();
 
@@ -1622,10 +1864,11 @@ async function main() {
     source: {
       squads: 'https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads',
       groups: 'https://en.wikipedia.org/wiki/2026_FIFA_World_Cup',
+      lineups: SKY_WORLD_CUP_RESULTS_PAGE,
       eaFcRatings: EA_FC_RATINGS_PAGE,
       eaFcFallbackRatings: FUT_GG_PLAYERS_URL,
       note:
-        'Squads and clubs are parsed from the Wikipedia squad page, which cites the FIFA squad list. Club logos are fetched from Wikipedia page image metadata, club leagues are fetched from Wikidata league metadata with club infobox fallbacks, and EA FC ratings are matched from the official EA Sports FC 26 ratings table with FUT.GG EA FC 26 common-card fallbacks for players omitted from the official table. Player photos are loaded from Wikipedia page summaries in the app.',
+        'Squads and clubs are parsed from the Wikipedia squad page, which cites the FIFA squad list. Group-stage lineups are parsed from Wikipedia match tables, knockout-stage lineups are parsed from Sky Sports team-sheet pages when 11 starters are available, club logos are fetched from Wikipedia page image metadata, club leagues are fetched from Wikidata league metadata with club infobox fallbacks, and EA FC ratings are matched from the official EA Sports FC 26 ratings table with FUT.GG EA FC 26 common-card fallbacks for players omitted from the official table. Player photos are loaded from Wikipedia page summaries in the app.',
     },
     totals: buildTotals(teams),
     topClubs: topClubs(teams),
