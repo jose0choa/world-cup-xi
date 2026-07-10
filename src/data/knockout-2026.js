@@ -1,5 +1,5 @@
 export const knockoutData = {
-  "updatedAt": "2026-07-05",
+  "updatedAt": "2026-07-09",
   "sourceUrl": "https://www.espn.com/soccer/bracket",
   "sourceLabel": "ESPN bracket",
   "rounds": [
@@ -310,80 +310,100 @@ export const knockoutData = {
         {
           "id": "M91",
           "date": "Jul 5",
-          "status": "Scheduled",
+          "status": "Final",
           "teams": [
             {
-              "code": "BRA"
+              "code": "BRA",
+              "score": "1"
             },
             {
-              "code": "NOR"
+              "code": "NOR",
+              "score": "2"
             }
-          ]
+          ],
+          "winnerCode": "NOR"
         },
         {
           "id": "M92",
           "date": "Jul 5",
-          "status": "Scheduled",
+          "status": "Final",
           "teams": [
             {
-              "code": "MEX"
+              "code": "MEX",
+              "score": "2"
             },
             {
-              "code": "ENG"
+              "code": "ENG",
+              "score": "3"
             }
-          ]
+          ],
+          "winnerCode": "ENG"
         },
         {
           "id": "M93",
           "date": "Jul 6",
-          "status": "Scheduled",
+          "status": "Final",
           "teams": [
             {
-              "code": "POR"
+              "code": "POR",
+              "score": "0"
             },
             {
-              "code": "ESP"
+              "code": "ESP",
+              "score": "1"
             }
-          ]
+          ],
+          "winnerCode": "ESP"
         },
         {
           "id": "M94",
           "date": "Jul 6",
-          "status": "Scheduled",
+          "status": "Final",
           "teams": [
             {
-              "code": "USA"
+              "code": "USA",
+              "score": "1"
             },
             {
-              "code": "BEL"
+              "code": "BEL",
+              "score": "4"
             }
-          ]
+          ],
+          "winnerCode": "BEL"
         },
         {
           "id": "M95",
           "date": "Jul 7",
-          "status": "Scheduled",
+          "status": "Final",
           "teams": [
             {
-              "code": "ARG"
+              "code": "ARG",
+              "score": "3"
             },
             {
-              "code": "EGY"
+              "code": "EGY",
+              "score": "2"
             }
-          ]
+          ],
+          "winnerCode": "ARG"
         },
         {
           "id": "M96",
           "date": "Jul 7",
-          "status": "Scheduled",
+          "status": "Final pens",
           "teams": [
             {
-              "code": "SUI"
+              "code": "SUI",
+              "score": "0",
+              "pens": "4"
             },
             {
-              "code": "COL"
+              "code": "COL",
+              "score": "0",
+              "pens": "3"
             }
-          ]
+          ],
+          "winnerCode": "SUI"
         }
       ]
     },
