@@ -1121,21 +1121,27 @@ function LineupsPage({ routeTeam = null, onNavigate, onTeamSelect }) {
 }
 
 function remainingKnockoutTeams() {
-  const roundOf32 = knockoutData.rounds.find((round) => round.id === 'round-of-32');
-  const codes = new Set();
+  const currentMatchById = buildSimulatedKnockoutMatches();
 
-  roundOf32?.matches.forEach((match) => {
-    if (match.winnerCode) {
-      codes.add(match.winnerCode);
-      return;
-    }
+  for (const round of knockoutData.rounds) {
+    const codes = new Set();
+    const openMatches = round.matches
+      .map((match) => currentMatchById.get(match.id) ?? match)
+      .filter((match) => match.id !== 'M103' && !match.winnerCode);
 
-    match.teams.forEach((entry) => {
-      if (entry.code) codes.add(entry.code);
+    openMatches.forEach((match) => {
+      match.teams.forEach((entry) => {
+        if (entry.code) codes.add(entry.code);
+      });
     });
-  });
 
-  return [...codes].map((code) => TEAM_BY_CODE.get(code)).filter(Boolean);
+    if (codes.size > 0) {
+      return [...codes].map((code) => TEAM_BY_CODE.get(code)).filter(Boolean);
+    }
+  }
+
+  const championCode = currentMatchById.get('M104')?.winnerCode;
+  return championCode ? [TEAM_BY_CODE.get(championCode)].filter(Boolean) : [];
 }
 
 function loserCodeForMatch(match) {
