@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-10T22:32:35.108Z",
+  "generatedAt": "2026-07-13T06:21:19.070Z",
   "tournament": "FIFA World Cup 2026",
   "source": {
     "squads": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
@@ -5781,12 +5781,12 @@
       },
       "latestLineup": {
         "group": "Knockout",
-        "date": "2026-07-07",
-        "score": "0–0",
-        "match": "Switzerland vs Colombia",
-        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549860",
+        "date": "2026-07-12",
+        "score": "3–1",
+        "match": "Argentina vs Switzerland",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549865",
         "team": "Switzerland",
-        "opponent": "Colombia",
+        "opponent": "Argentina",
         "starters": [
           {
             "role": "GK",
@@ -5874,6 +5874,18 @@
           },
           {
             "role": "CM",
+            "number": 15,
+            "name": "Djibril Sow",
+            "captain": false,
+            "playerId": "SUI-15-djibril-sow",
+            "page": "Djibril Sow",
+            "club": "Sevilla",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Sevilla_FC_logo.svg/120px-Sevilla_FC_logo.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "LWB",
             "number": 22,
             "name": "Fabian Rieder",
             "captain": false,
@@ -5881,18 +5893,6 @@
             "page": "Fabian Rieder",
             "club": "FC Augsburg",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c5/FC_Augsburg_logo.svg/120px-FC_Augsburg_logo.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "LWB",
-            "number": 14,
-            "name": "Ardon Jashari",
-            "captain": false,
-            "playerId": "SUI-14-ardon-jashari",
-            "page": "Ardon Jashari",
-            "club": "Milan",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Logo_of_AC_Milan.svg/120px-Logo_of_AC_Milan.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -25454,12 +25454,12 @@
       },
       "latestLineup": {
         "group": "Knockout",
-        "date": "2026-07-05",
+        "date": "2026-07-11",
         "score": "1–2",
-        "match": "Brazil vs Norway",
-        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549856",
+        "match": "Norway vs England",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549864",
         "team": "Norway",
-        "opponent": "Brazil",
+        "opponent": "England",
         "starters": [
           {
             "role": "GK",
@@ -25583,13 +25583,13 @@
           },
           {
             "role": "LM",
-            "number": 20,
-            "name": "Antonio Nusa",
+            "number": 21,
+            "name": "Andreas Schjelderup",
             "captain": false,
-            "playerId": "NOR-20-antonio-nusa",
-            "page": "Antonio Nusa",
-            "club": "RB Leipzig",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/RB_Leipzig_2014_logo.svg/120px-RB_Leipzig_2014_logo.svg.png",
+            "playerId": "NOR-21-andreas-schjelderup",
+            "page": "Andreas Schjelderup",
+            "club": "Benfica",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/SL_Benfica_logo.svg/120px-SL_Benfica_logo.svg.png",
             "photo": "",
             "squadPosition": "MF"
           }
@@ -27640,12 +27640,12 @@
       },
       "latestLineup": {
         "group": "Knockout",
-        "date": "2026-07-07",
-        "score": "3–2",
-        "match": "Argentina vs Egypt",
-        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549861",
+        "date": "2026-07-12",
+        "score": "3–1",
+        "match": "Argentina vs Switzerland",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549865",
         "team": "Argentina",
-        "opponent": "Egypt",
+        "opponent": "Switzerland",
         "starters": [
           {
             "role": "GK",
@@ -27733,18 +27733,6 @@
           },
           {
             "role": "CM",
-            "number": 20,
-            "name": "Alexis Mac Allister",
-            "captain": false,
-            "playerId": "ARG-20-alexis-mac-allister",
-            "page": "Alexis Mac Allister",
-            "club": "Liverpool",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/120px-Liverpool_FC.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "LM",
             "number": 24,
             "name": "Enzo Fernández",
             "captain": false,
@@ -27752,6 +27740,18 @@
             "page": "Enzo Fernández",
             "club": "Chelsea",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/120px-Chelsea_FC.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "LM",
+            "number": 20,
+            "name": "Alexis Mac Allister",
+            "captain": false,
+            "playerId": "ARG-20-alexis-mac-allister",
+            "page": "Alexis Mac Allister",
+            "club": "Liverpool",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/120px-Liverpool_FC.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -33472,12 +33472,12 @@
       },
       "latestLineup": {
         "group": "Knockout",
-        "date": "2026-07-06",
-        "score": "2–3",
-        "match": "Mexico vs England",
-        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549857",
+        "date": "2026-07-11",
+        "score": "1–2",
+        "match": "Norway vs England",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549864",
         "team": "England",
-        "opponent": "Mexico",
+        "opponent": "Norway",
         "starters": [
           {
             "role": "GK",
@@ -33493,18 +33493,6 @@
           },
           {
             "role": "RB",
-            "number": 26,
-            "name": "Jarell Quansah",
-            "captain": false,
-            "playerId": "ENG-26-jarell-quansah",
-            "page": "Jarell Quansah",
-            "club": "Bayer Leverkusen",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/59/Bayer_04_Leverkusen_logo.svg/120px-Bayer_04_Leverkusen_logo.svg.png",
-            "photo": "",
-            "squadPosition": "DF"
-          },
-          {
-            "role": "CB",
             "number": 2,
             "name": "Ezri Konsa",
             "captain": false,
@@ -33512,6 +33500,18 @@
             "page": "Ezri Konsa",
             "club": "Aston Villa",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Aston_Villa_FC_new_crest.svg/120px-Aston_Villa_FC_new_crest.svg.png",
+            "photo": "",
+            "squadPosition": "DF"
+          },
+          {
+            "role": "CB",
+            "number": 5,
+            "name": "John Stones",
+            "captain": false,
+            "playerId": "ENG-5-john-stones",
+            "page": "John Stones",
+            "club": "Manchester City",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/120px-Manchester_City_FC_badge.svg.png",
             "photo": "",
             "squadPosition": "DF"
           },
@@ -33565,11 +33565,11 @@
           },
           {
             "role": "RF",
-            "number": 7,
-            "name": "Bukayo Saka",
+            "number": 20,
+            "name": "Noni Madueke",
             "captain": false,
-            "playerId": "ENG-7-bukayo-saka",
-            "page": "Bukayo Saka",
+            "playerId": "ENG-20-noni-madueke",
+            "page": "Noni Madueke",
             "club": "Arsenal",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/120px-Arsenal_FC.svg.png",
             "photo": "",

@@ -1,5 +1,5 @@
 export const knockoutData = {
-  "updatedAt": "2026-07-10",
+  "updatedAt": "2026-07-13",
   "sourceUrl": "https://www.espn.com/soccer/bracket",
   "sourceLabel": "ESPN bracket",
   "rounds": [
@@ -414,54 +414,66 @@ export const knockoutData = {
         {
           "id": "M97",
           "date": "Jul 9",
-          "status": "Scheduled",
+          "status": "Final",
           "teams": [
             {
-              "label": "W89"
+              "code": "FRA",
+              "score": "2"
             },
             {
-              "label": "W90"
+              "code": "MAR",
+              "score": "0"
             }
-          ]
+          ],
+          "winnerCode": "FRA"
         },
         {
           "id": "M98",
           "date": "Jul 10",
-          "status": "Scheduled",
+          "status": "Final",
           "teams": [
             {
-              "label": "W93"
+              "code": "ESP",
+              "score": "2"
             },
             {
-              "label": "W94"
+              "code": "BEL",
+              "score": "1"
             }
-          ]
+          ],
+          "winnerCode": "ESP"
         },
         {
           "id": "M99",
           "date": "Jul 11",
-          "status": "Scheduled",
+          "status": "Final aet",
           "teams": [
             {
-              "label": "W91"
+              "code": "NOR",
+              "score": "1"
             },
             {
-              "label": "W92"
+              "code": "ENG",
+              "score": "2"
             }
-          ]
+          ],
+          "winnerCode": "ENG"
         },
         {
           "id": "M100",
           "date": "Jul 11",
-          "status": "Scheduled",
+          "status": "Final aet",
           "teams": [
             {
-              "label": "W95"
+              "code": "ARG",
+              "score": "3"
             },
             {
-              "label": "W96"
+              "code": "SUI",
+              "score": "1"
             }
-          ]
+          ],
+          "winnerCode": "ARG"
         }
       ]
     },
@@ -475,10 +487,10 @@ export const knockoutData = {
           "status": "Scheduled",
           "teams": [
             {
-              "label": "W97"
+              "code": "FRA"
             },
             {
-              "label": "W98"
+              "code": "ESP"
             }
           ]
         },
@@ -488,10 +500,10 @@ export const knockoutData = {
           "status": "Scheduled",
           "teams": [
             {
-              "label": "W99"
+              "code": "ENG"
             },
             {
-              "label": "W100"
+              "code": "ARG"
             }
           ]
         }

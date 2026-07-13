@@ -470,6 +470,12 @@ function statusForBracketMatch(match) {
   return 'Scheduled';
 }
 
+function hasRealEspnCompetitors(match) {
+  return [match.competitorOne, match.competitorTwo].every(
+    (competitor) => competitor?.abbreviation && CODE_TO_TEAM[competitor.abbreviation],
+  );
+}
+
 function entryFromEspnCompetitor(competitor, includeScore = false) {
   const code = competitor?.abbreviation && CODE_TO_TEAM[competitor.abbreviation] ? competitor.abbreviation : '';
   const entry = code
@@ -491,11 +497,14 @@ function updateMatchFromEspn(match, espnMatch) {
   match.status = statusForBracketMatch(espnMatch);
 
   const includeScore = espnMatch.statusState !== 'pre';
-  match.teams = [espnMatch.competitorOne, espnMatch.competitorTwo].map((competitor) =>
-    entryFromEspnCompetitor(competitor, includeScore),
-  );
+  const hasRealTeams = hasRealEspnCompetitors(espnMatch);
+  if (hasRealTeams || includeScore) {
+    match.teams = [espnMatch.competitorOne, espnMatch.competitorTwo].map((competitor) =>
+      entryFromEspnCompetitor(competitor, includeScore),
+    );
+  }
 
-  if (espnMatch.statusState === 'post') {
+  if (espnMatch.statusState === 'post' && hasRealTeams) {
     if (espnMatch.competitorOne?.winner) match.winnerCode = espnMatch.competitorOne.abbreviation;
     else if (espnMatch.competitorTwo?.winner) match.winnerCode = espnMatch.competitorTwo.abbreviation;
   } else {
@@ -515,19 +524,22 @@ async function writeKnockoutData() {
       .filter((match) => match.matchNumber)
       .map((match) => [Number(match.matchNumber.replace(/\D+/g, '')), match]),
   );
+  const unnumberedMatches = (espnBracket.matchups ?? []).filter((match) => !match.matchNumber);
 
   const next = structuredClone(existingKnockoutData);
   const matchNumberById = {
     M89: 90,
     M90: 89,
   };
+  const espnMatchById = {
+    M103: unnumberedMatches.find((match) => match.date?.startsWith('2026-07-18')),
+    M104: unnumberedMatches.find((match) => match.date?.startsWith('2026-07-19')),
+  };
 
   for (const round of next.rounds ?? []) {
-    if (round.id !== 'round-of-32' && round.id !== 'round-of-16') continue;
-
     for (const match of round.matches ?? []) {
       const matchNumber = matchNumberById[match.id] ?? Number(match.id.replace(/^M/, ''));
-      const espnMatch = sourceMatches.get(matchNumber);
+      const espnMatch = sourceMatches.get(matchNumber) ?? espnMatchById[match.id];
       updateMatchFromEspn(match, espnMatch);
     }
   }
