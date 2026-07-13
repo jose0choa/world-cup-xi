@@ -1,5 +1,5 @@
 export const knockoutData = {
-  "updatedAt": "2026-07-09",
+  "updatedAt": "2026-07-10",
   "sourceUrl": "https://www.espn.com/soccer/bracket",
   "sourceLabel": "ESPN bracket",
   "rounds": [

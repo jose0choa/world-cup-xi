@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-09T22:29:44.311Z",
+  "generatedAt": "2026-07-10T22:32:35.108Z",
   "tournament": "FIFA World Cup 2026",
   "source": {
     "squads": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
@@ -18170,12 +18170,12 @@
       },
       "latestLineup": {
         "group": "Knockout",
-        "date": "2026-07-07",
-        "score": "1–4",
-        "match": "United States vs Belgium",
-        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549859",
+        "date": "2026-07-10",
+        "score": "2–1",
+        "match": "Spain vs Belgium",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549863",
         "team": "Belgium",
-        "opponent": "United States",
+        "opponent": "Spain",
         "starters": [
           {
             "role": "GK",
@@ -18239,13 +18239,13 @@
           },
           {
             "role": "CM",
-            "number": 24,
-            "name": "Amadou Onana",
+            "number": 20,
+            "name": "Hans Vanaken",
             "captain": false,
-            "playerId": "BEL-24-amadou-onana",
-            "page": "Amadou Onana",
-            "club": "Aston Villa",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Aston_Villa_FC_new_crest.svg/120px-Aston_Villa_FC_new_crest.svg.png",
+            "playerId": "BEL-20-hans-vanaken",
+            "page": "Hans Vanaken",
+            "club": "Club Brugge",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d0/Club_Brugge_KV_logo.svg/120px-Club_Brugge_KV_logo.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -18263,30 +18263,6 @@
           },
           {
             "role": "RF",
-            "number": 14,
-            "name": "Dodi Lukébakio",
-            "captain": false,
-            "playerId": "BEL-14-dodi-lukebakio",
-            "page": "Dodi Lukébakio",
-            "club": "Benfica",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/SL_Benfica_logo.svg/120px-SL_Benfica_logo.svg.png",
-            "photo": "",
-            "squadPosition": "FW"
-          },
-          {
-            "role": "CM",
-            "number": 8,
-            "name": "Youri Tielemans",
-            "captain": true,
-            "playerId": "BEL-8-youri-tielemans",
-            "page": "Youri Tielemans",
-            "club": "Aston Villa",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Aston_Villa_FC_new_crest.svg/120px-Aston_Villa_FC_new_crest.svg.png",
-            "photo": "",
-            "squadPosition": "MF"
-          },
-          {
-            "role": "CF",
             "number": 10,
             "name": "Leandro Trossard",
             "captain": false,
@@ -18294,6 +18270,30 @@
             "page": "Leandro Trossard",
             "club": "Arsenal",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/120px-Arsenal_FC.svg.png",
+            "photo": "",
+            "squadPosition": "FW"
+          },
+          {
+            "role": "CM",
+            "number": 7,
+            "name": "Kevin De Bruyne",
+            "captain": true,
+            "playerId": "BEL-7-kevin-de-bruyne",
+            "page": "Kevin De Bruyne",
+            "club": "Napoli",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/SSC_Napoli_2025_%28white_and_azure%29.svg/120px-SSC_Napoli_2025_%28white_and_azure%29.svg.png",
+            "photo": "",
+            "squadPosition": "MF"
+          },
+          {
+            "role": "CF",
+            "number": 11,
+            "name": "Jérémy Doku",
+            "captain": false,
+            "playerId": "BEL-11-jeremy-doku",
+            "page": "Jérémy Doku",
+            "club": "Manchester City",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/120px-Manchester_City_FC_badge.svg.png",
             "photo": "",
             "squadPosition": "FW"
           },
@@ -22540,12 +22540,12 @@
       },
       "latestLineup": {
         "group": "Knockout",
-        "date": "2026-07-06",
-        "score": "0–1",
-        "match": "Portugal vs Spain",
-        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549858",
+        "date": "2026-07-10",
+        "score": "2–1",
+        "match": "Spain vs Belgium",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549863",
         "team": "Spain",
-        "opponent": "Portugal",
+        "opponent": "Belgium",
         "starters": [
           {
             "role": "GK",
@@ -22621,13 +22621,13 @@
           },
           {
             "role": "CM",
-            "number": 20,
-            "name": "Pedri",
+            "number": 8,
+            "name": "Fabián Ruiz",
             "captain": false,
-            "playerId": "ESP-20-pedri",
-            "page": "Pedri",
-            "club": "Barcelona",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/120px-FC_Barcelona_%28crest%29.svg.png",
+            "playerId": "ESP-8-fabian-ruiz",
+            "page": "Fabián Ruiz",
+            "club": "Paris Saint-Germain",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/Paris_Saint-Germain_F.C..svg/120px-Paris_Saint-Germain_F.C..svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
