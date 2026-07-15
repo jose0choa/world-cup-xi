@@ -1122,26 +1122,33 @@ function LineupsPage({ routeTeam = null, onNavigate, onTeamSelect }) {
 
 function remainingKnockoutTeams() {
   const currentMatchById = buildSimulatedKnockoutMatches();
+  const remainingCodes = possibleWinnerCodesForMatch('M104', currentMatchById);
 
-  for (const round of knockoutData.rounds) {
-    const codes = new Set();
-    const openMatches = round.matches
-      .map((match) => currentMatchById.get(match.id) ?? match)
-      .filter((match) => match.id !== 'M103' && !match.winnerCode);
-
-    openMatches.forEach((match) => {
-      match.teams.forEach((entry) => {
-        if (entry.code) codes.add(entry.code);
-      });
-    });
-
-    if (codes.size > 0) {
-      return [...codes].map((code) => TEAM_BY_CODE.get(code)).filter(Boolean);
-    }
+  if (remainingCodes.length > 0) {
+    return remainingCodes.map((code) => TEAM_BY_CODE.get(code)).filter(Boolean);
   }
 
   const championCode = currentMatchById.get('M104')?.winnerCode;
   return championCode ? [TEAM_BY_CODE.get(championCode)].filter(Boolean) : [];
+}
+
+function possibleWinnerCodesForMatch(matchId, matchById, visitedMatchIds = new Set()) {
+  if (visitedMatchIds.has(matchId)) return [];
+  visitedMatchIds.add(matchId);
+
+  const match = matchById.get(matchId);
+  if (!match) return [];
+  if (match.winnerCode) return [match.winnerCode];
+
+  const feederReferences = BRACKET_FEEDERS[match.id] ?? [];
+  const codes = feederReferences
+    .filter((reference) => reference.startsWith('W'))
+    .flatMap((reference) =>
+      possibleWinnerCodesForMatch(`M${reference.slice(1)}`, matchById, visitedMatchIds),
+    );
+
+  const directCodes = match.teams.map((entry) => entry.code).filter(Boolean);
+  return [...new Set([...codes, ...directCodes])];
 }
 
 function loserCodeForMatch(match) {
