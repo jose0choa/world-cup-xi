@@ -1,5 +1,5 @@
 export const knockoutData = {
-  "updatedAt": "2026-07-13",
+  "updatedAt": "2026-07-14",
   "sourceUrl": "https://www.espn.com/soccer/bracket",
   "sourceLabel": "ESPN bracket",
   "rounds": [
@@ -484,15 +484,18 @@ export const knockoutData = {
         {
           "id": "M101",
           "date": "Jul 14",
-          "status": "Scheduled",
+          "status": "Final",
           "teams": [
             {
-              "code": "FRA"
+              "code": "FRA",
+              "score": "0"
             },
             {
-              "code": "ESP"
+              "code": "ESP",
+              "score": "2"
             }
-          ]
+          ],
+          "winnerCode": "ESP"
         },
         {
           "id": "M102",

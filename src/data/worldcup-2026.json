@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-13T06:21:19.070Z",
+  "generatedAt": "2026-07-14T22:04:28.637Z",
   "tournament": "FIFA World Cup 2026",
   "source": {
     "squads": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
@@ -22540,12 +22540,12 @@
       },
       "latestLineup": {
         "group": "Knockout",
-        "date": "2026-07-10",
-        "score": "2–1",
-        "match": "Spain vs Belgium",
-        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549863",
+        "date": "2026-07-14",
+        "score": "0–2",
+        "match": "France vs Spain",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549866",
         "team": "Spain",
-        "opponent": "Belgium",
+        "opponent": "France",
         "starters": [
           {
             "role": "GK",
@@ -23996,12 +23996,12 @@
       },
       "latestLineup": {
         "group": "Knockout",
-        "date": "2026-07-09",
-        "score": "2–0",
-        "match": "France vs Morocco",
-        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549862",
+        "date": "2026-07-14",
+        "score": "0–2",
+        "match": "France vs Spain",
+        "sourceUrl": "https://www.skysports.com/football/x-v-y/teams/549866",
         "team": "France",
-        "opponent": "Morocco",
+        "opponent": "Spain",
         "starters": [
           {
             "role": "GK",
@@ -24065,13 +24065,13 @@
           },
           {
             "role": "CM",
-            "number": 6,
-            "name": "Manu Koné",
+            "number": 8,
+            "name": "Aurélien Tchouaméni",
             "captain": false,
-            "playerId": "FRA-6-manu-kone",
-            "page": "Manu Koné",
-            "club": "Roma",
-            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/AS_Roma_logo_%282017%29.svg/120px-AS_Roma_logo_%282017%29.svg.png",
+            "playerId": "FRA-8-aurelien-tchouameni",
+            "page": "Aurélien Tchouaméni",
+            "club": "Real Madrid",
+            "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/120px-Real_Madrid_CF.svg.png",
             "photo": "",
             "squadPosition": "MF"
           },
@@ -24113,11 +24113,11 @@
           },
           {
             "role": "CF",
-            "number": 20,
-            "name": "Désiré Doué",
+            "number": 12,
+            "name": "Bradley Barcola",
             "captain": false,
-            "playerId": "FRA-20-desire-doue",
-            "page": "Désiré Doué",
+            "playerId": "FRA-12-bradley-barcola",
+            "page": "Bradley Barcola",
             "club": "Paris Saint-Germain",
             "clubLogo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/Paris_Saint-Germain_F.C..svg/120px-Paris_Saint-Germain_F.C..svg.png",
             "photo": "",
